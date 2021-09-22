@@ -7,9 +7,10 @@ RUN rm -r /home/node/app/*
 COPY ./moneyapp/package.json /home/node/app
 
 RUN npm install 
+RUN npm i -g @ionic/cli
 
 RUN chown -R node /home/node/app
 
 USER node
 
-CMD npm start
+CMD ionic serve

@@ -1,0 +1,22 @@
+version: '3.7'
+
+services:
+  frontend:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    container_name: frontend
+    image: 'node:16.7'
+    volumes:
+      - ./moneyapp/src:/home/node/app/src
+      - ./moneyapp/public:/home/node/app/public
+      - ./moneyapp/package.json:/home/node/app/package.json
+      - ./moneyapp/package-lock.json:/home/node/app/package-lock.json
+    ports:
+      - 80:3000
+    stdin_open: true
+    environment:
+      - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING=true
+      - REACT_APP_API_URL=https://money-app-nqproject-staging.herokuapp.com/
+    restart: always

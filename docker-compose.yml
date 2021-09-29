@@ -2,19 +2,10 @@ version: '3.7'
 
 services:
   frontend:
-    build:
-      context: ./
-      dockerfile: ./Dockerfile
     container_name: frontend
     image: 'node:16.7'
     volumes:
-      - ./moneyapp/src:/home/node/app/src
-      - ./moneyapp/public:/home/node/app/public
-      - ./moneyapp/package.json:/home/node/app/package.json
-      - ./moneyapp/package-lock.json:/home/node/app/package-lock.json
-      - ./moneyapp/tsconfig.json:/home/node/app/tsconfig.json
-      - ./moneyapp/ionic.config.json:/home/node/app/ionic.config.json
-      - ./moneyapp/capacitor.config.ts:/home/node/app/capacitor.config.ts
+      - ./moneyapp:/home/node/app
     ports:
       - 8100:8100
     stdin_open: true
@@ -22,4 +13,6 @@ services:
       - NODE_ENV=development
       - CHOKIDAR_USEPOLLING=true
       - REACT_APP_API_URL=https://money-app-nqproject-staging.herokuapp.com/
-    restart: always
+    working_dir: /home/node/app
+    user: "node"
+    command: /home/node/app/entrypoint.sh

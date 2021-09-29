@@ -1,0 +1,13 @@
+img.logo {
+    object-fit: contain;
+    padding: 0.4rem;
+  }
+  
+  ion-buttons {
+    margin-left: 0.5rem;
+  }
+  
+  ion-title {
+    padding-left: 0.5rem;
+  }
+  

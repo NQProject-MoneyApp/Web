@@ -15,6 +15,8 @@ const LoginFrom: React.FC = () => {
     } else {
       console.log("Error!");
     }
+    const response =  await ApiClient.getGroups();
+    console.log(response.data)
   };
 
   return (

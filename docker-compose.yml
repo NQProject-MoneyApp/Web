@@ -14,5 +14,5 @@ services:
       - CHOKIDAR_USEPOLLING=true
       - REACT_APP_API_URL=https://money-app-nqproject-staging.herokuapp.com/
     working_dir: /home/node/app
-    user: "node"
+    user: "root"
     command: /home/node/app/entrypoint.sh

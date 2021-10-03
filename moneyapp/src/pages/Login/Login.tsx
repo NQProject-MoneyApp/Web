@@ -1,8 +1,4 @@
-import {
-  IonContent,
-  IonHeader,
-  IonPage,
-} from "@ionic/react";
+import { IonContent, IonHeader, IonPage } from "@ionic/react";
 import LoginForm from "./LoginForm";
 import Toolbar from "../../components/Toolbar";
 
@@ -12,7 +8,7 @@ const Login: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
-        <Toolbar/>
+        <Toolbar />
       </IonHeader>
       <IonContent fullscreen>
         <LoginForm />

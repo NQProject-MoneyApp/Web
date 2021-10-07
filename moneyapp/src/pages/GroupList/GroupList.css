@@ -1,0 +1,32 @@
+ion-card {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+    padding: 0.5rem;
+}
+
+ion-label {
+    margin-left: 1rem;
+}
+
+ion-card-title {
+    /* margin-bottom: 0.5rem; */
+    font-size: 1.4rem;
+}
+
+ion-icon {
+    /* size: 30px; */
+    float: right;
+    color: var(--ion-color-primary);
+}
+
+img.icon {
+    /* padding: 0.5rem; */
+    width: 4.5rem;
+    float: left;
+}
+
+.updatedDate {
+    float: right;
+}

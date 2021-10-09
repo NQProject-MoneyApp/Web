@@ -2,24 +2,25 @@ import {
   IonContent,
   IonHeader,
   IonPage,
-  IonCard,
-  IonCardSubtitle,
-  IonCardTitle,
   IonItem,
-  IonLabel,
-  IonIcon,
+  IonList,
+  IonButton,
 } from "@ionic/react";
 import Toolbar from "../../components/Toolbar";
-import burger from "../../images/icons/burgers.svg";
-import bowling from "../../images/icons/bowling.svg";
-import { star } from "ionicons/icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 import "./GroupList.css";
 import ApiClient from "../../services/ApiClient";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import GroupComponent from "./GroupComponent";
 
 const GroupList: React.FC = () => {
+  const [groupList, setGroupList] = useState(new Array<any>());
+
   const fetchGroups = async () => {
     const response = await ApiClient.instance.getGroups();
+    setGroupList(response.data);
+    console.log(response.data);
   };
 
   useEffect(() => {
@@ -32,32 +33,26 @@ const GroupList: React.FC = () => {
         <Toolbar />
       </IonHeader>
       <IonContent fullscreen>
-        <IonCard>
-          <IonItem color="none" lines="none">
-            <img className="icon" src={burger} />
-            <IonLabel>
-              <IonIcon icon={star}></IonIcon>
-              <IonCardTitle>Grill</IonCardTitle>
-              <IonCardSubtitle>$ 163</IonCardSubtitle>
-              <IonCardSubtitle className="updatedDate">
-                07.10.2021
-              </IonCardSubtitle>
-            </IonLabel>
+        <IonList lines="none">
+          <IonItem>
+            <IonButton icon-only fill="clear" size="default">
+              <FontAwesomeIcon
+                className="addGroupIcon"
+                icon={faPlusCircle}
+              ></FontAwesomeIcon>
+            </IonButton>
           </IonItem>
-        </IonCard>
-        <IonCard>
-          <IonItem color="none" lines="none">
-            <img className="icon" src={bowling} />
-            <IonLabel>
-              <IonIcon icon={star}></IonIcon>
-              <IonCardTitle>Impreza</IonCardTitle>
-              <IonCardSubtitle>$ 50</IonCardSubtitle>
-              <IonCardSubtitle className="updatedDate">
-                20.09.2021
-              </IonCardSubtitle>
-            </IonLabel>
-          </IonItem>
-        </IonCard>
+          {groupList.map((group) => (
+            <GroupComponent
+            key={group.pk}
+            name={group.name}
+            icon={group.icon}
+            balance={group.user_balance}
+            createDate={group.create_date}
+            isFavourite={group.is_favourite}
+            />
+          ))}
+        </IonList>
       </IonContent>
     </IonPage>
   );

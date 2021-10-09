@@ -15,9 +15,22 @@ ion-card-title {
     font-size: 1.4rem;
 }
 
+ion-button {
+    margin: auto;
+    margin-top: 0.6rem;
+    fill: clear;
+}
+
 ion-icon {
     /* size: 30px; */
     float: right;
+    color: var(--ion-color-primary);
+}
+
+.addGroupIcon {
+    margin: auto;
+    padding: 0.5rem;
+    font-size: 3rem;
     color: var(--ion-color-primary);
 }
 
@@ -27,6 +40,6 @@ img.icon {
     float: left;
 }
 
-.updatedDate {
+.groupDate {
     float: right;
 }

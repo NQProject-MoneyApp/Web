@@ -1,4 +1,4 @@
-import ApiClient from "./ApiClient";
+import ApiClient, { SimpleResult } from "./ApiClient";
 import SessionStorage from "./SessionStorage";
 
 class UserRepository {
@@ -24,8 +24,12 @@ class UserRepository {
     window.location.href = "";
   }
 
-  async userProfile(): Promise<any> {
+  async userProfile(): Promise<SimpleResult> {
     return await ApiClient.instance.getUserProfile();
+  }
+
+  async updateUserProfile(username: string, pk: number, email: string): Promise<SimpleResult> {
+    return await ApiClient.instance.updateUserProfile(username, pk, email);
   }
 }
 

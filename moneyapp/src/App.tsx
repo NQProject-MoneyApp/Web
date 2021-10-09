@@ -12,6 +12,7 @@ import { IonReactRouter } from '@ionic/react-router';
 import { ellipse, square, triangle } from 'ionicons/icons';
 import Login from './pages/Login/Login';
 import GroupList from './pages/GroupList/GroupList';
+import GroupDetails from './pages/GroupDetails/GroupDetails';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -42,6 +43,9 @@ const App: React.FC = () => (
           </Route>
           <Route exact path="/Groups">
             <GroupList />
+          </Route>
+          <Route exact path="/group-details">
+            <GroupDetails />
           </Route>
           <Route exact path="/">
             <Redirect to="/login" />

@@ -1,6 +1,8 @@
 import { IonItem, IonLabel, IonInput, IonButton } from "@ionic/react";
 import { useState } from "react";
+import { Redirect } from "react-router";
 import ApiClient from "../../services/ApiClient";
+import UserRepository from "../../services/UserRepository";
 import "./Login.css";
 
 const LoginFrom: React.FC = () => {
@@ -9,44 +11,50 @@ const LoginFrom: React.FC = () => {
 
   const submitLogin = async () => {
     console.log("Login");
-    const result = await ApiClient.login(username, password);
+    const result = await UserRepository.instance.login(username, password);
     if (result) {
       console.log("Logged in succesfully!");
+      window.location.reload();
     } else {
       console.log("Error!");
     }
-    const response =  await ApiClient.getGroups();
-    console.log(response.data)
   };
 
-  return (
-    <div className="container">
-      <h1>Hello</h1>
-      <IonItem>
-        <IonLabel>Login</IonLabel>
-        <IonInput
-          type="text"
-          placeholder="username"
-          value={username}
-          onIonChange={(e) => setUsername(e.detail.value!)}
-        />
-      </IonItem>
+  if (UserRepository.instance.isLogin()) {
+    return <Redirect to = "/groups"/>;
 
-      <IonItem>
-        <IonLabel>Password</IonLabel>
-        <IonInput
-          type="password"
-          placeholder="password"
-          value={password}
-          onIonChange={(e) => setPassword(e.detail.value!)}
-        />
-      </IonItem>
-
-      <IonButton color="primary" onClick={submitLogin}>
-        Login
-      </IonButton>
-    </div>
-  );
+  } else {
+    return (
+      <div className="container">
+        <h1>Hello</h1>
+        <IonItem>
+          <IonLabel>Login</IonLabel>
+          <IonInput
+            type="text"
+            placeholder="username"
+            value={username}
+            onIonChange={(e) => setUsername(e.detail.value!)}
+          />
+        </IonItem>
+  
+        <IonItem>
+          <IonLabel>Password</IonLabel>
+          <IonInput
+            type="password"
+            placeholder="password"
+            value={password}
+            onIonChange={(e) => setPassword(e.detail.value!)}
+          />
+        </IonItem>
+  
+        <IonButton color="primary" onClick={submitLogin}>
+          Login
+        </IonButton>
+      </div>
+    );
+  }
 };
+
+
 
 export default LoginFrom;

@@ -5,12 +5,22 @@ import {
   IonToolbar,
   IonButtons,
   IonThumbnail,
+  IonButton,
 } from "@ionic/react";
+import { useState } from "react";
 import logo from "../images/logo.png";
+import UserRepository from "../services/UserRepository";
 
 import "./Toolbar.css";
 
+
+
 const Toolbar: React.FC = () => {
+
+  const logout = () => {
+    UserRepository.instance.logout();
+  };
+
   return (
     <IonToolbar>
       <IonGrid>
@@ -21,6 +31,10 @@ const Toolbar: React.FC = () => {
             </IonThumbnail>
           </IonButtons>
           <IonTitle>MoneyApp</IonTitle>
+          {(UserRepository.instance.isLogin()) &&
+          <IonButton color="primary" onClick={logout}>
+          Logout
+          </IonButton> }
         </IonRow>
       </IonGrid>
     </IonToolbar>

@@ -9,6 +9,7 @@ import {
   IonList,
   IonItem,
   IonImg,
+  IonButton,
 } from "@ionic/react";
 import Toolbar from "../../components/Toolbar";
 import burger from "../../images/icons/burgers.svg";
@@ -28,15 +29,18 @@ const GroupDetails: React.FC = () => {
             <IonCol>
               <GroupImage src={burger} />
             </IonCol>
-
             <IonCol>
               <IonRow>Total cost: $12.99</IonRow>
               <IonRow>Balance: $+2.00</IonRow>
             </IonCol>
           </IonRow>
           <IonRow>
-            <IonCol>Settle up</IonCol>
-            <IonCol>New expense</IonCol>
+            <IonCol>
+              <IonButton color="primary">Settle up</IonButton>
+            </IonCol>
+            <IonCol>
+              <IonButton color="primary">New expense</IonButton>
+            </IonCol>
           </IonRow>
         </IonGrid>
         <IonCard>
@@ -52,11 +56,11 @@ const GroupDetails: React.FC = () => {
 };
 
 type GroupImageProps = {
-    src?: string
-}
+  src?: string;
+};
 
-const GroupImage: React.FC<GroupImageProps> = ({src}: GroupImageProps) => {
-    return <IonImg className="icon group-image" src={src} />
+const GroupImage: React.FC<GroupImageProps> = ({ src }: GroupImageProps) => {
+  return <IonImg className="icon group-image" src={src} />;
 };
 
 export default GroupDetails;

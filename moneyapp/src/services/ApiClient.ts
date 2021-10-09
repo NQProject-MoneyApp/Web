@@ -37,6 +37,10 @@ class ApiClient {
     return await this.axiosInstance.get<any>("api/groups/");
   }
 
+  async getUserProfile() {
+    return await this.axiosInstance.get<any>("api/user/");
+  }
+
   private createInstance(): Axios {
     return axios.create({
       baseURL: process.env.REACT_APP_API_URL || "",

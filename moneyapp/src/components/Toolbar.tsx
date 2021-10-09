@@ -10,12 +10,13 @@ import {
 import { useState } from "react";
 import logo from "../images/logo.png";
 import UserRepository from "../services/UserRepository";
+import FlexSpacer from "./common/Spacer";
 
 import "./Toolbar.css";
 
 const Toolbar: React.FC = () => {
-  const logout = () => {
-    UserRepository.instance.logout();
+  const navigateToProfile = () => {
+    window.location.href = "/profile";    
   };
 
   return (
@@ -28,10 +29,12 @@ const Toolbar: React.FC = () => {
             </IonThumbnail>
           </IonButtons>
           <IonTitle>MoneyApp</IonTitle>
-          {UserRepository.instance.isLogin() && (
-            <IonButton color="primary" onClick={logout}>
-              Logout
+          {UserRepository.instance.isLogin() && (<>
+            <FlexSpacer flex={1} />
+            <IonButton color="primary" onClick={navigateToProfile}>
+              Profile
             </IonButton>
+            </>
           )}
         </IonRow>
       </IonGrid>

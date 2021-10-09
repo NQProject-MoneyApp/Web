@@ -34,6 +34,7 @@ import "@ionic/react/css/display.css";
 import "./theme/variables.css";
 import "./theme/styles.css";
 import ExpenseList from "./pages/ExpenseList/ExpenseList";
+import Profile from "./pages/Profile/Profile";
 
 const App: React.FC = () => (
   <IonApp>
@@ -50,6 +51,9 @@ const App: React.FC = () => (
         </Route>
         <Route exact path="/group-details">
           <GroupDetails />
+        </Route>
+        <Route exact path="/profile">
+          <Profile />
         </Route>
         <Route exact path="/">
           <Redirect to="/login" />

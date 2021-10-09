@@ -39,3 +39,7 @@ ion-content {
   text-align: center;
   max-width: 768px;
 }
+
+ion-item {
+  text-align: center;
+}

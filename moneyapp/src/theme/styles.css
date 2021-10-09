@@ -30,3 +30,12 @@ ion-text {
 ion-card {
   border-radius: var(--app-rounded-corners);
 }
+
+.ion-page {
+  align-items: center;
+}
+
+ion-content {
+  text-align: center;
+  max-width: 768px;
+}

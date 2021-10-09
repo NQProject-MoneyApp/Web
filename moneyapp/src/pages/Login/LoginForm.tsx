@@ -10,7 +10,6 @@ const LoginFrom: React.FC = () => {
   const [password, setPassword] = useState("");
   const [showToast, setShowToast] = useState(false);
 
-
   const submitLogin = async () => {
     console.log("Login");
     const result = await UserRepository.instance.login(username, password);
@@ -22,19 +21,18 @@ const LoginFrom: React.FC = () => {
   };
 
   if (UserRepository.instance.isLogin()) {
-    return <Redirect to = "/groups"/>;
-
+    return <Redirect to="/groups" />;
   } else {
     return (
       <div className="container">
         <IonToast
-        isOpen={showToast}
-        onDidDismiss={() => setShowToast(false)}
-        message="Login error"
-        position="top"
-        color = "danger"
-        mode = "ios"
-        duration={1000}
+          isOpen={showToast}
+          onDidDismiss={() => setShowToast(false)}
+          message="Login error"
+          position="top"
+          color="danger"
+          mode="ios"
+          duration={1000}
         />
         <h1>Hello</h1>
         <IonItem>
@@ -46,7 +44,7 @@ const LoginFrom: React.FC = () => {
             onIonChange={(e) => setUsername(e.detail.value!)}
           />
         </IonItem>
-  
+
         <IonItem>
           <IonLabel>Password</IonLabel>
           <IonInput
@@ -56,7 +54,7 @@ const LoginFrom: React.FC = () => {
             onIonChange={(e) => setPassword(e.detail.value!)}
           />
         </IonItem>
-  
+
         <IonButton color="primary" onClick={submitLogin}>
           Login
         </IonButton>
@@ -64,7 +62,5 @@ const LoginFrom: React.FC = () => {
     );
   }
 };
-
-
 
 export default LoginFrom;

@@ -13,10 +13,7 @@ import UserRepository from "../services/UserRepository";
 
 import "./Toolbar.css";
 
-
-
 const Toolbar: React.FC = () => {
-
   const logout = () => {
     UserRepository.instance.logout();
   };
@@ -27,14 +24,15 @@ const Toolbar: React.FC = () => {
         <IonRow>
           <IonButtons>
             <IonThumbnail slot="start">
-              <img className="logo" src={logo} alt='MoneyApp Logo'></img>
+              <img className="logo" src={logo} alt="MoneyApp Logo"></img>
             </IonThumbnail>
           </IonButtons>
           <IonTitle>MoneyApp</IonTitle>
-          {(UserRepository.instance.isLogin()) &&
-          <IonButton color="primary" onClick={logout}>
-          Logout
-          </IonButton> }
+          {UserRepository.instance.isLogin() && (
+            <IonButton color="primary" onClick={logout}>
+              Logout
+            </IonButton>
+          )}
         </IonRow>
       </IonGrid>
     </IonToolbar>

@@ -3,7 +3,6 @@ import SessionStorage from "./SessionStorage";
 import UserRepository from "./UserRepository";
 
 class ApiClient {
-
   static instance: ApiClient = new ApiClient();
 
   private axiosInstance: Axios;
@@ -27,7 +26,7 @@ class ApiClient {
 
       this.axiosInstance = this.createInstance();
       this.addLogoutInterceptors();
-     
+
       return [true, response.data.key];
     } catch {
       return [false, undefined];
@@ -43,19 +42,21 @@ class ApiClient {
       baseURL: process.env.REACT_APP_API_URL || "",
       timeout: 1000 * 30,
       headers: { Authorization: SessionStorage.instance.getToken() ?? "" },
-    });  
+    });
   }
 
   private addLogoutInterceptors() {
-
-    this.axiosInstance.interceptors.response.use(response => {
-      return response;
-    }, error => {
-     if (error.response.status === 401) {
-      UserRepository.instance.logout();
-     }
-     return error;
-   });
+    this.axiosInstance.interceptors.response.use(
+      (response) => {
+        return response;
+      },
+      (error) => {
+        if (error.response.status === 401) {
+          UserRepository.instance.logout();
+        }
+        return error;
+      }
+    );
   }
 }
 

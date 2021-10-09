@@ -4,8 +4,7 @@ import SessionStorage from "./SessionStorage";
 class UserRepository {
   static instance: UserRepository = new UserRepository();
 
-  async login(username: string, password: string): Promise<boolean>  {
-
+  async login(username: string, password: string): Promise<boolean> {
     const result = await ApiClient.instance.login(username, password);
 
     if (result[0]) {
@@ -22,7 +21,7 @@ class UserRepository {
 
   logout(): void {
     SessionStorage.instance.logout();
-    window.location.href = '';
+    window.location.href = "";
   }
 }
 

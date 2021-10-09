@@ -18,9 +18,8 @@ import ApiClient from "../../services/ApiClient";
 import { useEffect } from "react";
 
 const GroupList: React.FC = () => {
-
   const fetchGroups = async () => {
-    const response =  await ApiClient.instance.getGroups();
+    const response = await ApiClient.instance.getGroups();
   };
 
   useEffect(() => {

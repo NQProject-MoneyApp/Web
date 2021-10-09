@@ -1,4 +1,4 @@
-import { IonItem, IonLabel, IonInput, IonButton } from "@ionic/react";
+import { IonItem, IonLabel, IonInput, IonButton, IonToast } from "@ionic/react";
 import { useState } from "react";
 import { Redirect } from "react-router";
 import ApiClient from "../../services/ApiClient";
@@ -8,15 +8,16 @@ import "./Login.css";
 const LoginFrom: React.FC = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [showToast, setShowToast] = useState(false);
+
 
   const submitLogin = async () => {
     console.log("Login");
     const result = await UserRepository.instance.login(username, password);
     if (result) {
-      console.log("Logged in succesfully!");
       window.location.reload();
     } else {
-      console.log("Error!");
+      setShowToast(true);
     }
   };
 
@@ -26,6 +27,15 @@ const LoginFrom: React.FC = () => {
   } else {
     return (
       <div className="container">
+        <IonToast
+        isOpen={showToast}
+        onDidDismiss={() => setShowToast(false)}
+        message="Login error"
+        position="top"
+        color = "danger"
+        mode = "ios"
+        duration={1000}
+        />
         <h1>Hello</h1>
         <IonItem>
           <IonLabel>Login</IonLabel>

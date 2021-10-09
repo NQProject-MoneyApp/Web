@@ -7,8 +7,8 @@ class UserRepository {
   async login(username: string, password: string): Promise<boolean> {
     const result = await ApiClient.instance.login(username, password);
 
-    if (result[0]) {
-      SessionStorage.instance.setToken(result[1]);
+    if (result.success) {
+      SessionStorage.instance.setToken(result.result.key);
       return true;
     } else {
       return false;
@@ -16,7 +16,7 @@ class UserRepository {
   }
 
   isLogin(): boolean {
-    return SessionStorage.instance.getToken() != undefined;
+    return SessionStorage.instance.getToken() !== undefined;
   }
 
   logout(): void {

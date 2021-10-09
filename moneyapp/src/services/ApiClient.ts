@@ -2,6 +2,11 @@ import axios, { Axios } from "axios";
 import SessionStorage from "./SessionStorage";
 import UserRepository from "./UserRepository";
 
+type SimpleResult = {
+  success: boolean;
+  result: any;
+};
+
 class ApiClient {
   static instance: ApiClient = new ApiClient();
 
@@ -12,7 +17,7 @@ class ApiClient {
     this.addLogoutInterceptors();
   }
 
-  async login(username: string, password: string) {
+  async login(username: string, password: string): Promise<SimpleResult> {
     const requestData = {
       username: username,
       password: password,
@@ -27,9 +32,9 @@ class ApiClient {
       this.axiosInstance = this.createInstance();
       this.addLogoutInterceptors();
 
-      return [true, response.data.key];
+      return { success: true, result: response.data };
     } catch {
-      return [false, undefined];
+      return { success: false, result: null };
     }
   }
 

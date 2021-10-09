@@ -1,0 +1,15 @@
+ion-card.border {
+    display: flex;
+    width: 10rem;
+    height: 10rem;
+    border-radius: 100px;
+    margin: auto;
+    margin-top: 1rem;
+    border: 5px solid var(--ion-color-primary);
+}  
+
+ion-label.initials {
+    margin: auto;
+    color: white;
+    font-size: 5rem;
+}  

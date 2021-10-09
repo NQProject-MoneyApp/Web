@@ -23,6 +23,10 @@ class UserRepository {
     SessionStorage.instance.logout();
     window.location.href = "";
   }
+
+  async userProfile(): Promise<any> {
+    return await ApiClient.instance.getUserProfile();
+  }
 }
 
 export default UserRepository;

@@ -1,8 +1,24 @@
 /* Ionic Variables and Theming. For more info, please see:
 http://ionicframework.com/docs/theming/ */
 
+
+@font-face {   
+  font-family: 'Poppins Regular';   
+  src: url('../assets/fonts/poppins_regular.ttf');
+}
+
+@font-face {   
+  font-family: 'Poppins SemiBold';   
+  src: url('../assets/fonts/poppins_semi_bold.ttf');
+}
+
 /** Ionic CSS Variables **/
 :root {
+
+  /** App stype **/
+  --app-rounded-corners: 1.05rem;
+
+
   /** primary **/
   --ion-color-primary: #FFCB2D;
   --ion-color-primary-rgb: 56, 128, 255;
@@ -74,6 +90,8 @@ http://ionicframework.com/docs/theming/ */
   --ion-color-light-contrast-rgb: 0, 0, 0;
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
+
+  
 }
 
 @media (prefers-color-scheme: dark) {

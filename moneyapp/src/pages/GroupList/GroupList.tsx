@@ -14,8 +14,18 @@ import burger from "../../images/icons/burgers.svg";
 import bowling from "../../images/icons/bowling.svg";
 import { star } from "ionicons/icons";
 import "./GroupList.css";
+import ApiClient from "../../services/ApiClient";
+import { useEffect } from "react";
 
 const GroupList: React.FC = () => {
+  const fetchGroups = async () => {
+    const response = await ApiClient.instance.getGroups();
+  };
+
+  useEffect(() => {
+    fetchGroups();
+  }, []);
+
   return (
     <IonPage>
       <IonHeader>

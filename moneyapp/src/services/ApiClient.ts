@@ -1,12 +1,18 @@
 import axios, { Axios } from "axios";
+import SessionStorage from "./SessionStorage";
+import UserRepository from "./UserRepository";
 
 class ApiClient {
-  private static axiosInstance: Axios = axios.create({
-    baseURL: process.env.REACT_APP_API_URL || "",
-    timeout: 1000,
-  });
+  static instance: ApiClient = new ApiClient();
 
-  static async login(username: string, password: string) {
+  private axiosInstance: Axios;
+
+  constructor() {
+    this.axiosInstance = this.createInstance();
+    this.addLogoutInterceptors();
+  }
+
+  async login(username: string, password: string) {
     const requestData = {
       username: username,
       password: password,
@@ -16,21 +22,41 @@ class ApiClient {
         "api/login/",
         requestData
       );
-      console.log(response);
-      console.log(response.data.key);
-      this.axiosInstance = axios.create({
-        baseURL: process.env.REACT_APP_API_URL || "",
-        timeout: 1000,
-        headers: { Authorization: `Token ${response.data.key}` },
-      });
+      SessionStorage.instance.setToken(response.data.key);
+
+      this.axiosInstance = this.createInstance();
+      this.addLogoutInterceptors();
+
+      return [true, response.data.key];
     } catch {
-      return false;
+      return [false, undefined];
     }
-    return true;
   }
 
-  static async getGroups() {
-      return await this.axiosInstance.get<any>("api/groups/");
+  async getGroups() {
+    return await this.axiosInstance.get<any>("api/groups/");
+  }
+
+  private createInstance(): Axios {
+    return axios.create({
+      baseURL: process.env.REACT_APP_API_URL || "",
+      timeout: 1000 * 30,
+      headers: { Authorization: SessionStorage.instance.getToken() ?? "" },
+    });
+  }
+
+  private addLogoutInterceptors() {
+    this.axiosInstance.interceptors.response.use(
+      (response) => {
+        return response;
+      },
+      (error) => {
+        if (error.response.status === 401) {
+          UserRepository.instance.logout();
+        }
+        return error;
+      }
+    );
   }
 }
 

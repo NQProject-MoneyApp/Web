@@ -1,8 +1,3 @@
-img.logo {
-    object-fit: contain;
-    padding: 0.4rem;
-  }
-  
   ion-buttons {
     margin-left: 0.5rem;
   }
@@ -13,6 +8,5 @@ img.logo {
   
   .profileIcon {
     margin: auto;
-    padding: 0.4rem;
     color: var(--ion-color-primary);
   }

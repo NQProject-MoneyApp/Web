@@ -2,9 +2,7 @@ import {
   IonContent,
   IonHeader,
   IonPage,
-  IonItem,
   IonList,
-  IonButton,
 } from "@ionic/react";
 import Toolbar from "../../components/Toolbar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -14,7 +12,7 @@ import ApiClient from "../../services/ApiClient";
 import { useEffect, useState } from "react";
 import GroupComponent from "./GroupComponent";
 import Group from "../../domain/groups/Group";
-import { Redirect } from "react-router";
+import IconButton from "../../components/IconButton";
 
 const GroupList: React.FC = () => {
   const [groupList, setGroupList] = useState(new Array<Group>());
@@ -39,29 +37,23 @@ const GroupList: React.FC = () => {
         <Toolbar />
       </IonHeader>
       <IonContent fullscreen>
-        <IonList lines="none">
-          <IonItem>
-            <IonButton
-              onClick={navigateToAddGroup}
-              icon-only
-              fill="clear"
-              size="default"
-            >
+        <IonList lines="none" className="group-container">
+            <IconButton onClick={navigateToAddGroup} justify="flex-end">
               <FontAwesomeIcon
                 className="addGroupIcon"
+                size="2x"
                 icon={faPlusCircle}
               ></FontAwesomeIcon>
-            </IonButton>
-          </IonItem>
+            </IconButton>
           {groupList.map((group) => (
             <GroupComponent
-            key={group.id}
-            groupId={group.id}
-            name={group.name}
-            icon={0}
-            balance={group.userBalance}
-            createDate={group.createDate}
-            isFavourite={false}
+              key={group.id}
+              groupId={group.id}
+              name={group.name}
+              icon={0}
+              balance={group.userBalance}
+              createDate={group.createDate}
+              isFavourite={false}
             />
           ))}
         </IonList>

@@ -1,7 +1,7 @@
 import { User } from "../users/User";
 
 export type Expense = {
-    readonly pk: number;
+    readonly id: number;
     readonly groupId: number;
     readonly name: string;
     readonly amount: number;

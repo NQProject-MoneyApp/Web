@@ -9,35 +9,36 @@ import {
   IonRow,
   IonText,
 } from "@ionic/react";
-import FlexSpacer from "../../components/common/Spacer";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router";
 import Toolbar from "../../components/Toolbar";
 import { Expense } from "../../domain/expenses/Expense";
-import { User } from "../../domain/users/User";
+import ApiClient from "../../services/ApiClient";
 import ExpenseComponent from "./ExpenseComponent";
 
 import "./ExpenseList.css";
 
+interface RouteParams {
+  groupId: string
+}
+
+
+
 const ExpenseList: React.FC = () => {
-  const expenses: Expense[] = [
-    {
-      pk: 1,
-      name: "Whisky",
-      amount: 10,
-      groupId: 1,
-    },
-    {
-      pk: 2,
-      name: "Dirty Vegan Dancer",
-      amount: 12,
-      groupId: 1,
-    },
-    {
-      pk: 3,
-      name: "Faloviec",
-      amount: 120,
-      groupId: 1,
-    },
-  ];
+
+  const { groupId } = useParams<RouteParams>();
+  
+  const [expenseList, setExpenseList] = useState(new Array<Expense>());
+
+  const fetchExpenses = async () => {
+    const expenses = await ApiClient.instance.getExpenses(parseInt(groupId));
+    setExpenseList(expenses);
+    console.log(expenses);
+  };
+
+  useEffect(() => {
+    fetchExpenses();
+  }, []);
 
   return (
     <IonPage>
@@ -46,16 +47,14 @@ const ExpenseList: React.FC = () => {
       </IonHeader>
       <IonContent fullscreen>
         <IonList>
-          {expenses.map((e) => {
-            return (
-              <ExpenseComponent
-                key={e.pk}
-                title={e.name}
-                amount={e.amount}
-                author="Unknown"
-              />
-            );
-          })}
+          {expenseList.map((e) => (
+            <ExpenseComponent
+              key={e.id}
+              title={e.name}
+              amount={e.amount}
+              author="Unknown"
+            />
+          ))}
         </IonList>
       </IonContent>
     </IonPage>

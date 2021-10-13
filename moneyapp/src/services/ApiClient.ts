@@ -1,10 +1,35 @@
 import axios, { Axios } from "axios";
 import SessionStorage from "./SessionStorage";
 import UserRepository from "./UserRepository";
+import Group from "./../domain/groups/Group";
+import { Expense } from "../domain/expenses/Expense";
 
 type SimpleResult = {
   success: boolean;
   result: any;
+};
+
+type GroupDto = {
+  pk?: number,
+  name?: string,
+  icon?: number,
+  total_cost?: number,
+  user_balance?: number,
+  create_date?: string,
+  is_favorite?: boolean,
+};
+
+type ExpenseDto = {
+  pk?: number,
+  group_id?: number,
+  name?: string,
+  author?: any,
+  amount?: number,
+  create_date?: string,
+}
+
+type NetworkResponse<T> = {
+  data?: T;
 };
 
 class ApiClient {
@@ -38,8 +63,44 @@ class ApiClient {
     }
   }
 
-  async getGroups() {
-    return await this.axiosInstance.get<any>("api/groups/");
+  async getGroups(): Promise<Group[]> {
+    const result = await this.axiosInstance.get<
+      any,
+      NetworkResponse<GroupDto[]>
+    >("api/groups/");
+    if(result.data) {
+    
+      return result.data.map((e) => {
+        return {
+          id: e.pk!,
+          name: e.name!,
+          totalCost: -1,
+          userBalance: e.user_balance!,
+          createDate: new Date(e.create_date!),
+          icon: "",
+        };
+      } );
+    }
+    return [];
+  }
+
+  async getExpenses(groupId: number): Promise<Expense[]> {
+    const result = await this.axiosInstance.get<
+      any,
+      NetworkResponse<ExpenseDto[]>
+    >(`api/${groupId}/expenses/`);
+    if(result.data) {
+    
+      return result.data.map((e) => {
+        return {
+          amount: e.amount!,
+          groupId: e.group_id!,
+          name: e.name!,
+          id: e.group_id!,
+        };
+      } );
+    }
+    return [];
   }
 
   async getUserProfile() {

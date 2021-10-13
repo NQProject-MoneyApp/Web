@@ -13,14 +13,15 @@ import "./GroupList.css";
 import ApiClient from "../../services/ApiClient";
 import { useEffect, useState } from "react";
 import GroupComponent from "./GroupComponent";
+import Group from "../../domain/groups/Group";
 
 const GroupList: React.FC = () => {
-  const [groupList, setGroupList] = useState(new Array<any>());
+  const [groupList, setGroupList] = useState(new Array<Group>());
 
   const fetchGroups = async () => {
-    const response = await ApiClient.instance.getGroups();
-    setGroupList(response.data);
-    console.log(response.data);
+    const groups = await ApiClient.instance.getGroups();
+    setGroupList(groups);
+    console.log(groups);
   };
 
   useEffect(() => {
@@ -44,12 +45,13 @@ const GroupList: React.FC = () => {
           </IonItem>
           {groupList.map((group) => (
             <GroupComponent
-            key={group.pk}
+            key={group.id}
+            groupId={group.id}
             name={group.name}
-            icon={group.icon}
-            balance={group.user_balance}
-            createDate={group.create_date}
-            isFavourite={group.is_favourite}
+            icon={0}
+            balance={group.userBalance}
+            createDate={group.createDate}
+            isFavourite={false}
             />
           ))}
         </IonList>

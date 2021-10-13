@@ -46,9 +46,7 @@ const App: React.FC = () => (
         <Route exact path="/groups">
           <GroupList />
         </Route>
-        <Route exact path="/expenses">
-          <ExpenseList />
-        </Route>
+        <Route exact path="/groups/:groupId/expenses" component={ExpenseList} />
         <Route exact path="/group-details">
           <GroupDetails />
         </Route>

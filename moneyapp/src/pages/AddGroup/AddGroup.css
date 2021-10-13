@@ -1,0 +1,12 @@
+ion-row.iconList {
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+    overflow-y: hidden;
+  
+}
+
+ion-card.groupIconClass {
+    height: 4rem;
+    min-width: 4rem;
+}

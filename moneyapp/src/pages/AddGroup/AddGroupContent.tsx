@@ -30,6 +30,7 @@ const AddGroupContent: React.FC = () => {
   const [friends, setFriends] = useState(new Array<any>());
   const [icons, setIcons] = useState(new Array<any>());
   const [name, setName] = useState("");
+  const [selectedIcon, setSelectedIcon] = useState(1);
 
   const fetchFriends = async () => {
     let result = await UserRepository.instance.fetchFriends();
@@ -51,6 +52,18 @@ const AddGroupContent: React.FC = () => {
     } else {
       return false;
     }
+  };
+
+  const iconColor = (icon: number) => {
+    if (icon == selectedIcon) {
+      return "primary";
+    } else {
+      return "light";
+    }
+  };
+
+  const setIcon = (icon: number) => {
+    setSelectedIcon(icon);
   };
 
   const init = async () => {
@@ -88,12 +101,24 @@ const AddGroupContent: React.FC = () => {
     case AddGroupContentState.edit: {
       return (
         <IonContent>
-          <IonList>
-            <IonItem>
+          <IonList lines="none">
+            <FlexSpacer height="16.rem" />
+            <IonRow className="iconList">
               {icons.map((icon) => (
-                <IonImg src={Icons.instance.icon(icon)} />
+                <IonCard
+                  key={icon}
+                  color={iconColor(icon)}
+                  className="groupIconClass"
+                >
+                  <IonImg
+                    key={icon}
+                    src={Icons.instance.icon(icon)}
+                    onClick={() => setIcon(icon)}
+                  />
+                </IonCard>
               ))}
-            </IonItem>
+            </IonRow>
+            <FlexSpacer height="16.rem" />
 
             <IonItem>
               <IonLabel>Login</IonLabel>
@@ -104,10 +129,11 @@ const AddGroupContent: React.FC = () => {
                 onIonChange={(e) => setName(e.detail.value!)}
               />
             </IonItem>
+            <FlexSpacer height="16.rem" />
 
             <IonItem>
               {friends.map((friend) => (
-                <IonLabel>{friend.username!}</IonLabel>
+                <IonLabel key={friend.pk}>{friend.username!}</IonLabel>
               ))}
             </IonItem>
           </IonList>

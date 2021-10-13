@@ -1,6 +1,3 @@
-
-
-
 .container {
   text-align: center;
   position: absolute;
@@ -20,7 +17,7 @@ h3 {
 }
 
 ion-text {
-  font-family: "Poppins Regular";  
+  font-family: "Poppins Regular";
 }
 
 ion-card {
@@ -38,4 +35,26 @@ ion-content {
 
 ion-item {
   text-align: left;
+}
+
+ion-item.item-input {
+  border-radius: var(--app-rounded-corners);
+  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  margin: 1rem;
+}
+
+ion-button {
+  width: auto;
+  display: block;
+  border-radius: var(--app-rounded-corners);
+  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  margin: 1rem;
+  flex-grow: 1;
+  min-width: 240px;
+}
+
+.transparent-container {
+  background-color: transparent;
 }

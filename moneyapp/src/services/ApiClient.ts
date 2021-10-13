@@ -96,7 +96,7 @@ class ApiClient {
           amount: e.amount!,
           groupId: e.group_id!,
           name: e.name!,
-          id: e.group_id!,
+          id: e.pk!,
         };
       } );
     }

@@ -14,7 +14,7 @@ const ExpenseComponent: React.FC<ExpenseComponentProps> = ({
 }: ExpenseComponentProps) => {
   return (
     <IonCard className="expense-card" color="light">
-      <IonList>
+      <IonList className="transparent-container">
         <IonText color="primary" style={{ fontFamily: "Poppins SemiBold" }}>
           <h3>{title}</h3>
         </IonText>

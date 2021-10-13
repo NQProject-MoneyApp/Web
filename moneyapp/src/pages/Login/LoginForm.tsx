@@ -1,4 +1,4 @@
-import { IonItem, IonLabel, IonInput, IonButton, IonToast } from "@ionic/react";
+import { IonItem, IonList, IonInput, IonButton, IonToast } from "@ionic/react";
 import { useState } from "react";
 import { Redirect } from "react-router";
 import ApiClient from "../../services/ApiClient";
@@ -24,7 +24,7 @@ const LoginFrom: React.FC = () => {
     return <Redirect to="/groups" />;
   } else {
     return (
-      <div className="container">
+      <IonList className="container auth-form">
         <IonToast
           isOpen={showToast}
           onDidDismiss={() => setShowToast(false)}
@@ -35,21 +35,19 @@ const LoginFrom: React.FC = () => {
           duration={1000}
         />
         <h1>Hello</h1>
-        <IonItem>
-          <IonLabel>Login</IonLabel>
+        <IonItem lines="none">
           <IonInput
             type="text"
-            placeholder="username"
+            placeholder="Username"
             value={username}
             onIonChange={(e) => setUsername(e.detail.value!)}
           />
         </IonItem>
 
-        <IonItem>
-          <IonLabel>Password</IonLabel>
+        <IonItem lines="none">
           <IonInput
             type="password"
-            placeholder="password"
+            placeholder="Password"
             value={password}
             onIonChange={(e) => setPassword(e.detail.value!)}
             onKeyDown={(e) => {
@@ -59,11 +57,10 @@ const LoginFrom: React.FC = () => {
             }}
           />
         </IonItem>
-
-        <IonButton color="primary" onClick={submitLogin}>
-          Login
-        </IonButton>
-      </div>
+          <IonButton color="primary" onClick={submitLogin}>
+            Log in
+          </IonButton>
+      </IonList>
     );
   }
 };

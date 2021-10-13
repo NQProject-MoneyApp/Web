@@ -39,3 +39,7 @@ ion-content {
 ion-item {
   text-align: left;
 }
+
+.transparent-container {
+  background-color: transparent;
+}

@@ -13,6 +13,7 @@ import { ellipse, square, triangle } from "ionicons/icons";
 import Login from "./pages/Login/Login";
 import GroupList from "./pages/GroupList/GroupList";
 import GroupDetails from "./pages/GroupDetails/GroupDetails";
+import ExpenseDetails from "./pages/ExpenseDetails/ExpenseDetails";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -50,6 +51,9 @@ const App: React.FC = () => (
         <Route exact path="/groups/:groupId/expenses" component={ExpenseList} />
         <Route exact path="/group-details">
           <GroupDetails />
+        </Route>
+        <Route exact path="/expense-details">
+          <ExpenseDetails />
         </Route>
         <Route exact path="/profile">
           <Profile />

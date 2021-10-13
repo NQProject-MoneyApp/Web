@@ -44,7 +44,7 @@ const GroupDetails: React.FC = () => {
           </IonRow>
         </IonGrid>
         <IonCard>
-          <IonList>
+          <IonList lines="none" >
             <IonItem>Item 1</IonItem>
             <IonItem>Item 2</IonItem>
             <IonItem>Item 3</IonItem>

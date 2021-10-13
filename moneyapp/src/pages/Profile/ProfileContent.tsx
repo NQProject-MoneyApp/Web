@@ -92,7 +92,7 @@ const ProfileContent: React.FC = () => {
           </IonCard>
           <FlexSpacer height="1rem" />
 
-          <IonList>
+          <IonList lines="none">
             <IonItem>
               <IonLabel>Login</IonLabel>
               <IonInput
@@ -131,7 +131,7 @@ const ProfileContent: React.FC = () => {
     default: {
       return (
         <IonContent>
-          <IonList>
+          <IonList lines="none">
             <FlexSpacer height="1rem" />
             <IonItem className="error">
               <IonLabel>Connection error</IonLabel>

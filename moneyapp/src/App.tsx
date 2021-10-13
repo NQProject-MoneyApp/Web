@@ -36,6 +36,7 @@ import "./theme/styles.css";
 import ExpenseList from "./pages/ExpenseList/ExpenseList";
 import Profile from "./pages/Profile/Profile";
 import AddGroup from "./pages/AddGroup/AddGroup";
+import AddExpense from "./pages/AddExpense/AddExpense";
 
 const App: React.FC = () => (
   <IonApp>
@@ -48,6 +49,7 @@ const App: React.FC = () => (
           <GroupList />
         </Route>
         <Route exact path="/groups/:groupId/expenses" component={ExpenseList} />
+        <Route exact path="/groups/:groupId/add-expense" component={AddExpense} />
         <Route exact path="/group-details">
           <GroupDetails />
         </Route>

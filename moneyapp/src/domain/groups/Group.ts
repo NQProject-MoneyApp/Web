@@ -9,6 +9,8 @@
 //     kite = 7,
 // }
 
+import { User } from "../users/User";
+
 
 
 type Group = {
@@ -18,6 +20,7 @@ type Group = {
     userBalance: number,
     createDate: Date,
     icon: String,
+    members: User[],
 };
 
 export default Group;

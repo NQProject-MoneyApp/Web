@@ -1,9 +1,12 @@
+import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   IonButton,
   IonCard,
   IonCardTitle,
   IonContent,
   IonHeader,
+  IonItem,
   IonList,
   IonPage,
   IonRow,
@@ -30,6 +33,10 @@ const ExpenseList: React.FC = () => {
   
   const [expenseList, setExpenseList] = useState(new Array<Expense>());
 
+  const navigateToAddExpense = () => {
+    window.location.href = `groups/${groupId}/add-expense`;
+  };
+
   const fetchExpenses = async () => {
     const expenses = await ApiClient.instance.getExpenses(parseInt(groupId));
     setExpenseList(expenses);
@@ -46,7 +53,20 @@ const ExpenseList: React.FC = () => {
         <Toolbar />
       </IonHeader>
       <IonContent fullscreen>
-        <IonList>
+        <IonList lines="none">
+        <IonItem>
+            <IonButton
+              onClick={navigateToAddExpense}
+              icon-only
+              fill="clear"
+              size="default"
+            >
+              <FontAwesomeIcon
+                className="addGroupIcon"
+                icon={faPlusCircle}
+              ></FontAwesomeIcon>
+            </IonButton>
+          </IonItem>
           {expenseList.map((e) => (
             <ExpenseComponent
               key={e.id}

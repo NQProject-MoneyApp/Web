@@ -32,9 +32,9 @@ const GroupComponent: React.FC<GroupComponentProps> = ({
   };
 
   return (
-    <IonCard onClick={navigateToExpenses}>
+    <IonCard color="light" onClick={navigateToExpenses}>
       <IonItem color="none" lines="none">
-        <img className="icon" src={burger} />
+        <img className="icon" src={burger} alt="group icon"/>
         <IonLabel>
           <IonIcon icon={star}></IonIcon>
           <IonCardTitle class="ion-text-wrap">{name}</IonCardTitle>

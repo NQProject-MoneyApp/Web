@@ -180,24 +180,34 @@ class ApiClient {
     );
   }
 
-  async getUserFriends(): Promise<SimpleResult> {
-    try {
-      const response = await this.axiosInstance.get<any>("api/friends/");
-      return { success: true, result: response.data };
+  async getUserFriends(): Promise<User[]> {
+      const response = await this.axiosInstance.get<
+        any,
+        NetworkResponse<UserDto[]>
+      >("api/friends/");
 
-    } catch {
-      return { success: false, result: null };
-    }
+      if (response.data) {
+        return response.data.map((e) => {
+          return {
+            id: e.pk!,
+            name: e.username!,
+            email: e.email!,
+            balance: 0
+          };
+        });
+      } else {
+        return [];
+      }
   }
 
   async getIcons(): Promise<SimpleResult> {
     try {
       const response = await this.axiosInstance.get<any>("api/icons");
       return { success: true, result: response.data };
-
     } catch {
       return { success: false, result: null };
-    }  }
+    }
+  }
 
   private mapFromGroupUserDto(user: GroupUserDto): User {
     return this.mapFromUserDto(user.user!, user.balance!);

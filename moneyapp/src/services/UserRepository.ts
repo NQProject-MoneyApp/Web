@@ -1,3 +1,4 @@
+import { User } from "../domain/users/User";
 import ApiClient, { SimpleResult } from "./ApiClient";
 import SessionStorage from "./SessionStorage";
 
@@ -28,7 +29,7 @@ class UserRepository {
     return await ApiClient.instance.getUserProfile();
   }
 
-  async fetchFriends(): Promise<SimpleResult> {
+  async fetchFriends(): Promise<User[]> {
     return await ApiClient.instance.getUserFriends();
   }
 

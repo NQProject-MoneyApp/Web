@@ -14,6 +14,10 @@ import {
 import { useEffect, useState } from "react";
 import { Redirect } from "react-router";
 import FlexSpacer from "../../components/common/Spacer";
+import {
+  ParticipantsComponent,
+  SelectedParticipant,
+} from "../../components/ParticipantsComponent";
 import ApiClient from "../../services/ApiClient";
 import UserRepository from "../../services/UserRepository";
 import "./AddGroup.css";
@@ -27,20 +31,24 @@ const AddGroupContent: React.FC = () => {
 
   const [state, setState] = useState(AddGroupContentState.loading);
   const [showToast, setShowToast] = useState(false);
-  const [friends, setFriends] = useState(new Array<any>());
   const [icons, setIcons] = useState(new Array<any>());
   const [name, setName] = useState("");
   const [selectedIcon, setSelectedIcon] = useState(1);
+  const [selectedFriends, setSelectedFriends] = useState(
+    new Array<SelectedParticipant>()
+  );
 
   const fetchFriends = async () => {
     let result = await UserRepository.instance.fetchFriends();
 
-    if (result.success) {
-      setFriends(result.result);
-      return true;
-    } else {
-      return false;
-    }
+    const friends = result.map((e) => ({
+      id: e.id,
+      name: e.name,
+      selected: true,
+    }));
+    setSelectedFriends(friends);
+    return true;
+
   };
 
   const fetchIcons = async () => {
@@ -121,7 +129,7 @@ const AddGroupContent: React.FC = () => {
             <FlexSpacer height="16.rem" />
 
             <IonItem>
-              <IonLabel>Login</IonLabel>
+              <IonLabel>Name</IonLabel>
               <IonInput
                 type="text"
                 placeholder="Name"
@@ -131,11 +139,12 @@ const AddGroupContent: React.FC = () => {
             </IonItem>
             <FlexSpacer height="16.rem" />
 
-            <IonItem>
-              {friends.map((friend) => (
-                <IonLabel key={friend.pk}>{friend.username!}</IonLabel>
-              ))}
-            </IonItem>
+            <IonCard color="light">
+              <ParticipantsComponent
+                participants={selectedFriends}
+                onChanged={setSelectedFriends}
+              />
+            </IonCard>
           </IonList>
         </IonContent>
       );

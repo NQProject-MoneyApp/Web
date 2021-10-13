@@ -1,4 +1,4 @@
-import { IonItem, IonLabel, IonInput, IonButton, IonToast } from "@ionic/react";
+import { IonItem, IonList, IonInput, IonButton, IonToast } from "@ionic/react";
 import { useState } from "react";
 import { Redirect } from "react-router";
 import ApiClient from "../../services/ApiClient";
@@ -24,7 +24,7 @@ const LoginFrom: React.FC = () => {
     return <Redirect to="/groups" />;
   } else {
     return (
-      <div className="container auth-form">
+      <IonList className="container auth-form">
         <IonToast
           isOpen={showToast}
           onDidDismiss={() => setShowToast(false)}
@@ -60,7 +60,7 @@ const LoginFrom: React.FC = () => {
           <IonButton color="primary" onClick={submitLogin}>
             Log in
           </IonButton>
-      </div>
+      </IonList>
     );
   }
 };

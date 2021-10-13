@@ -48,16 +48,17 @@ ion-item {
 
 ion-item.item-input {
   border-radius: var(--app-rounded-corners);
-  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 4px 16px var(--ion-color-shadow);
   overflow: hidden;
   margin: 1rem;
+  background-color: var(--ion-color-light);
 }
 
 ion-button {
   width: auto;
   display: block;
   border-radius: var(--app-rounded-corners);
-  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 4px 16px var(--ion-color-shadow);
   overflow: hidden;
   margin: 1rem;
   flex-grow: 1;
@@ -66,4 +67,9 @@ ion-button {
 
 .transparent-container {
   background-color: transparent;
+}
+
+::-webkit-scrollbar,
+*::-webkit-scrollbar {
+  display: none;
 }

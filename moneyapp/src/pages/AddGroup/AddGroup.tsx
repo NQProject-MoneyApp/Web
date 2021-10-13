@@ -1,19 +1,8 @@
-import {
-  IonContent,
-  IonGrid,
-  IonHeader,
-  IonPage,
-  IonRow,
-  IonCol,
-  IonCard,
-  IonList,
-  IonItem,
-  IonImg,
-  IonButton,
-} from "@ionic/react";
+import { IonContent, IonHeader, IonPage } from "@ionic/react";
 import Toolbar from "../../components/Toolbar";
 
 import "./AddGroup.css";
+import AddGroupContent from "./AddGroupContent";
 
 const AddGroup: React.FC = () => {
   return (
@@ -21,8 +10,8 @@ const AddGroup: React.FC = () => {
       <IonHeader>
         <Toolbar />
       </IonHeader>
-      <IonContent>
-        <h2>Add Group</h2>
+      <IonContent fullscreen>
+        <AddGroupContent />
       </IonContent>
     </IonPage>
   );

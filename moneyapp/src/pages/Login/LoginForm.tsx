@@ -52,6 +52,11 @@ const LoginFrom: React.FC = () => {
             placeholder="password"
             value={password}
             onIonChange={(e) => setPassword(e.detail.value!)}
+            onKeyDown={(e) => {
+              if (e.key == "Enter") {
+                submitLogin();
+              }
+            }}
           />
         </IonItem>
 

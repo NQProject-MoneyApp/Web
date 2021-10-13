@@ -35,6 +35,7 @@ import "./theme/variables.css";
 import "./theme/styles.css";
 import ExpenseList from "./pages/ExpenseList/ExpenseList";
 import Profile from "./pages/Profile/Profile";
+import AddGroup from "./pages/AddGroup/AddGroup";
 
 const App: React.FC = () => (
   <IonApp>
@@ -54,6 +55,9 @@ const App: React.FC = () => (
         </Route>
         <Route exact path="/profile">
           <Profile />
+        </Route>
+        <Route exact path="/add-group">
+          <AddGroup />
         </Route>
         <Route exact path="/">
           <Redirect to="/login" />

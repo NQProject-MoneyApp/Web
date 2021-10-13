@@ -11,3 +11,8 @@ img.logo {
     padding-left: 0.5rem;
   }
   
+  .profileIcon {
+    margin: auto;
+    padding: 0.4rem;
+    color: var(--ion-color-primary);
+  }

@@ -24,25 +24,45 @@ const ProfileContent: React.FC = () => {
     edit,
   }
 
-  const [state, setIsLoading] = useState(ProfileContentState.loading);
+  const [state, setState] = useState(ProfileContentState.loading);
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
+  const [pk, setPk] = useState(0);
 
   const fetchUserProfile = async () => {
     let now = Date.now();
-    setIsLoading(ProfileContentState.loading);
+    setState(ProfileContentState.loading);
 
     let data = await UserRepository.instance.userProfile();
-
     let diff = Date.now().valueOf() - now.valueOf();
-    setTimeout(() => {
-      setUsername("Jędrzej");
-      setEmail("Jędrzej@gmail.com");
-      setIsLoading(ProfileContentState.edit);
-    }, 1000 - diff);
+
+    if (data.success) {
+      setTimeout(() => {
+        setUsername(data.result.username);
+        setEmail(data.result.email);
+        setPk(data.result.pk);
+
+        setState(ProfileContentState.edit);
+      }, 1000 - diff);
+    } else {
+      setTimeout(() => {
+        setState(ProfileContentState.error);
+      }, 1000 - diff);
+    }
   };
 
-  const save = async () => {};
+  const save = async () => {
+    setState(ProfileContentState.loading);
+    let result = await UserRepository.instance.updateUserProfile(
+      username,
+      pk,
+      email
+    );
+
+    if (result.success) {
+      fetchUserProfile();
+    }
+  };
 
   const logout = async () => {
     UserRepository.instance.logout();
@@ -88,16 +108,22 @@ const ProfileContent: React.FC = () => {
                 type="text"
                 placeholder="email"
                 value={email}
-                onIonChange={(e) => setEmail(e.detail.value!)}
+                disabled
               />
             </IonItem>
             <FlexSpacer height="1rem" />
-            <IonButton color="primary" onClick={save}>
-              Save
-            </IonButton>
-            <IonButton color="danger" onClick={logout}>
-              Logout
-            </IonButton>
+
+            <IonRow className="buttons">
+              <IonButton color="primary" onClick={save}>
+                Save
+              </IonButton>
+
+              <IonButton color="danger" onClick={logout}>
+                Logout
+              </IonButton>
+            </IonRow>
+
+
           </IonList>
         </IonContent>
       );
@@ -107,7 +133,7 @@ const ProfileContent: React.FC = () => {
         <IonContent>
           <IonList>
             <FlexSpacer height="1rem" />
-            <IonItem>
+            <IonItem className="error">
               <IonLabel>Connection error</IonLabel>
             </IonItem>
             <FlexSpacer height="1rem" />

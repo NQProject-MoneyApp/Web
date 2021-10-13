@@ -15,10 +15,6 @@ h3 {
   margin: 0;
 }
 
-ion-list.list-md {
-  background-color: transparent;
-}
-
 .header3 {
   color: var(--ion-color-primary) !important;
 }

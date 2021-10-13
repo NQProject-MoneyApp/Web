@@ -103,8 +103,27 @@ class ApiClient {
     return [];
   }
 
-  async getUserProfile() {
-    return await this.axiosInstance.get<any>("api/user/");
+  async updateUserProfile(username: string, pk: number, email: string): Promise<SimpleResult> {
+    try {
+      const response = await this.axiosInstance.patch<any>("api/user/", {
+        username: username,
+        email: email,
+        pk: pk
+      });
+      return { success: true, result: response.data };
+    } catch {
+      return { success: false, result: null };
+    }
+  }
+
+  async getUserProfile(): Promise<SimpleResult> {
+    try {
+      const response = await this.axiosInstance.get<any>("api/user/");
+      return { success: true, result: response.data };
+
+    } catch {
+      return { success: false, result: null };
+    }
   }
 
   private createInstance(): Axios {
@@ -131,3 +150,4 @@ class ApiClient {
 }
 
 export default ApiClient;
+export type {SimpleResult}

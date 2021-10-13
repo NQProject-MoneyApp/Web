@@ -28,6 +28,14 @@ class UserRepository {
     return await ApiClient.instance.getUserProfile();
   }
 
+  async fetchFriends(): Promise<SimpleResult> {
+    return await ApiClient.instance.getUserFriends();
+  }
+
+  async fetchIcons(): Promise<SimpleResult> {
+    return await ApiClient.instance.getIcons();
+  }
+
   async updateUserProfile(username: string, pk: number, email: string): Promise<SimpleResult> {
     return await ApiClient.instance.updateUserProfile(username, pk, email);
   }

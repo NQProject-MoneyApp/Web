@@ -147,6 +147,25 @@ class ApiClient {
       }
     );
   }
+
+  async getUserFriends(): Promise<SimpleResult> {
+    try {
+      const response = await this.axiosInstance.get<any>("api/friends/");
+      return { success: true, result: response.data };
+
+    } catch {
+      return { success: false, result: null };
+    }
+  }
+
+  async getIcons(): Promise<SimpleResult> {
+    try {
+      const response = await this.axiosInstance.get<any>("api/icons");
+      return { success: true, result: response.data };
+
+    } catch {
+      return { success: false, result: null };
+    }  }
 }
 
 export default ApiClient;

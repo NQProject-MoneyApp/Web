@@ -13,6 +13,7 @@ import "./GroupList.css";
 import ApiClient from "../../services/ApiClient";
 import { useEffect, useState } from "react";
 import GroupComponent from "./GroupComponent";
+import { Redirect } from "react-router";
 
 const GroupList: React.FC = () => {
   const [groupList, setGroupList] = useState(new Array<any>());
@@ -21,6 +22,10 @@ const GroupList: React.FC = () => {
     const response = await ApiClient.instance.getGroups();
     setGroupList(response.data);
     console.log(response.data);
+  };
+
+  const navigateToAddGroup = () => {
+    window.location.href = "/add-group";
   };
 
   useEffect(() => {
@@ -35,7 +40,12 @@ const GroupList: React.FC = () => {
       <IonContent fullscreen>
         <IonList lines="none">
           <IonItem>
-            <IonButton icon-only fill="clear" size="default">
+            <IonButton
+              onClick={navigateToAddGroup}
+              icon-only
+              fill="clear"
+              size="default"
+            >
               <FontAwesomeIcon
                 className="addGroupIcon"
                 icon={faPlusCircle}
@@ -44,12 +54,12 @@ const GroupList: React.FC = () => {
           </IonItem>
           {groupList.map((group) => (
             <GroupComponent
-            key={group.pk}
-            name={group.name}
-            icon={group.icon}
-            balance={group.user_balance}
-            createDate={group.create_date}
-            isFavourite={group.is_favourite}
+              key={group.pk}
+              name={group.name}
+              icon={group.icon}
+              balance={group.user_balance}
+              createDate={group.create_date}
+              isFavourite={group.is_favourite}
             />
           ))}
         </IonList>

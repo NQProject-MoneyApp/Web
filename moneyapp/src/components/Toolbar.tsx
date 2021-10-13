@@ -21,11 +21,15 @@ const Toolbar: React.FC = () => {
     window.location.href = "/profile";    
   };
 
+  const navigateToHome = () => {
+    window.location.href = "/";    
+  };
+
   return (
     <IonToolbar>
       <IonGrid>
         <IonRow>
-          <IonButtons>
+          <IonButtons onClick={navigateToHome}>
             <IonThumbnail slot="start">
               <img className="logo" src={logo} alt="MoneyApp Logo"></img>
             </IonThumbnail>

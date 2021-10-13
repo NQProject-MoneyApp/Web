@@ -44,7 +44,7 @@ const ProfileContent: React.FC = () => {
 
         setState(ProfileContentState.edit);
       }, 1000 - diff);
-    } else  {
+    } else {
       setTimeout(() => {
         setState(ProfileContentState.error);
       }, 1000 - diff);
@@ -53,12 +53,14 @@ const ProfileContent: React.FC = () => {
 
   const save = async () => {
     setState(ProfileContentState.loading);
-    let result = await UserRepository.instance.updateUserProfile(username, pk ,email);
+    let result = await UserRepository.instance.updateUserProfile(
+      username,
+      pk,
+      email
+    );
 
     if (result.success) {
       fetchUserProfile();
-    } else {
-      console.log("EROR");
     }
   };
 
@@ -110,13 +112,18 @@ const ProfileContent: React.FC = () => {
               />
             </IonItem>
             <FlexSpacer height="1rem" />
-            <IonButton color="primary" onClick={save}>
-              Save
-            </IonButton>
 
-            <IonButton color="danger" onClick={logout}>
-              Logout
-            </IonButton>
+            <IonRow className="buttons">
+              <IonButton color="primary" onClick={save}>
+                Save
+              </IonButton>
+
+              <IonButton color="danger" onClick={logout}>
+                Logout
+              </IonButton>
+            </IonRow>
+
+
           </IonList>
         </IonContent>
       );

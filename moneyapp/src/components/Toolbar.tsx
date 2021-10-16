@@ -1,10 +1,4 @@
-import {
-  IonGrid,
-  IonRow,
-  IonTitle,
-  IonToolbar,
-  IonItem,
-} from "@ionic/react";
+import { IonGrid, IonRow, IonToolbar } from "@ionic/react";
 import logo from "../images/logo.png";
 import UserRepository from "../services/UserRepository";
 import FlexSpacer from "./common/Spacer";
@@ -24,27 +18,26 @@ const Toolbar: React.FC = () => {
   };
 
   return (
-    <IonToolbar>
+    <IonToolbar color="secondary">
       <IonGrid>
         <IonRow>
-          <IonItem lines="none">
-            <IconButton onClick={navigateToHome}>
+          <div className="app-title-container">
+            <IconButton onClick={navigateToHome} size="medium">
               <img src={logo} alt="MoneyApp Logo"></img>
             </IconButton>
-          </IonItem>
-          <IonTitle>MoneyApp</IonTitle>
+            <h1 className="app-title">MoneyApp</h1>
+          </div>
+
           {UserRepository.instance.isLogin() && (
             <>
               <FlexSpacer flex={1} />
-              <IonItem lines="none">
-                <IconButton onClick={navigateToProfile}>
-                  <FontAwesomeIcon
-                    className="profileIcon"
-                    size="2x"
-                    icon={faUserCircle}
-                  ></FontAwesomeIcon>
-                </IconButton>
-              </IonItem>
+              <IconButton onClick={navigateToProfile}>
+                <FontAwesomeIcon
+                  className="profileIcon"
+                  size="2x"
+                  icon={faUserCircle}
+                ></FontAwesomeIcon>
+              </IconButton>
             </>
           )}
         </IonRow>

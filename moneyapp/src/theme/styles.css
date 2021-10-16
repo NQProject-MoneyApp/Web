@@ -83,6 +83,12 @@ ion-item.item-input, ion-item.item-input ion-input, ion-button {
   cursor: pointer;
 }
 
+/* Group/Expense card */
+
+ion-card.ion-color ion-item ion-label ion-card-title.ion-inherit-color {
+  color: var(--ion-color-secondary);
+}
+
 /* Login/Register screen */
 
 .login-form-option {

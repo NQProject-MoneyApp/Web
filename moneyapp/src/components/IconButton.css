@@ -3,6 +3,7 @@
   text-align: center;
   overflow: hidden;
   flex: auto;
+  display: flex;
 }
 
 .icon-button-container {

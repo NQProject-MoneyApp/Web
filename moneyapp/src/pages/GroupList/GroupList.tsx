@@ -1,9 +1,4 @@
-import {
-  IonContent,
-  IonHeader,
-  IonPage,
-  IonList,
-} from "@ionic/react";
+import { IonContent, IonHeader, IonPage, IonList, IonLoading } from "@ionic/react";
 import Toolbar from "../../components/Toolbar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
@@ -16,11 +11,14 @@ import IconButton from "../../components/IconButton";
 
 const GroupList: React.FC = () => {
   const [groupList, setGroupList] = useState(new Array<Group>());
+  const [isLoading, setIsLoading] = useState(false);
 
   const fetchGroups = async () => {
+    setIsLoading(true);
     const groups = await ApiClient.instance.getGroups();
     setGroupList(groups);
     console.log(groups);
+    setIsLoading(false);
   };
 
   const navigateToAddGroup = () => {
@@ -37,14 +35,15 @@ const GroupList: React.FC = () => {
         <Toolbar />
       </IonHeader>
       <IonContent fullscreen>
+        <IonLoading isOpen={isLoading} message={"Loading..."} />
         <IonList lines="none" className="group-container">
-            <IconButton onClick={navigateToAddGroup} justify="center">
-              <FontAwesomeIcon
-                className="addGroupIcon"
-                size="2x"
-                icon={faPlusCircle}
-              ></FontAwesomeIcon>
-            </IconButton>
+          <IconButton onClick={navigateToAddGroup} justify="center">
+            <FontAwesomeIcon
+              className="addGroupIcon"
+              size="2x"
+              icon={faPlusCircle}
+            ></FontAwesomeIcon>
+          </IconButton>
           {groupList.map((group) => (
             <GroupComponent
               key={group.id}

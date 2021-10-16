@@ -1,4 +1,11 @@
-import { IonItem, IonList, IonInput, IonButton, IonToast, IonLoading } from "@ionic/react";
+import {
+  IonItem,
+  IonList,
+  IonInput,
+  IonButton,
+  IonToast,
+  IonLoading,
+} from "@ionic/react";
 import { useState } from "react";
 import { Redirect } from "react-router";
 import ApiClient from "../../services/ApiClient";
@@ -29,7 +36,7 @@ const LoginFrom: React.FC = () => {
   } else {
     return (
       <IonList className="container auth-form">
-         <IonLoading isOpen={isLoading} message={"Loading..."} />
+        <IonLoading isOpen={isLoading} message={"Loading..."} />
 
         <IonToast
           isOpen={showToast}
@@ -63,9 +70,9 @@ const LoginFrom: React.FC = () => {
             }}
           />
         </IonItem>
-          <IonButton color="primary" onClick={submitLogin}>
-            Log in
-          </IonButton>
+        <IonButton color="primary" onClick={submitLogin}>
+          Log in
+        </IonButton>
       </IonList>
     );
   }

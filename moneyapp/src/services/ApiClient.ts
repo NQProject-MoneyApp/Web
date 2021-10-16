@@ -132,6 +132,23 @@ class ApiClient {
     console.log(result);
   }
 
+  async addGroup(
+    name: String,
+    icon: number,
+    participants: number[]
+  ): Promise<SimpleResult> {
+    try {
+      const result = await this.axiosInstance.post<any>(`api/groups/`, {
+        name: name,
+        icon: icon,
+        participants: participants,
+      });
+      return { success: true, result: "Succes" };
+    } catch {
+      return { success: false, result: null };
+    }
+  }
+
   async updateUserProfile(
     username: string,
     pk: number,
@@ -181,23 +198,23 @@ class ApiClient {
   }
 
   async getUserFriends(): Promise<User[]> {
-      const response = await this.axiosInstance.get<
-        any,
-        NetworkResponse<UserDto[]>
-      >("api/friends/");
+    const response = await this.axiosInstance.get<
+      any,
+      NetworkResponse<UserDto[]>
+    >("api/friends/");
 
-      if (response.data) {
-        return response.data.map((e) => {
-          return {
-            id: e.pk!,
-            name: e.username!,
-            email: e.email!,
-            balance: 0
-          };
-        });
-      } else {
-        return [];
-      }
+    if (response.data) {
+      return response.data.map((e) => {
+        return {
+          id: e.pk!,
+          name: e.username!,
+          email: e.email!,
+          balance: 0,
+        };
+      });
+    } else {
+      return [];
+    }
   }
 
   async getIcons(): Promise<SimpleResult> {

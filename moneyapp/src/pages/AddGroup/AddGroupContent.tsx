@@ -28,9 +28,10 @@ const AddGroupContent: React.FC = () => {
     loading,
     edit,
   }
-
+  
   const [state, setState] = useState(AddGroupContentState.loading);
   const [showToast, setShowToast] = useState(false);
+  const [showErrorToast, setShowErrorToast] = useState(false);
   const [icons, setIcons] = useState(new Array<any>());
   const [name, setName] = useState("");
   const [selectedIcon, setSelectedIcon] = useState(1);
@@ -48,7 +49,6 @@ const AddGroupContent: React.FC = () => {
     }));
     setSelectedFriends(friends);
     return true;
-
   };
 
   const fetchIcons = async () => {
@@ -59,6 +59,22 @@ const AddGroupContent: React.FC = () => {
       return true;
     } else {
       return false;
+    }
+  };
+
+  const submitSave = async () => {
+    setState(AddGroupContentState.loading);
+    const result = await ApiClient.instance.addGroup(
+      name,
+      selectedIcon,
+      selectedFriends.filter((e) => e.selected).map((e) => e.id)
+    );
+
+    if (result.success) {
+      window.location.href = "/groups";
+    } else {
+      setShowErrorToast(true);
+      setState(AddGroupContentState.edit);
     }
   };
 
@@ -109,6 +125,15 @@ const AddGroupContent: React.FC = () => {
     case AddGroupContentState.edit: {
       return (
         <IonContent>
+          <IonToast
+            isOpen={showErrorToast}
+            onDidDismiss={() => setShowErrorToast(false)}
+            message="Add group error"
+            position="top"
+            color="danger"
+            mode="ios"
+            duration={1000}
+          />
           <IonList lines="none">
             <FlexSpacer height="16.rem" />
             <IonRow className="iconList">
@@ -119,6 +144,7 @@ const AddGroupContent: React.FC = () => {
                   className="groupIconClass"
                 >
                   <IonImg
+                    className="groupImage"
                     key={icon}
                     src={Icons.instance.icon(icon)}
                     onClick={() => setIcon(icon)}
@@ -139,10 +165,14 @@ const AddGroupContent: React.FC = () => {
             </IonItem>
             <FlexSpacer height="16.rem" />
 
-              <ParticipantsComponent
-                participants={selectedFriends}
-                onChanged={setSelectedFriends}
-              />
+            <ParticipantsComponent
+              participants={selectedFriends}
+              onChanged={setSelectedFriends}
+            />
+
+            <IonButton color="primary" onClick={submitSave}>
+              Save
+            </IonButton>
           </IonList>
         </IonContent>
       );

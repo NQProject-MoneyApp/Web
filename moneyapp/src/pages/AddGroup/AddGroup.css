@@ -7,6 +7,10 @@ ion-row.iconList {
 }
 
 ion-card.groupIconClass {
-    height: 4rem;
     min-width: 4rem;
+    padding: 0.5rem;
+}
+
+ioin-img.groupImage {
+    margin: 2rem;
 }

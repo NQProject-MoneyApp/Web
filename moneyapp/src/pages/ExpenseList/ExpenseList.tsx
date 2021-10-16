@@ -46,22 +46,21 @@ const ExpenseList: React.FC = () => {
   }, []);
 
   return (
-
     <IonPage>
-    <IonHeader>
-      <Toolbar />
-    </IonHeader>
-    <IonContent fullscreen>
-      <IonLoading isOpen={isLoading} message={"Loading..."} />
-      <IonList lines="none" className="group-container">
-        <IconButton onClick={navigateToAddExpense} justify="center">
-          <FontAwesomeIcon
-            className="addGroupIcon"
-            size="2x"
-            icon={faPlusCircle}
-          ></FontAwesomeIcon>
-        </IconButton>
-        {expenseList.map((e) => (
+      <IonHeader>
+        <Toolbar />
+      </IonHeader>
+      <IonContent fullscreen>
+        <IonLoading isOpen={isLoading} message={"Loading..."} />
+        <IonList lines="none" className="group-container">
+          <IconButton onClick={navigateToAddExpense} justify="center">
+            <FontAwesomeIcon
+              className="addGroupIcon"
+              size="2x"
+              icon={faPlusCircle}
+            ></FontAwesomeIcon>
+          </IconButton>
+          {expenseList.map((e) => (
             <ExpenseComponent
               key={e.id}
               title={e.name}
@@ -69,9 +68,9 @@ const ExpenseList: React.FC = () => {
               author={e.author}
             />
           ))}
-      </IonList>
-    </IonContent>
-  </IonPage>
+        </IonList>
+      </IonContent>
+    </IonPage>
   );
 };
 

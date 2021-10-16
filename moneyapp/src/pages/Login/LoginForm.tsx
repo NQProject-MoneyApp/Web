@@ -1,4 +1,4 @@
-import { IonItem, IonList, IonInput, IonButton, IonToast } from "@ionic/react";
+import { IonItem, IonList, IonInput, IonButton, IonToast, IonLoading } from "@ionic/react";
 import { useState } from "react";
 import { Redirect } from "react-router";
 import ApiClient from "../../services/ApiClient";
@@ -9,14 +9,18 @@ const LoginFrom: React.FC = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showToast, setShowToast] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const submitLogin = async () => {
     console.log("Login");
+    setIsLoading(true);
     const result = await UserRepository.instance.login(username, password);
     if (result) {
+      setIsLoading(false);
       window.location.reload();
     } else {
       setShowToast(true);
+      setIsLoading(false);
     }
   };
 
@@ -25,6 +29,8 @@ const LoginFrom: React.FC = () => {
   } else {
     return (
       <IonList className="container auth-form">
+         <IonLoading isOpen={isLoading} message={"Loading..."} />
+
         <IonToast
           isOpen={showToast}
           onDidDismiss={() => setShowToast(false)}

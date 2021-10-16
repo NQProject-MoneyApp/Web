@@ -8,6 +8,7 @@ import {
 } from "@ionic/react";
 import { useState } from "react";
 import { Redirect } from "react-router";
+import LoginHeader from "../../components/LoginHeader";
 import ApiClient from "../../services/ApiClient";
 import UserRepository from "../../services/UserRepository";
 import "./Login.css";
@@ -51,7 +52,7 @@ const LoginFrom: React.FC = () => {
           mode="ios"
           duration={1000}
         />
-        <h1>Hello</h1>
+        <LoginHeader title="Hello" />
         <IonItem lines="none">
           <IonInput
             type="text"

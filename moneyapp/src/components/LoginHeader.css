@@ -1,0 +1,11 @@
+.login-header {
+  margin-bottom: 3rem;
+}
+
+.login-header img {
+    width: 7rem;
+}
+
+.login-header h1 {
+  color: var(--ion-color-primary);
+}

@@ -80,9 +80,9 @@ const AddGroupContent: React.FC = () => {
 
   const iconColor = (icon: number) => {
     if (icon == selectedIcon) {
-      return "primary";
+      return "dark";
     } else {
-      return "medium";
+      return "light";
     }
   };
 

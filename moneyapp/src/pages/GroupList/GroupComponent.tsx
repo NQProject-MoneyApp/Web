@@ -6,9 +6,9 @@ import {
   IonLabel,
   IonIcon,
 } from "@ionic/react";
-import burger from "../../images/icons/burgers.svg";
 import { star, starOutline } from "ionicons/icons";
 import moment from "moment";
+import Icons from "../AddGroup/Icons";
 
 type GroupComponentProps = {
   readonly groupId: number;
@@ -34,7 +34,7 @@ const GroupComponent: React.FC<GroupComponentProps> = ({
   return (
     <IonCard color="light" onClick={navigateToGroupDetails}>
       <IonItem color="none" lines="none">
-        <img className="icon" src={burger} alt="group icon"/>
+        <img className="icon" src={Icons.instance.icon(icon)} alt="group icon"/>
         <IonLabel>
           <IonIcon icon={star}></IonIcon>
           <IonCardTitle class="ion-text-wrap">{name}</IonCardTitle>

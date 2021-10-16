@@ -20,7 +20,6 @@ import { useParams } from "react-router";
 import FlexSpacer from "../../components/common/Spacer";
 import Toolbar from "../../components/Toolbar";
 import Group from "../../domain/groups/Group";
-import burger from "../../images/icons/burgers.svg";
 import ApiClient from "../../services/ApiClient";
 import Icons from "../AddGroup/Icons";
 import { Clipboard } from "@capacitor/clipboard";
@@ -104,16 +103,10 @@ const GroupDetails: React.FC = () => {
           <IonGrid>
             <IonRow>
               <IonCol>
-                <IonCard
-                  key={groupDetails!.icon}
-                  color="medium"
-                  className="groupIconClass"
-                >
-                  <IonImg
-                    className="icon group-image"
-                    src={Icons.instance.icon(groupDetails!.icon)}
-                  />
-                </IonCard>
+                <IonImg
+                  className="icon group-image"
+                  src={Icons.instance.icon(groupDetails!.icon)}
+                />
               </IonCol>
               <IonCol>
                 <IonRow>Total cost: ${groupDetails!.totalCost}</IonRow>

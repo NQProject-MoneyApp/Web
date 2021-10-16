@@ -9,7 +9,6 @@ import {
 import { useState } from "react";
 import { Redirect } from "react-router";
 import LoginHeader from "../../components/LoginHeader";
-import ApiClient from "../../services/ApiClient";
 import UserRepository from "../../services/UserRepository";
 import "./Login.css";
 
@@ -33,7 +32,7 @@ const LoginFrom: React.FC = () => {
   };
 
   const navigateToRegister = async () => {
-    window.location.href = "/register"
+    window.location.href = "/register";
   };
 
   if (UserRepository.instance.isLogin()) {
@@ -69,7 +68,7 @@ const LoginFrom: React.FC = () => {
             value={password}
             onIonChange={(e) => setPassword(e.detail.value!)}
             onKeyDown={(e) => {
-              if (e.key == "Enter") {
+              if (e.key === "Enter") {
                 submitLogin();
               }
             }}
@@ -80,10 +79,17 @@ const LoginFrom: React.FC = () => {
         </IonButton>
 
         <IonItem className="login-form-option" lines="none">
-          <p>Forgot password?<span className="clickable">Reset</span></p>
+          <p>
+            Forgot password?<span className="clickable">Reset</span>
+          </p>
         </IonItem>
         <IonItem className="login-form-option" lines="none">
-          <p>No account yet?<span className="clickable" onClick={navigateToRegister}>Register</span></p>
+          <p>
+            No account yet?
+            <span className="clickable" onClick={navigateToRegister}>
+              Register
+            </span>
+          </p>
         </IonItem>
       </IonList>
     );

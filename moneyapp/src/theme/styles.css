@@ -83,3 +83,20 @@ ion-item.item-input, ion-item.item-input ion-input, ion-button {
   opacity: 0.6;
   cursor: pointer;
 }
+
+/* Login/Register screen */
+
+.login-form-option {
+  text-align: center;
+  height: 2.4em;
+}
+
+.login-form-option p{
+  flex: auto;
+}
+
+.login-form-option span{
+  color: var(--ion-color-primary);
+  font-weight: 600;
+  margin-left: 0.5em;
+}

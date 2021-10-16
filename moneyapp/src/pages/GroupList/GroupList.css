@@ -26,8 +26,12 @@ ion-icon {
   color: var(--ion-color-primary);
 }
 
-.addGroupIcon {
+.addIcon {
   color: var(--ion-color-primary);
+}
+
+.removeIcon {
+  color: var(--ion-color-danger);
 }
 
 img.icon {

@@ -1,3 +1,5 @@
+import { faPlusCircle, faTimesCircle } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   IonCard,
   IonCheckbox,
@@ -5,8 +7,12 @@ import {
   IonList,
   IonCardContent,
   IonLabel,
+  IonRow,
+  IonCol,
 } from "@ionic/react";
 import { attachProps } from "@ionic/react/dist/types/components/utils";
+import FlexSpacer from "./common/Spacer";
+import IconButton from "./IconButton";
 
 export type SelectedParticipant = {
   readonly id: number;
@@ -24,7 +30,6 @@ export const ParticipantsComponent: React.FC<ParticipantsProps> = ({
   onChanged,
 }: ParticipantsProps) => {
   const onToggle = (id: number) => {
-    console.log("onToggle");
     const newParticipants = participants.map((e) => {
       if (e.id != id) {
         return e;
@@ -41,19 +46,49 @@ export const ParticipantsComponent: React.FC<ParticipantsProps> = ({
   return (
     <IonCard>
       <IonCardContent>
-      <IonList lines="none">
-        {participants.map((p) => {
-          return (
-            <IonItem key={p.id}>
-                <IonCheckbox
-                  checked={p.selected}
-                  onIonChange={() => onToggle(p.id)}
-                />
-                <IonLabel>{p.name}</IonLabel>
-            </IonItem>
-          );
-        })}
-      </IonList>
+        <IonList lines="none">
+          {participants.map((p) => {
+            return (
+              <IonCol key={p.id}>
+                <IonRow>
+                  {p.selected && (
+                    <>
+                      <IonLabel>{p.name}</IonLabel>
+                      <FlexSpacer flex={1} />
+                      <IconButton
+                        onClick={() => onToggle(p.id)}
+                        justify="center"
+                      >
+                        <FontAwesomeIcon
+                          className="removeIcon"
+                          size="2x"
+                          icon={faTimesCircle}
+                        ></FontAwesomeIcon>
+                      </IconButton>
+                    </>
+                  )}
+
+                  {!p.selected && (
+                    <>
+                      <IonLabel>{p.name}</IonLabel>
+                      <FlexSpacer flex={1} />
+                      <IconButton
+                        onClick={() => onToggle(p.id)}
+                        justify="center"
+                      >
+                        <FontAwesomeIcon
+                          className="addIcon"
+                          size="2x"
+                          icon={faPlusCircle}
+                        ></FontAwesomeIcon>
+                      </IconButton>
+                    </>
+                  )}
+                </IonRow>
+              </IonCol>
+            );
+          })}
+        </IonList>
       </IonCardContent>
     </IonCard>
   );

@@ -26,7 +26,7 @@ class Icons {
   private icons = [beers, bowling, burgers, burgerSet, cups, kite, wine];
 
   icon(from: number): string {
-    return this.icons[from-1];
+    return this.icons[from - 1];
   }
 
   index(from: string): number {

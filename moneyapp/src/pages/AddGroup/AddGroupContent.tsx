@@ -82,7 +82,7 @@ const AddGroupContent: React.FC<any> = ({history}) => {
     if (icon == selectedIcon) {
       return "primary";
     } else {
-      return "light";
+      return "medium";
     }
   };
 

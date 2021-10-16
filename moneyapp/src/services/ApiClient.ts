@@ -25,7 +25,7 @@ type ExpenseDto = {
   pk?: number;
   group_id?: number;
   name?: string;
-  author?: any;
+  author?: UserDto;
   amount?: number;
   create_date?: string;
 };
@@ -76,6 +76,29 @@ class ApiClient {
     }
   }
 
+  async register(username: string, email: string, password: string): Promise<SimpleResult> {
+    const requestData = {
+      username: username,
+      email: email,
+      password1: password,
+      password2: password,
+    };
+    try {
+      const response = await this.axiosInstance.post<typeof requestData, any>(
+        "api/registration/",
+        requestData
+      );
+      SessionStorage.instance.setToken(response.data.key);
+
+      this.axiosInstance = this.createInstance();
+      this.addLogoutInterceptors();
+
+      return { success: true, result: response.data };
+    } catch {
+      return { success: false, result: null };
+    }
+  }
+
   async getGroups(): Promise<Group[]> {
     const result = await this.axiosInstance.get<
       any,
@@ -89,12 +112,32 @@ class ApiClient {
           totalCost: -1,
           userBalance: e.user_balance!,
           createDate: new Date(e.create_date!),
-          icon: "",
+          icon: e.icon!,
           members: e.members!.map((e) => this.mapFromGroupUserDto(e)),
         };
       });
     }
     return [];
+  }
+
+  async getGroup(id: number): Promise<Group | null> {
+    const result = await this.axiosInstance.get<
+      any,
+      NetworkResponse<GroupDto>
+    >(`api/groups/${id}`);
+    if (result.data) {
+        return {
+          id: result.data.pk!,
+          name: result.data.name!,
+          totalCost: result.data.total_cost!,
+          userBalance: result.data.user_balance!,
+          createDate: new Date(result.data.create_date!),
+          icon: result.data.icon!,
+          members: result.data.members!.map((e) => this.mapFromGroupUserDto(e)),
+        };
+    }
+
+    return null;
   }
 
   async getExpenses(groupId: number): Promise<Expense[]> {
@@ -109,6 +152,12 @@ class ApiClient {
           groupId: e.group_id!,
           name: e.name!,
           id: e.pk!,
+          author: { 
+            id: e.author?.pk!,
+            name: e.author?.username!,
+            email: e.author?.email!,
+            balance: 0,
+          }
         };
       });
     }

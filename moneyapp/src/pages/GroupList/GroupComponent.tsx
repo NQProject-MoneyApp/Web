@@ -27,6 +27,9 @@ const GroupComponent: React.FC<GroupComponentProps> = ({
   createDate,
   isFavourite,
 }: GroupComponentProps) => {
+  const navigateToGroupDetails = () => {
+    window.location.href = `groups/${groupId}`;
+  };
 
   return (
       <IonCard color="light" routerLink={`groups/${groupId}/expenses`}>

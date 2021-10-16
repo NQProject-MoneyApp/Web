@@ -3,8 +3,7 @@
   position: absolute;
   left: 0;
   right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+  top: 15%;
 }
 
 h3 {
@@ -72,4 +71,31 @@ ion-button {
 ::-webkit-scrollbar,
 *::-webkit-scrollbar {
   display: none;
+}
+
+ion-item.item-input, ion-item.item-input ion-input, ion-button {
+  height: 3.1rem;
+}
+
+
+.clickable:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+/* Login/Register screen */
+
+.login-form-option {
+  text-align: center;
+  height: 2.4em;
+}
+
+.login-form-option p{
+  flex: auto;
+}
+
+.login-form-option span{
+  color: var(--ion-color-primary);
+  font-weight: 600;
+  margin-left: 0.5em;
 }

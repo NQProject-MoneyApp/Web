@@ -2,7 +2,3 @@
     max-width: 400px;
     margin: auto;
 }
-
-.auth-form > h1 {
-    color: var(--ion-color-primary);
-}

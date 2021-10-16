@@ -19,7 +19,7 @@ type Group = {
     totalCost: number,
     userBalance: number,
     createDate: Date,
-    icon: String,
+    icon: number,
     members: User[],
 };
 

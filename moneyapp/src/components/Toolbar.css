@@ -1,12 +1,32 @@
   ion-buttons {
     margin-left: 0.5rem;
   }
+
+  .app-title-container {
+    display: flex;
+    align-content: center;
+    align-items: center;
+
+  }
   
-  ion-title {
-    padding-left: 0.5rem;
+  .app-title {
+    padding-left: 0.3rem;
+    font-size: 1rem;
+    margin: 0;
+    margin-top: 0.4rem;
   }
   
   .profileIcon {
     margin: auto;
-    color: var(--ion-color-primary);
+  }
+
+  ion-toolbar ion-row {
+    display: flex;
+    align-items: center;
+
+  }
+
+  ion-toolbar ion-row, ion-toolbar ion-grid {
+    padding: 0.1rem 0.1rem;
+    padding-left: 0.2rem
   }

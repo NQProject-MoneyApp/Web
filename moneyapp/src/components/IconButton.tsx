@@ -16,8 +16,11 @@ const IconButton: React.FC<IconButtonProps> = ({
 }: IconButtonProps) => {
   let iconSize: string;
   switch (size) {
+    case "tiny":
+      iconSize = "1.8rem";
+      break;
     case "small":
-      iconSize = "1rem";
+      iconSize = "2.2rem";
       break;
     case "medium":
       iconSize = "2.6rem";

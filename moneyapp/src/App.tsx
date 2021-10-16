@@ -48,12 +48,12 @@ const App: React.FC = () => (
         <Route exact path="/groups" component={GroupList}/>
         <Route exact path="/groups/:groupId/expenses" component={ExpenseList} />
         <Route exact path="/groups/:groupId/add-expense" component={AddExpense} />
-        <Route exact path="/group-details" component={GroupDetails}/>
-        <Route exact path="/expense-details" component={ExpenseDetails} />
         <Route exact path="/profile" component={Profile}/>
         <Route exact path="/add-group" component={AddGroup}/>
         <Route exact path="/register" component={Register} />
         <Route exact path="/groups/:groupId" component={GroupDetails} />
+        <Route exact path="/groups/:groupId/expenses/:expenseId" component={ExpenseDetails} />
+        <Route exact path="/group-details" component={GroupDetails}/>
         <Route exact path="/">
           <Redirect to="/login" />
         </Route>

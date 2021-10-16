@@ -6,7 +6,9 @@ export type Expense = {
     readonly name: string;
     readonly amount: number;
    
-    // readonly createDate?: Date;
+    readonly createDate?: string;
     readonly author: User;
-  //   readonly participants: User[];
+    readonly participants: User[];
   };
+
+  export default Expense;

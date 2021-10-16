@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@capacitor/app": "1.0.3",
+    "@capacitor/clipboard": "^1.0.5",
     "@capacitor/core": "3.2.3",
     "@capacitor/haptics": "1.0.3",
     "@capacitor/keyboard": "1.0.3",

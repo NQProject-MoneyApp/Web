@@ -5,7 +5,7 @@ import Toolbar from "../../components/Toolbar";
 import "./AddGroup.css";
 import AddGroupContent from "./AddGroupContent";
 
-const AddGroup: React.FC<RouteComponentProps> = (history) => {
+const AddGroup: React.FC<RouteComponentProps> = ({history}) => {
   return (
     <IonPage>
       <IonHeader>

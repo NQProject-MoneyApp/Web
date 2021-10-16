@@ -63,6 +63,8 @@ const ExpenseList: React.FC<RouteComponentProps> = ({history}) => {
           {expenseList.map((e) => (
             <ExpenseComponent
               key={e.id}
+              groupId={e.groupId}
+              expenseId={e.id}
               title={e.name}
               amount={e.amount}
               author={e.author}

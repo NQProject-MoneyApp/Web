@@ -12,7 +12,7 @@ import LoginHeader from "../../components/LoginHeader";
 import UserRepository from "../../services/UserRepository";
 import "./Register.css";
 
-const RegisterForm: React.FC = () => {
+const RegisterForm: React.FC<any> = ({history}) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
@@ -36,7 +36,8 @@ const RegisterForm: React.FC = () => {
   };
 
   const navigateToLogin = async () => {
-    window.location.href = "/login";
+    history.push("/login");
+
   };
 
   if (UserRepository.instance.isLogin()) {

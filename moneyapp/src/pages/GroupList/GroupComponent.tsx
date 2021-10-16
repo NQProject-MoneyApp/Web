@@ -6,9 +6,12 @@ import {
   IonLabel,
   IonIcon,
 } from "@ionic/react";
-import burger from "../../images/icons/burgers.svg";
 import { star, starOutline } from "ionicons/icons";
 import moment from "moment";
+import Icons from "../AddGroup/Icons";
+import Burger from "../AddGroup/Icons";
+import GroupDetails from "../GroupDetails/GroupDetails";
+
 
 type GroupComponentProps = {
   readonly groupId: number;
@@ -27,14 +30,11 @@ const GroupComponent: React.FC<GroupComponentProps> = ({
   createDate,
   isFavourite,
 }: GroupComponentProps) => {
-  const navigateToGroupDetails = () => {
-    window.location.href = `groups/${groupId}`;
-  };
 
   return (
-      <IonCard color="light" routerLink={`groups/${groupId}/expenses`}>
+      <IonCard color="light" routerLink={`/groups/${groupId}/expenses`}>
         <IonItem color="none" lines="none">
-          <img className="icon" src={burger} alt="group icon"/>
+          <img className="icon" src={Icons.instance.icon(icon)} alt="group icon"/>
           <IonLabel>
             <IonIcon icon={star}></IonIcon>
             <IonCardTitle class="ion-text-wrap">{name}</IonCardTitle>

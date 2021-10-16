@@ -12,7 +12,7 @@ const Login: React.FC<RouteComponentProps> = ({history}) => {
         <Toolbar history={history} />
       </IonHeader>
       <IonContent fullscreen>
-        <LoginForm />
+        <LoginForm history={history} />
       </IonContent>
     </IonPage>
   );

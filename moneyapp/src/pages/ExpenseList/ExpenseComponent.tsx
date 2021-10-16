@@ -15,18 +15,22 @@ import { User } from "../../domain/users/User";
 import "./ExpenseList.css";
 
 type ExpenseComponentProps = {
+  readonly groupId: number;
+  readonly expenseId: number;
   readonly title: string;
   readonly author: User;
   readonly amount: number;
 };
 
 const ExpenseComponent: React.FC<ExpenseComponentProps> = ({
+  groupId,
+  expenseId,
   title,
   author,
   amount,
 }: ExpenseComponentProps) => {
   return (
-    <IonCard color="light">
+    <IonCard color="light" routerLink={`/groups/${groupId}/expenses/${expenseId}`}>
       <IonItem color="none" lines="none">
         <IonLabel>
           <IonCardTitle class="ion-text-wrap" className="expense">

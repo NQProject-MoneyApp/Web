@@ -104,6 +104,7 @@ class ApiClient {
   }
 
   async getGroups(): Promise<Group[]> {
+    
     const result = await this.axiosInstance.get<
       any,
       NetworkResponse<GroupDto[]>
@@ -215,8 +216,9 @@ class ApiClient {
   }
 
   async join(code: String): Promise<SimpleResult> {
+
     try {
-      const result = await this.axiosInstance.put<any>(`api/join/${code}/`);
+      const result = await this.axiosInstance.put<any, any>(`api/join/${code}/`);
       return { success: true, result: "Succes" };
     } catch {
       return { success: false, result: null };
@@ -266,7 +268,7 @@ class ApiClient {
         if (error.response?.status === 401) {
           UserRepository.instance.logout();
         }
-        return error;
+        throw "Unknow error";
       }
     );
   }

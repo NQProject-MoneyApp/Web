@@ -6,6 +6,7 @@ import {
   IonLoading,
   IonButton,
   useIonAlert,
+  IonToast,
 } from "@ionic/react";
 
 import Toolbar from "../../components/Toolbar";
@@ -22,6 +23,7 @@ const GroupList: React.FC = () => {
   const [groupList, setGroupList] = useState(new Array<Group>());
   const [isLoading, setIsLoading] = useState(false);
   const [present] = useIonAlert();
+  const [showToast, setShowToast] = useState(false);
 
   const fetchGroups = async () => {
     setIsLoading(true);
@@ -37,8 +39,13 @@ const GroupList: React.FC = () => {
 
   const joinToGroup = async (code: string) => {
     setIsLoading(true);
-    await ApiClient.instance.join(code);
-    fetchGroups();
+    const result = await ApiClient.instance.join(code);
+    if (result.success) {
+      fetchGroups();
+    } else {
+      setIsLoading(false);
+      setShowToast(true);
+    }
   };
 
   const presentJoinAlert = () => {
@@ -65,6 +72,15 @@ const GroupList: React.FC = () => {
         <Toolbar />
       </IonHeader>
       <IonContent fullscreen>
+        <IonToast
+          isOpen={showToast}
+          onDidDismiss={() => setShowToast(false)}
+          message="Error"
+          position="top"
+          color="danger"
+          mode="ios"
+          duration={1000}
+        />
         <IonLoading isOpen={isLoading} message={"Loading..."} />
         <IonList lines="none" className="group-container">
           <IconButton onClick={navigateToAddGroup} justify="center">

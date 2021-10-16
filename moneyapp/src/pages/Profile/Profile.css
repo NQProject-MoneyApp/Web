@@ -10,7 +10,7 @@ ion-card.border {
 
 ion-label.initials {
   margin: auto;
-  color: white;
+  color: var(--ion-color-dark);
   font-size: 5rem;
 }
 

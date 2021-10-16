@@ -10,18 +10,18 @@ import { useState } from "react";
 import { Redirect } from "react-router";
 import ApiClient from "../../services/ApiClient";
 import UserRepository from "../../services/UserRepository";
-import "./Login.css";
+import "./Register.css";
 
-const LoginFrom: React.FC = () => {
+const RegisterForm: React.FC = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
   const [showToast, setShowToast] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const submitLogin = async () => {
-    console.log("Login");
+  const submitRegister = async () => {
     setIsLoading(true);
-    const result = await UserRepository.instance.login(username, password);
+    const result = await UserRepository.instance.register(username, email, password);
     if (result) {
       setIsLoading(false);
       window.location.reload();
@@ -29,10 +29,6 @@ const LoginFrom: React.FC = () => {
       setShowToast(true);
       setIsLoading(false);
     }
-  };
-
-  const navigateToRegister = async () => {
-    window.location.href = "/register"
   };
 
   if (UserRepository.instance.isLogin()) {
@@ -45,7 +41,7 @@ const LoginFrom: React.FC = () => {
         <IonToast
           isOpen={showToast}
           onDidDismiss={() => setShowToast(false)}
-          message="Login error"
+          message="Register error"
           position="top"
           color="danger"
           mode="ios"
@@ -63,21 +59,27 @@ const LoginFrom: React.FC = () => {
 
         <IonItem lines="none">
           <IonInput
+            type="text"
+            placeholder="Email"
+            value={email}
+            onIonChange={(e) => setEmail(e.detail.value!)}
+          />
+        </IonItem>
+
+        <IonItem lines="none">
+          <IonInput
             type="password"
             placeholder="Password"
             value={password}
             onIonChange={(e) => setPassword(e.detail.value!)}
             onKeyDown={(e) => {
               if (e.key == "Enter") {
-                submitLogin();
+                submitRegister();
               }
             }}
           />
         </IonItem>
-        <IonButton color="primary" onClick={submitLogin}>
-          Log in
-        </IonButton>
-        <IonButton color="primary" onClick={navigateToRegister}>
+        <IonButton color="primary" onClick={submitRegister}>
           Register
         </IonButton>
       </IonList>
@@ -85,4 +87,4 @@ const LoginFrom: React.FC = () => {
   }
 };
 
-export default LoginFrom;
+export default RegisterForm;

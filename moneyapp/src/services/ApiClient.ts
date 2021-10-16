@@ -76,6 +76,29 @@ class ApiClient {
     }
   }
 
+  async register(username: string, email: string, password: string): Promise<SimpleResult> {
+    const requestData = {
+      username: username,
+      email: email,
+      password1: password,
+      password2: password,
+    };
+    try {
+      const response = await this.axiosInstance.post<typeof requestData, any>(
+        "api/registration/",
+        requestData
+      );
+      SessionStorage.instance.setToken(response.data.key);
+
+      this.axiosInstance = this.createInstance();
+      this.addLogoutInterceptors();
+
+      return { success: true, result: response.data };
+    } catch {
+      return { success: false, result: null };
+    }
+  }
+
   async getGroups(): Promise<Group[]> {
     const result = await this.axiosInstance.get<
       any,

@@ -1,13 +1,13 @@
 import { IonContent, IonPage } from "@ionic/react";
-import LoginForm from "./LoginForm";
 
-import "./Login.css";
+import "./Register.css";
+import RegisterForm from "./RegisterForm";
 
 const Login: React.FC = () => {
   return (
     <IonPage>
       <IonContent fullscreen>
-        <LoginForm />
+        <RegisterForm />
       </IonContent>
     </IonPage>
   );

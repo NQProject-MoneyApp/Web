@@ -1,4 +1,14 @@
-import { IonContent, IonHeader, IonPage, IonList, IonLoading } from "@ionic/react";
+import {
+  IonContent,
+  IonHeader,
+  IonPage,
+  IonList,
+  IonLoading,
+  IonButton,
+  useIonAlert,
+  IonToast,
+} from "@ionic/react";
+
 import Toolbar from "../../components/Toolbar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
@@ -12,17 +22,43 @@ import IconButton from "../../components/IconButton";
 const GroupList: React.FC = () => {
   const [groupList, setGroupList] = useState(new Array<Group>());
   const [isLoading, setIsLoading] = useState(false);
+  const [present] = useIonAlert();
+  const [showToast, setShowToast] = useState(false);
 
   const fetchGroups = async () => {
     setIsLoading(true);
     const groups = await ApiClient.instance.getGroups();
     setGroupList(groups);
-    console.log(groups);
     setIsLoading(false);
   };
 
   const navigateToAddGroup = () => {
     window.location.href = "/add-group";
+  };
+
+  const joinToGroup = async (code: string) => {
+    setIsLoading(true);
+    const result = await ApiClient.instance.join(code);
+    if (result.success) {
+      fetchGroups();
+    } else {
+      setIsLoading(false);
+      setShowToast(true);
+    }
+  };
+
+  const presentJoinAlert = () => {
+    present({
+      header: "Join",
+      inputs: [
+        {
+          name: "code",
+          type: "text",
+          placeholder: "Code",
+        },
+      ],
+      buttons: [{ text: "Join", handler: (e) => joinToGroup(e.code) }],
+    });
   };
 
   useEffect(() => {
@@ -35,6 +71,15 @@ const GroupList: React.FC = () => {
         <Toolbar />
       </IonHeader>
       <IonContent fullscreen>
+        <IonToast
+          isOpen={showToast}
+          onDidDismiss={() => setShowToast(false)}
+          message="Error"
+          position="top"
+          color="danger"
+          mode="ios"
+          duration={1000}
+        />
         <IonLoading isOpen={isLoading} message={"Loading..."} />
         <IonList lines="none" className="group-container">
           <IconButton onClick={navigateToAddGroup} justify="center">
@@ -44,6 +89,9 @@ const GroupList: React.FC = () => {
               icon={faPlusCircle}
             ></FontAwesomeIcon>
           </IconButton>
+
+          <IonButton onClick={presentJoinAlert}>Join</IonButton>
+
           {groupList.map((group) => (
             <GroupComponent
               key={group.id}

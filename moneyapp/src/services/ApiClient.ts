@@ -79,6 +79,33 @@ class ApiClient {
     }
   }
 
+  async register(
+    username: string,
+    email: string,
+    password: string
+  ): Promise<SimpleResult> {
+    const requestData = {
+      username: username,
+      email: email,
+      password1: password,
+      password2: password,
+    };
+    try {
+      const response = await this.axiosInstance.post<typeof requestData, any>(
+        "api/registration/",
+        requestData
+      );
+      SessionStorage.instance.setToken(response.data.key);
+
+      this.axiosInstance = this.createInstance();
+      this.addLogoutInterceptors();
+
+      return { success: true, result: response.data };
+    } catch {
+      return { success: false, result: null };
+    }
+  }
+
   async getGroups(): Promise<Group[]> {
     const result = await this.axiosInstance.get<
       any,
@@ -92,12 +119,43 @@ class ApiClient {
           totalCost: -1,
           userBalance: e.user_balance!,
           createDate: new Date(e.create_date!),
-          icon: "",
+          icon: e.icon!,
           members: e.members!.map((e) => this.mapFromGroupUserDto(e)),
         };
       });
     }
     return [];
+  }
+
+  async getGroup(id: number): Promise<Group | null> {
+    const result = await this.axiosInstance.get<any, NetworkResponse<GroupDto>>(
+      `api/groups/${id}`
+    );
+    if (result.data) {
+      return {
+        id: result.data.pk!,
+        name: result.data.name!,
+        totalCost: result.data.total_cost!,
+        userBalance: result.data.user_balance!,
+        createDate: new Date(result.data.create_date!),
+        icon: result.data.icon!,
+        members: result.data.members!.map((e) => this.mapFromGroupUserDto(e)),
+      };
+    }
+
+    return null;
+  }
+
+  async getCode(id: number): Promise<string> {
+    const result = await this.axiosInstance.post<any>(`api/group-codes/`, {
+      group: id,
+    });
+    console.log(result.data);
+    if (result.data) {
+      return result.data.code;
+    }
+
+    return "code";
   }
 
   async getExpenses(groupId: number): Promise<Expense[]> {
@@ -121,25 +179,30 @@ class ApiClient {
     return [];
   }
 
-  async getExpense(groupId: number, expenseId: number): Promise<Expense | null> {
+  async getExpense(
+    groupId: number,
+    expenseId: number
+  ): Promise<Expense | null> {
     const result = await this.axiosInstance.get<
-    any,
-    NetworkResponse<ExpenseDto>  
+      any,
+      NetworkResponse<ExpenseDto>
     >(`api/${groupId}/expenses/${expenseId}/`);
 
-   if(result.data) {
-     return {
-      amount: result.data.amount!,
-      groupId: result.data.group_id!,
-      id: result.data.pk!,
-      name: result.data.name!,
-      author: this.mapFromUserDto(result.data.author!, 0),
-      createDate: result.data.create_date!,
-      participants: result.data.participants!.map((e) => this.mapFromUserDto(e, 0)),
-     }
-   }
-   
-   return null;
+    if (result.data) {
+      return {
+        amount: result.data.amount!,
+        groupId: result.data.group_id!,
+        id: result.data.pk!,
+        name: result.data.name!,
+        author: this.mapFromUserDto(result.data.author!, 0),
+        createDate: result.data.create_date!,
+        participants: result.data.participants!.map((e) =>
+          this.mapFromUserDto(e, 0)
+        ),
+      };
+    }
+
+    return null;
   }
 
   async addExpense(
@@ -170,6 +233,17 @@ class ApiClient {
         icon: icon,
         participants: participants,
       });
+      return { success: true, result: "Succes" };
+    } catch {
+      return { success: false, result: null };
+    }
+  }
+
+  async join(code: String): Promise<SimpleResult> {
+    try {
+      const result = await this.axiosInstance.put<any, any>(
+        `api/join/${code}/`
+      );
       return { success: true, result: "Succes" };
     } catch {
       return { success: false, result: null };
@@ -219,7 +293,7 @@ class ApiClient {
         if (error.response?.status === 401) {
           UserRepository.instance.logout();
         }
-        return error;
+        throw "Unknow error";
       }
     );
   }

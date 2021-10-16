@@ -10,18 +10,22 @@ import { useState } from "react";
 import { Redirect } from "react-router";
 import LoginHeader from "../../components/LoginHeader";
 import UserRepository from "../../services/UserRepository";
-import "./Login.css";
+import "./Register.css";
 
-const LoginFrom: React.FC = () => {
+const RegisterForm: React.FC = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
   const [showToast, setShowToast] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const submitLogin = async () => {
-    console.log("Login");
+  const submitRegister = async () => {
     setIsLoading(true);
-    const result = await UserRepository.instance.login(username, password);
+    const result = await UserRepository.instance.register(
+      username,
+      email,
+      password
+    );
     if (result) {
       setIsLoading(false);
       window.location.reload();
@@ -31,8 +35,8 @@ const LoginFrom: React.FC = () => {
     }
   };
 
-  const navigateToRegister = async () => {
-    window.location.href = "/register";
+  const navigateToLogin = async () => {
+    window.location.href = "/login";
   };
 
   if (UserRepository.instance.isLogin()) {
@@ -45,13 +49,13 @@ const LoginFrom: React.FC = () => {
         <IonToast
           isOpen={showToast}
           onDidDismiss={() => setShowToast(false)}
-          message="Login error"
+          message="Register error"
           position="top"
           color="danger"
           mode="ios"
           duration={1000}
         />
-        <LoginHeader title="Hello" />
+        <LoginHeader title="Register" />
         <IonItem lines="none">
           <IonInput
             type="text"
@@ -63,31 +67,34 @@ const LoginFrom: React.FC = () => {
 
         <IonItem lines="none">
           <IonInput
+            type="text"
+            placeholder="Email"
+            value={email}
+            onIonChange={(e) => setEmail(e.detail.value!)}
+          />
+        </IonItem>
+
+        <IonItem lines="none">
+          <IonInput
             type="password"
             placeholder="Password"
             value={password}
             onIonChange={(e) => setPassword(e.detail.value!)}
             onKeyDown={(e) => {
               if (e.key === "Enter") {
-                submitLogin();
+                submitRegister();
               }
             }}
           />
         </IonItem>
-        <IonButton color="primary" onClick={submitLogin}>
-          Log in
+        <IonButton color="primary" onClick={submitRegister}>
+          Register
         </IonButton>
-
         <IonItem className="login-form-option" lines="none">
           <p>
-            Forgot password?<span className="clickable">Reset</span>
-          </p>
-        </IonItem>
-        <IonItem className="login-form-option" lines="none">
-          <p>
-            No account yet?
-            <span className="clickable" onClick={navigateToRegister}>
-              Register
+            Have an account?
+            <span className="clickable" onClick={navigateToLogin}>
+              Login
             </span>
           </p>
         </IonItem>
@@ -96,4 +103,4 @@ const LoginFrom: React.FC = () => {
   }
 };
 
-export default LoginFrom;
+export default RegisterForm;

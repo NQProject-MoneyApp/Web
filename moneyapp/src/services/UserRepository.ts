@@ -16,6 +16,17 @@ class UserRepository {
     }
   }
 
+  async register(username: string, email: string, password: string): Promise<boolean> {
+    const result = await ApiClient.instance.register(username, email, password);
+
+    if (result.success) {
+      SessionStorage.instance.setToken(result.result.key);
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   isLogin(): boolean {
     return SessionStorage.instance.getToken() !== undefined;
   }

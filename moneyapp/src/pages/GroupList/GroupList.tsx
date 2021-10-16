@@ -97,7 +97,7 @@ const GroupList: React.FC = () => {
               key={group.id}
               groupId={group.id}
               name={group.name}
-              icon={0}
+              icon={group.icon}
               balance={group.userBalance}
               createDate={group.createDate}
               isFavourite={false}

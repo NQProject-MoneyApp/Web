@@ -1,4 +1,11 @@
-import { IonCheckbox, IonItem, IonList, IonRow, IonText } from "@ionic/react";
+import {
+  IonCard,
+  IonCheckbox,
+  IonItem,
+  IonList,
+  IonRow,
+  IonText,
+} from "@ionic/react";
 import { attachProps } from "@ionic/react/dist/types/components/utils";
 
 export type SelectedParticipant = {
@@ -32,20 +39,22 @@ export const ParticipantsComponent: React.FC<ParticipantsProps> = ({
   };
 
   return (
-    <IonList lines="none">
-      {participants.map((p) => {
-        return (
-          <IonItem key={p.id}>
-            <IonRow>
-              <IonCheckbox
-                checked={p.selected}
-                onIonChange={() => onToggle(p.id)}
-              />
-              <IonText>{p.name}</IonText>
-            </IonRow>
-          </IonItem>
-        );
-      })}
-    </IonList>
+    <IonCard color="light">
+      <IonList lines="none">
+        {participants.map((p) => {
+          return (
+            <IonItem key={p.id}>
+              <IonRow>
+                <IonCheckbox
+                  checked={p.selected}
+                  onIonChange={() => onToggle(p.id)}
+                />
+                <IonText>{p.name}</IonText>
+              </IonRow>
+            </IonItem>
+          );
+        })}
+      </IonList>
+    </IonCard>
   );
 };

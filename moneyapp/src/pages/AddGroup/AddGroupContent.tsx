@@ -139,12 +139,10 @@ const AddGroupContent: React.FC = () => {
             </IonItem>
             <FlexSpacer height="16.rem" />
 
-            <IonCard color="light">
               <ParticipantsComponent
                 participants={selectedFriends}
                 onChanged={setSelectedFriends}
               />
-            </IonCard>
           </IonList>
         </IonContent>
       );

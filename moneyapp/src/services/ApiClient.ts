@@ -112,12 +112,32 @@ class ApiClient {
           totalCost: -1,
           userBalance: e.user_balance!,
           createDate: new Date(e.create_date!),
-          icon: "",
+          icon: e.icon!,
           members: e.members!.map((e) => this.mapFromGroupUserDto(e)),
         };
       });
     }
     return [];
+  }
+
+  async getGroup(id: number): Promise<Group | null> {
+    const result = await this.axiosInstance.get<
+      any,
+      NetworkResponse<GroupDto>
+    >(`api/groups/${id}`);
+    if (result.data) {
+        return {
+          id: result.data.pk!,
+          name: result.data.name!,
+          totalCost: result.data.total_cost!,
+          userBalance: result.data.user_balance!,
+          createDate: new Date(result.data.create_date!),
+          icon: result.data.icon!,
+          members: result.data.members!.map((e) => this.mapFromGroupUserDto(e)),
+        };
+    }
+
+    return null;
   }
 
   async getExpenses(groupId: number): Promise<Expense[]> {

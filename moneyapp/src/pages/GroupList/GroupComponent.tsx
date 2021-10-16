@@ -27,12 +27,12 @@ const GroupComponent: React.FC<GroupComponentProps> = ({
   createDate,
   isFavourite,
 }: GroupComponentProps) => {
-  const navigateToExpenses = () => {
-    window.location.href = `groups/${groupId}/expenses`;
+  const navigateToGroupDetails = () => {
+    window.location.href = `groups/${groupId}`;
   };
 
   return (
-    <IonCard color="light" onClick={navigateToExpenses}>
+    <IonCard color="light" onClick={navigateToGroupDetails}>
       <IonItem color="none" lines="none">
         <img className="icon" src={burger} alt="group icon"/>
         <IonLabel>

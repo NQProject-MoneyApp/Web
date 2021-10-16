@@ -2,18 +2,15 @@ import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   IonButton,
-  IonCard,
-  IonCardTitle,
   IonContent,
   IonHeader,
   IonItem,
   IonList,
   IonPage,
-  IonRow,
-  IonText,
 } from "@ionic/react";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
+import IconButton from "../../components/IconButton";
 import Toolbar from "../../components/Toolbar";
 import { Expense } from "../../domain/expenses/Expense";
 import ApiClient from "../../services/ApiClient";
@@ -22,15 +19,12 @@ import ExpenseComponent from "./ExpenseComponent";
 import "./ExpenseList.css";
 
 interface RouteParams {
-  groupId: string
+  groupId: string;
 }
 
-
-
 const ExpenseList: React.FC = () => {
-
   const { groupId } = useParams<RouteParams>();
-  
+
   const [expenseList, setExpenseList] = useState(new Array<Expense>());
 
   const navigateToAddExpense = () => {
@@ -54,19 +48,13 @@ const ExpenseList: React.FC = () => {
       </IonHeader>
       <IonContent fullscreen>
         <IonList lines="none">
-        <IonItem>
-            <IonButton
-              onClick={navigateToAddExpense}
-              icon-only
-              fill="clear"
-              size="default"
-            >
+            <IconButton justify="center" onClick={navigateToAddExpense}>
               <FontAwesomeIcon
+                size="2x"
                 className="addGroupIcon"
                 icon={faPlusCircle}
               ></FontAwesomeIcon>
-            </IonButton>
-          </IonItem>
+            </IconButton>
           {expenseList.map((e) => (
             <ExpenseComponent
               key={e.id}

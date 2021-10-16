@@ -38,7 +38,7 @@ const GroupList: React.FC = () => {
       </IonHeader>
       <IonContent fullscreen>
         <IonList lines="none" className="group-container">
-            <IconButton onClick={navigateToAddGroup} justify="flex-end">
+            <IconButton onClick={navigateToAddGroup} justify="center">
               <FontAwesomeIcon
                 className="addGroupIcon"
                 size="2x"

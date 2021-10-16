@@ -4,6 +4,8 @@ import UserRepository from "./UserRepository";
 import Group from "./../domain/groups/Group";
 import { Expense } from "../domain/expenses/Expense";
 import { User } from "../domain/users/User";
+import { group } from "console";
+import { resultingClientExists } from "workbox-core/_private";
 
 type SimpleResult = {
   success: boolean;
@@ -25,9 +27,10 @@ type ExpenseDto = {
   pk?: number;
   group_id?: number;
   name?: string;
-  author?: any;
+  author?: UserDto;
   amount?: number;
   create_date?: string;
+  participants?: UserDto[];
 };
 
 type UserDto = {
@@ -109,10 +112,34 @@ class ApiClient {
           groupId: e.group_id!,
           name: e.name!,
           id: e.pk!,
+          author: this.mapFromUserDto(e.author!, 0),
+          createDate: e.create_date!,
+          participants: e.participants!.map((e) => this.mapFromUserDto(e, 0)),
         };
       });
     }
     return [];
+  }
+
+  async getExpense(groupId: number, expenseId: number): Promise<Expense | null> {
+    const result = await this.axiosInstance.get<
+    any,
+    NetworkResponse<ExpenseDto>  
+    >(`api/${groupId}/expenses/${expenseId}/`);
+
+   if(result.data) {
+     return {
+      amount: result.data.amount!,
+      groupId: result.data.group_id!,
+      id: result.data.pk!,
+      name: result.data.name!,
+      author: this.mapFromUserDto(result.data.author!, 0),
+      createDate: result.data.create_date!,
+      participants: result.data.participants!.map((e) => this.mapFromUserDto(e, 0)),
+     }
+   }
+   
+   return null;
   }
 
   async addExpense(

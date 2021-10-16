@@ -58,9 +58,11 @@ const ExpenseList: React.FC = () => {
           {expenseList.map((e) => (
             <ExpenseComponent
               key={e.id}
+              groupId={e.groupId}
+              expenseId={e.id}
               title={e.name}
               amount={e.amount}
-              author="Unknown"
+              author={e.author.name}
             />
           ))}
         </IonList>

@@ -52,12 +52,8 @@ const App: React.FC = () => (
         <Route exact path="/expense-details" component={ExpenseDetails} />
         <Route exact path="/profile" component={Profile}/>
         <Route exact path="/add-group" component={AddGroup}/>
-        <Route exact path="/register">
-          <Register />
-        </Route>
-        <Route exact path="/groups/:groupId">
-          <GroupDetails />
-        </Route>
+        <Route exact path="/register" component={Register} />
+        <Route exact path="/groups/:groupId" component={GroupDetails} />
         <Route exact path="/">
           <Redirect to="/login" />
         </Route>

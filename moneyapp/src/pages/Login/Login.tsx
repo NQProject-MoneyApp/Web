@@ -1,8 +1,9 @@
-import { IonContent, IonPage } from "@ionic/react";
+import { IonContent, IonHeader, IonPage } from "@ionic/react";
 import LoginForm from "./LoginForm";
 
 import "./Login.css";
 import { RouteComponentProps } from "react-router";
+import Toolbar from "../../components/Toolbar";
 
 const Login: React.FC<RouteComponentProps> = ({history}) => {
   return (

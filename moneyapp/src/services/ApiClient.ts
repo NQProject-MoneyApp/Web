@@ -76,7 +76,11 @@ class ApiClient {
     }
   }
 
-  async register(username: string, email: string, password: string): Promise<SimpleResult> {
+  async register(
+    username: string,
+    email: string,
+    password: string
+  ): Promise<SimpleResult> {
     const requestData = {
       username: username,
       email: email,
@@ -121,23 +125,35 @@ class ApiClient {
   }
 
   async getGroup(id: number): Promise<Group | null> {
-    const result = await this.axiosInstance.get<
-      any,
-      NetworkResponse<GroupDto>
-    >(`api/groups/${id}`);
+    const result = await this.axiosInstance.get<any, NetworkResponse<GroupDto>>(
+      `api/groups/${id}`
+    );
     if (result.data) {
-        return {
-          id: result.data.pk!,
-          name: result.data.name!,
-          totalCost: result.data.total_cost!,
-          userBalance: result.data.user_balance!,
-          createDate: new Date(result.data.create_date!),
-          icon: result.data.icon!,
-          members: result.data.members!.map((e) => this.mapFromGroupUserDto(e)),
-        };
+      return {
+        id: result.data.pk!,
+        name: result.data.name!,
+        totalCost: result.data.total_cost!,
+        userBalance: result.data.user_balance!,
+        createDate: new Date(result.data.create_date!),
+        icon: result.data.icon!,
+        members: result.data.members!.map((e) => this.mapFromGroupUserDto(e)),
+      };
     }
 
     return null;
+  }
+
+  async getCode(id: number): Promise<string> {
+    const result = await this.axiosInstance.post<any>(
+      `api/group-codes/`,
+      { group: id }
+    );
+    console.log(result.data);
+    if (result.data) {
+      return result.data.code;
+    }
+
+    return "code";
   }
 
   async getExpenses(groupId: number): Promise<Expense[]> {
@@ -152,12 +168,12 @@ class ApiClient {
           groupId: e.group_id!,
           name: e.name!,
           id: e.pk!,
-          author: { 
+          author: {
             id: e.author?.pk!,
             name: e.author?.username!,
             email: e.author?.email!,
             balance: 0,
-          }
+          },
         };
       });
     }
@@ -192,6 +208,15 @@ class ApiClient {
         icon: icon,
         participants: participants,
       });
+      return { success: true, result: "Succes" };
+    } catch {
+      return { success: false, result: null };
+    }
+  }
+
+  async join(code: String): Promise<SimpleResult> {
+    try {
+      const result = await this.axiosInstance.put<any>(`api/join/${code}/`);
       return { success: true, result: "Succes" };
     } catch {
       return { success: false, result: null };

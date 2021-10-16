@@ -12,6 +12,8 @@ import {
   IonButton,
   IonLoading,
   IonLabel,
+  useIonAlert,
+  IonToast,
 } from "@ionic/react";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
@@ -21,14 +23,17 @@ import Group from "../../domain/groups/Group";
 import burger from "../../images/icons/burgers.svg";
 import ApiClient from "../../services/ApiClient";
 import Icons from "../AddGroup/Icons";
+import { Clipboard } from "@capacitor/clipboard";
 
 import "./GroupDetails.css";
 
 const GroupDetails: React.FC = () => {
   const { groupId } = useParams<{ groupId: string }>();
-
-  const [isLoading, setIsLoading] = useState(true);
+  const [isGroupLoaded, setIsGroupLoaded] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [groupDetails, setGroup] = useState<Group | null>(null);
+  const [present] = useIonAlert();
+  const [showCopiedToast, setCopiedShowToast] = useState(false);
 
   const navigateToAllExpenses = () => {
     window.location.href = `groups/${groupId}/expenses`;
@@ -39,17 +44,40 @@ const GroupDetails: React.FC = () => {
   };
 
   const fethGroupsDetails = async () => {
-    setIsLoading(true);
+    setIsGroupLoaded(false);
     const group = await ApiClient.instance.getGroup(parseInt(groupId));
     setGroup(group);
+    setIsGroupLoaded(true);
+  };
+
+  const copieToClipboard = async (code: string) => {
+    await Clipboard.write({
+      string: code,
+    });
+    setCopiedShowToast(true);
+  };
+
+  const presentCodeAlert = async () => {
+    setIsLoading(true);
+    const code = await ApiClient.instance.getCode(parseInt(groupId));
+
     setIsLoading(false);
+
+    present({
+      header: "Code",
+      message: code,
+      buttons: [
+        { text: "Copy", handler: (e) => copieToClipboard(code) },
+        { text: "Ok", handler: (e) => {} },
+      ],
+    });
   };
 
   useEffect(() => {
     fethGroupsDetails();
   }, []);
 
-  if (isLoading) {
+  if (!isGroupLoaded) {
     return (
       <IonContent>
         <IonLoading isOpen={true} message={"Loading..."} />
@@ -62,6 +90,16 @@ const GroupDetails: React.FC = () => {
           <Toolbar />
         </IonHeader>
         <IonContent>
+          <IonLoading isOpen={isLoading} message={"Loading..."} />
+          <IonToast
+            isOpen={showCopiedToast}
+            onDidDismiss={() => setCopiedShowToast(false)}
+            message="Code copied to clipboard"
+            position="top"
+            color="primary"
+            mode="ios"
+            duration={1000}
+          />
           <h2>Group Details</h2>
           <IonGrid>
             <IonRow>
@@ -91,6 +129,11 @@ const GroupDetails: React.FC = () => {
                   New expense
                 </IonButton>
               </IonCol>
+              <IonCol>
+                <IonButton color="primary" onClick={presentCodeAlert}>
+                  Code
+                </IonButton>
+              </IonCol>
             </IonRow>
           </IonGrid>
           <IonCard>
@@ -109,8 +152,6 @@ const GroupDetails: React.FC = () => {
                   </IonRow>
                   <FlexSpacer height="0.5rem" />
                 </IonCol>
-
-                // </IonItem>
               ))}
 
               <IonButton onClick={navigateToAllExpenses}>
@@ -124,14 +165,5 @@ const GroupDetails: React.FC = () => {
     );
   }
 };
-
-type GroupImageProps = {
-  src?: string;
-};
-
-// const GroupImage: React.FC<GroupImageProps> = ({ src }: GroupImageProps) => {
-//   return;
-
-// };
 
 export default GroupDetails;

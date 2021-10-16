@@ -1,4 +1,13 @@
-import { IonContent, IonHeader, IonPage, IonList, IonLoading } from "@ionic/react";
+import {
+  IonContent,
+  IonHeader,
+  IonPage,
+  IonList,
+  IonLoading,
+  IonButton,
+  useIonAlert,
+} from "@ionic/react";
+
 import Toolbar from "../../components/Toolbar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
@@ -12,6 +21,7 @@ import IconButton from "../../components/IconButton";
 const GroupList: React.FC = () => {
   const [groupList, setGroupList] = useState(new Array<Group>());
   const [isLoading, setIsLoading] = useState(false);
+  const [present] = useIonAlert();
 
   const fetchGroups = async () => {
     setIsLoading(true);
@@ -23,6 +33,26 @@ const GroupList: React.FC = () => {
 
   const navigateToAddGroup = () => {
     window.location.href = "/add-group";
+  };
+
+  const joinToGroup = async (code: string) => {
+    setIsLoading(true);
+    await ApiClient.instance.join(code);
+    fetchGroups();
+  };
+
+  const presentJoinAlert = () => {
+    present({
+      header: "Join",
+      inputs: [
+        {
+          name: "code",
+          type: "text",
+          placeholder: "Code",
+        },
+      ],
+      buttons: [{ text: "Join", handler: (e) => joinToGroup(e.code) }],
+    });
   };
 
   useEffect(() => {
@@ -44,6 +74,9 @@ const GroupList: React.FC = () => {
               icon={faPlusCircle}
             ></FontAwesomeIcon>
           </IconButton>
+
+          <IonButton onClick={presentJoinAlert}>Join</IonButton>
+
           {groupList.map((group) => (
             <GroupComponent
               key={group.id}

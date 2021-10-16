@@ -25,7 +25,7 @@ type ExpenseDto = {
   pk?: number;
   group_id?: number;
   name?: string;
-  author?: any;
+  author?: UserDto;
   amount?: number;
   create_date?: string;
 };
@@ -132,6 +132,12 @@ class ApiClient {
           groupId: e.group_id!,
           name: e.name!,
           id: e.pk!,
+          author: { 
+            id: e.author?.pk!,
+            name: e.author?.username!,
+            email: e.author?.email!,
+            balance: 0,
+          }
         };
       });
     }

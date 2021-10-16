@@ -1,9 +1,22 @@
-import { IonCard, IonContent, IonList, IonRow, IonText } from "@ionic/react";
+import {
+  IonCard,
+  IonCardSubtitle,
+  IonCardTitle,
+  IonContent,
+  IonIcon,
+  IonItem,
+  IonLabel,
+  IonList,
+  IonRow,
+  IonText,
+} from "@ionic/react";
 import FlexSpacer from "../../components/common/Spacer";
+import { User } from "../../domain/users/User";
+import "./ExpenseList.css";
 
 type ExpenseComponentProps = {
   readonly title: string;
-  readonly author: string;
+  readonly author: User;
   readonly amount: number;
 };
 
@@ -13,17 +26,20 @@ const ExpenseComponent: React.FC<ExpenseComponentProps> = ({
   amount,
 }: ExpenseComponentProps) => {
   return (
-    <IonCard className="expense-card" color="light">
-      <IonList>
-        <IonText color="primary" style={{ fontFamily: "Poppins SemiBold" }}>
-          <h3>{title}</h3>
-        </IonText>
-        <IonRow>
-          <IonText>{author}</IonText>
-          <FlexSpacer flex={1} />
-          <IonText>${amount.toFixed(2)}</IonText>
-        </IonRow>
-      </IonList>
+    <IonCard color="light">
+      <IonItem color="none" lines="none">
+        <IonLabel>
+          <IonCardTitle class="ion-text-wrap" className="expense">
+            {title}
+          </IonCardTitle>
+          <FlexSpacer height="1rem" />
+          <IonRow>
+            <IonCardSubtitle>{author.name}</IonCardSubtitle>
+            <FlexSpacer flex={1} />
+            <IonCardSubtitle className="groupDate">$ ${amount}</IonCardSubtitle>
+          </IonRow>
+        </IonLabel>
+      </IonItem>
     </IonCard>
   );
 };

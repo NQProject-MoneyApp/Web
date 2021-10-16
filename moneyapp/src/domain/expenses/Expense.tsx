@@ -7,6 +7,6 @@ export type Expense = {
     readonly amount: number;
    
     // readonly createDate?: Date;
-  //   readonly author: User;
+    readonly author: User;
   //   readonly participants: User[];
   };

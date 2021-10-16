@@ -2,3 +2,7 @@
 .expense-card {
     padding: 2em;
 }
+
+ion-card.ion-color ion-item ion-label ion-card-title.expense {
+    color: var(--ion-color-primary);
+}

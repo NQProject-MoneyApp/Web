@@ -6,6 +6,7 @@ import {
   IonHeader,
   IonItem,
   IonList,
+  IonLoading,
   IonPage,
 } from "@ionic/react";
 import { useEffect, useState } from "react";
@@ -26,15 +27,18 @@ const ExpenseList: React.FC = () => {
   const { groupId } = useParams<RouteParams>();
 
   const [expenseList, setExpenseList] = useState(new Array<Expense>());
+  const [isLoading, setIsLoading] = useState(false);
 
   const navigateToAddExpense = () => {
     window.location.href = `groups/${groupId}/add-expense`;
   };
 
   const fetchExpenses = async () => {
+    setIsLoading(true);
     const expenses = await ApiClient.instance.getExpenses(parseInt(groupId));
     setExpenseList(expenses);
     console.log(expenses);
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -42,30 +46,32 @@ const ExpenseList: React.FC = () => {
   }, []);
 
   return (
+
     <IonPage>
-      <IonHeader>
-        <Toolbar />
-      </IonHeader>
-      <IonContent fullscreen>
-        <IonList lines="none">
-            <IconButton justify="center" onClick={navigateToAddExpense}>
-              <FontAwesomeIcon
-                size="2x"
-                className="addGroupIcon"
-                icon={faPlusCircle}
-              ></FontAwesomeIcon>
-            </IconButton>
-          {expenseList.map((e) => (
+    <IonHeader>
+      <Toolbar />
+    </IonHeader>
+    <IonContent fullscreen>
+      <IonLoading isOpen={isLoading} message={"Loading..."} />
+      <IonList lines="none" className="group-container">
+        <IconButton onClick={navigateToAddExpense} justify="center">
+          <FontAwesomeIcon
+            className="addGroupIcon"
+            size="2x"
+            icon={faPlusCircle}
+          ></FontAwesomeIcon>
+        </IconButton>
+        {expenseList.map((e) => (
             <ExpenseComponent
               key={e.id}
               title={e.name}
               amount={e.amount}
-              author="Unknown"
+              author={e.author}
             />
           ))}
-        </IonList>
-      </IonContent>
-    </IonPage>
+      </IonList>
+    </IonContent>
+  </IonPage>
   );
 };
 

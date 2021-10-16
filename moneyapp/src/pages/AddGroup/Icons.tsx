@@ -12,13 +12,13 @@ import {
   IonImg,
 } from "@ionic/react";
 
-import beers from "../../images/icons/Beers.png";
-import bowling from "../../images/icons/Bowling.png";
-import burgers from "../../images/icons/Burgers.png";
-import burgerSet from "../../images/icons/BurgerSet.png";
-import cups from "../../images/icons/Cups.png";
-import kite from "../../images/icons/Kite.png";
-import wine from "../../images/icons/Wine.png";
+import beers from "../../images/icons/Beers.svg";
+import bowling from "../../images/icons/Bowling.svg";
+import burgers from "../../images/icons/Burgers.svg";
+import burgerSet from "../../images/icons/BurgerSet.svg";
+import cups from "../../images/icons/Cups.svg";
+import kite from "../../images/icons/Kite.svg";
+import wine from "../../images/icons/Wine.svg";
 
 class Icons {
   static instance: Icons = new Icons();

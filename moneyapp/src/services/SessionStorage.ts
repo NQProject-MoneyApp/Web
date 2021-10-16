@@ -3,7 +3,6 @@
 class SessionStorage {
   static instance: SessionStorage = new SessionStorage();
 
-  private storage = window.sessionStorage;
   private key: string = "money-app-key";
 
   setToken(token: string): void {
@@ -13,11 +12,11 @@ class SessionStorage {
       );
       return;
     }
-    this.storage.setItem(this.key, `Token ${token}`);
+    localStorage.setItem(this.key, `Token ${token}`)
   }
 
   getToken(): string | undefined {
-    let token = this.storage.getItem(this.key);
+    let token = localStorage.getItem(this.key);
 
     if (token == null || !token) {
       return undefined;
@@ -27,7 +26,7 @@ class SessionStorage {
   }
 
   logout(): void {
-    this.storage.setItem(this.key, "");
+    localStorage.setItem(this.key, "");
   }
 }
 

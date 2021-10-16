@@ -3,3 +3,17 @@
     margin: auto;
 }
 
+.login-form-option {
+    text-align: center;
+    height: 2.4em;
+}
+
+.login-form-option p{
+    flex: auto;
+}
+
+.login-form-option span{
+    color: var(--ion-color-primary);
+    font-weight: 600;
+    margin-left: 0.5em;
+}

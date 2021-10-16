@@ -78,9 +78,13 @@ const LoginFrom: React.FC = () => {
         <IonButton color="primary" onClick={submitLogin}>
           Log in
         </IonButton>
-        <IonButton color="primary" onClick={navigateToRegister}>
-          Register
-        </IonButton>
+
+        <IonItem className="login-form-option" lines="none">
+          <p>Forgot password?<span className="clickable">Reset</span></p>
+        </IonItem>
+        <IonItem className="login-form-option" lines="none">
+          <p>No account yet?<span className="clickable" onClick={navigateToRegister}>Register</span></p>
+        </IonItem>
       </IonList>
     );
   }

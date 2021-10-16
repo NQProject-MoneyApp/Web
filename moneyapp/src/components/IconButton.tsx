@@ -40,7 +40,7 @@ const IconButton: React.FC<IconButtonProps> = ({
   return (
     <>
       <div className="icon-button-container" style={containerStyle}>
-        <div className="icon-button" style={styles} onClick={onClick}>
+        <div className="icon-button clickable" style={styles} onClick={onClick}>
           {children}
         </div>
       </div>

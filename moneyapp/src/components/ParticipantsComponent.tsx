@@ -3,8 +3,8 @@ import {
   IonCheckbox,
   IonItem,
   IonList,
-  IonRow,
-  IonText,
+  IonCardContent,
+  IonLabel,
 } from "@ionic/react";
 import { attachProps } from "@ionic/react/dist/types/components/utils";
 
@@ -39,22 +39,22 @@ export const ParticipantsComponent: React.FC<ParticipantsProps> = ({
   };
 
   return (
-    <IonCard color="light">
+    <IonCard>
+      <IonCardContent>
       <IonList lines="none">
         {participants.map((p) => {
           return (
             <IonItem key={p.id}>
-              <IonRow>
                 <IonCheckbox
                   checked={p.selected}
                   onIonChange={() => onToggle(p.id)}
                 />
-                <IonText>{p.name}</IonText>
-              </IonRow>
+                <IonLabel>{p.name}</IonLabel>
             </IonItem>
           );
         })}
       </IonList>
+      </IonCardContent>
     </IonCard>
   );
 };

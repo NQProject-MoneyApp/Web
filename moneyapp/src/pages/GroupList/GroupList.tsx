@@ -29,7 +29,6 @@ const GroupList: React.FC = () => {
     setIsLoading(true);
     const groups = await ApiClient.instance.getGroups();
     setGroupList(groups);
-    console.log(groups);
     setIsLoading(false);
   };
 

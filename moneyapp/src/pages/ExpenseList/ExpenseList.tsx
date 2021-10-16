@@ -9,7 +9,7 @@ import {
   IonPage,
 } from "@ionic/react";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { RouteComponentProps, useParams } from "react-router";
 import IconButton from "../../components/IconButton";
 import Toolbar from "../../components/Toolbar";
 import { Expense } from "../../domain/expenses/Expense";
@@ -22,13 +22,13 @@ interface RouteParams {
   groupId: string;
 }
 
-const ExpenseList: React.FC = () => {
+const ExpenseList: React.FC<RouteComponentProps> = ({history}) => {
   const { groupId } = useParams<RouteParams>();
 
   const [expenseList, setExpenseList] = useState(new Array<Expense>());
 
   const navigateToAddExpense = () => {
-    window.location.href = `groups/${groupId}/add-expense`;
+    history.push(`/groups/${groupId}/add-expense`);
   };
 
   const fetchExpenses = async () => {
@@ -44,7 +44,7 @@ const ExpenseList: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
-        <Toolbar />
+        <Toolbar history={history}/>
       </IonHeader>
       <IonContent fullscreen>
         <IonList lines="none">

@@ -43,26 +43,14 @@ const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
       <IonRouterOutlet>
-        <Route exact path="/login">
-          <Login />
-        </Route>
-        <Route exact path="/groups">
-          <GroupList />
-        </Route>
+        <Route exact path="/login" component={Login}/>
+        <Route exact path="/groups" component={GroupList}/>
         <Route exact path="/groups/:groupId/expenses" component={ExpenseList} />
         <Route exact path="/groups/:groupId/add-expense" component={AddExpense} />
-        <Route exact path="/group-details">
-          <GroupDetails />
-        </Route>
-        <Route exact path="/expense-details">
-          <ExpenseDetails />
-        </Route>
-        <Route exact path="/profile">
-          <Profile />
-        </Route>
-        <Route exact path="/add-group">
-          <AddGroup />
-        </Route>
+        <Route exact path="/group-details" component={GroupDetails}/>
+        <Route exact path="/expense-details" component={ExpenseDetails} />
+        <Route exact path="/profile" component={Profile}/>
+        <Route exact path="/add-group" component={AddGroup}/>
         <Route exact path="/">
           <Redirect to="/login" />
         </Route>

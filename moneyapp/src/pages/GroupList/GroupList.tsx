@@ -8,8 +8,12 @@ import { useEffect, useState } from "react";
 import GroupComponent from "./GroupComponent";
 import Group from "../../domain/groups/Group";
 import IconButton from "../../components/IconButton";
+import History from 'history';
+import { RouteComponentProps } from "react-router";
 
-const GroupList: React.FC = () => {
+
+
+const GroupList: React.FC<RouteComponentProps> = ({history}) => {
   const [groupList, setGroupList] = useState(new Array<Group>());
   const [isLoading, setIsLoading] = useState(false);
 
@@ -22,7 +26,7 @@ const GroupList: React.FC = () => {
   };
 
   const navigateToAddGroup = () => {
-    window.location.href = "/add-group";
+    history.push("/add-group");
   };
 
   useEffect(() => {
@@ -32,7 +36,7 @@ const GroupList: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
-        <Toolbar />
+        <Toolbar history={history} />
       </IonHeader>
       <IonContent fullscreen>
         <IonLoading isOpen={isLoading} message={"Loading..."} />

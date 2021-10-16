@@ -10,14 +10,15 @@ import {
   IonCardSubtitle,
   IonCardHeader,
 } from "@ionic/react";
+import { RouteComponentProps } from "react-router";
 import FlexSpacer from "../../components/common/Spacer";
 import Toolbar from "../../components/Toolbar";
 
-const ExpenseDetails: React.FC = () => {
+const ExpenseDetails: React.FC<RouteComponentProps> = (history) => {
   return (
     <IonPage>
       <IonHeader>
-        <Toolbar />
+        <Toolbar history={history}/>
       </IonHeader>
       <IonContent>
         <IonCard>

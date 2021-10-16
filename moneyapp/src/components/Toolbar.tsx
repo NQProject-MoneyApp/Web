@@ -14,13 +14,17 @@ import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import "./Toolbar.css";
 import IconButton from "./IconButton";
 
-const Toolbar: React.FC = () => {
+type ToolbarProps = {
+  history: any
+}
+
+const Toolbar: React.FC<ToolbarProps> = ({history}) => {
   const navigateToProfile = () => {
-    window.location.href = "/profile";
+    history.push("/profile")
   };
 
   const navigateToHome = () => {
-    window.location.href = "/";
+    history.push("/")
   };
 
   return (

@@ -12,7 +12,7 @@ import {
   IonImg,
 } from "@ionic/react";
 import { useEffect, useState } from "react";
-import { Redirect } from "react-router";
+import { Redirect, RouteComponentProps } from "react-router";
 import FlexSpacer from "../../components/common/Spacer";
 import {
   ParticipantsComponent,
@@ -23,7 +23,7 @@ import UserRepository from "../../services/UserRepository";
 import "./AddGroup.css";
 import Icons from "./Icons";
 
-const AddGroupContent: React.FC = () => {
+const AddGroupContent: React.FC<any> = ({history}) => {
   enum AddGroupContentState {
     loading,
     edit,
@@ -71,7 +71,7 @@ const AddGroupContent: React.FC = () => {
     );
 
     if (result.success) {
-      window.location.href = "/groups";
+      history.push("/groups");
     } else {
       setShowErrorToast(true);
       setState(AddGroupContentState.edit);

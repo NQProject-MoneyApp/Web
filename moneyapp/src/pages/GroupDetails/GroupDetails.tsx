@@ -11,16 +11,17 @@ import {
   IonImg,
   IonButton,
 } from "@ionic/react";
+import { RouteComponentProps } from "react-router";
 import Toolbar from "../../components/Toolbar";
 import burger from "../../images/icons/burgers.svg";
 
 import "./GroupDetails.css";
 
-const GroupDetails: React.FC = () => {
+const GroupDetails: React.FC<RouteComponentProps> = ({history}) => {
   return (
     <IonPage>
       <IonHeader>
-        <Toolbar />
+        <Toolbar history={history} />
       </IonHeader>
       <IonContent>
         <h2>Group Details</h2>

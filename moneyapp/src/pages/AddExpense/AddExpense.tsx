@@ -11,7 +11,7 @@ import {
   IonText,
 } from "@ionic/react";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { RouteComponentProps, useParams } from "react-router";
 import {
   ParticipantsComponent,
   SelectedParticipant,
@@ -19,7 +19,7 @@ import {
 import Toolbar from "../../components/Toolbar";
 import ApiClient from "../../services/ApiClient";
 
-const AddExpense: React.FC = () => {
+const AddExpense: React.FC<RouteComponentProps> = ({history}) => {
   interface RouteParams {
     groupId: string;
   }
@@ -43,7 +43,7 @@ const AddExpense: React.FC = () => {
         selectedParticipants.filter((e) => e.selected).map((e) => e.id)
       )
       .then(() => {
-        window.location.href = `groups/${groupId}/expenses`;
+        history.push(`/groups/${groupId}/expenses`);
       });
   };
 
@@ -64,7 +64,7 @@ const AddExpense: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
-        <Toolbar />
+        <Toolbar history={history} />
       </IonHeader>
       <IonContent fullscreen>
         <IonList>

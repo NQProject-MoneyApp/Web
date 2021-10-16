@@ -3,12 +3,13 @@ import LoginForm from "./LoginForm";
 import Toolbar from "../../components/Toolbar";
 
 import "./Login.css";
+import { RouteComponentProps } from "react-router";
 
-const Login: React.FC = () => {
+const Login: React.FC<RouteComponentProps> = ({history}) => {
   return (
     <IonPage>
       <IonHeader>
-        <Toolbar />
+        <Toolbar history={history} />
       </IonHeader>
       <IonContent fullscreen>
         <LoginForm />

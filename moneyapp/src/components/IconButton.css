@@ -8,8 +8,3 @@
 .icon-button-container {
     display: flex;
 }
-
-.icon-button:hover {
-  opacity: 0.6;
-  cursor: pointer;
-}

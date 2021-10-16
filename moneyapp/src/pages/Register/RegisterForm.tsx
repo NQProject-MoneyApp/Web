@@ -8,7 +8,7 @@ import {
 } from "@ionic/react";
 import { useState } from "react";
 import { Redirect } from "react-router";
-import ApiClient from "../../services/ApiClient";
+import LoginHeader from "../../components/LoginHeader";
 import UserRepository from "../../services/UserRepository";
 import "./Register.css";
 
@@ -21,7 +21,11 @@ const RegisterForm: React.FC = () => {
 
   const submitRegister = async () => {
     setIsLoading(true);
-    const result = await UserRepository.instance.register(username, email, password);
+    const result = await UserRepository.instance.register(
+      username,
+      email,
+      password
+    );
     if (result) {
       setIsLoading(false);
       window.location.reload();
@@ -29,6 +33,10 @@ const RegisterForm: React.FC = () => {
       setShowToast(true);
       setIsLoading(false);
     }
+  };
+
+  const navigateToLogin = async () => {
+    window.location.href = "/login";
   };
 
   if (UserRepository.instance.isLogin()) {
@@ -47,7 +55,7 @@ const RegisterForm: React.FC = () => {
           mode="ios"
           duration={1000}
         />
-        <h1>Hello</h1>
+        <LoginHeader title="Register" />
         <IonItem lines="none">
           <IonInput
             type="text"
@@ -73,7 +81,7 @@ const RegisterForm: React.FC = () => {
             value={password}
             onIonChange={(e) => setPassword(e.detail.value!)}
             onKeyDown={(e) => {
-              if (e.key == "Enter") {
+              if (e.key === "Enter") {
                 submitRegister();
               }
             }}
@@ -82,6 +90,14 @@ const RegisterForm: React.FC = () => {
         <IonButton color="primary" onClick={submitRegister}>
           Register
         </IonButton>
+        <IonItem className="login-form-option" lines="none">
+          <p>
+            Have an account?
+            <span className="clickable" onClick={navigateToLogin}>
+              Login
+            </span>
+          </p>
+        </IonItem>
       </IonList>
     );
   }

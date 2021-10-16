@@ -34,7 +34,7 @@ const ExpenseComponent: React.FC<ExpenseComponentProps> = ({
   }
 
   return (
-    <IonCard color="light">
+    <IonCard color="light" onClick={navigateToExpenseDetails}>
       <IonItem color="none" lines="none">
         <IonLabel>
           <IonCardTitle class="ion-text-wrap" className="expense">

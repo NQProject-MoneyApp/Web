@@ -7,6 +7,8 @@ import {
   IonButton,
   useIonAlert,
   IonToast,
+  IonGrid,
+  IonRow,
 } from "@ionic/react";
 
 import Toolbar from "../../components/Toolbar";
@@ -18,12 +20,10 @@ import { useEffect, useState } from "react";
 import GroupComponent from "./GroupComponent";
 import Group from "../../domain/groups/Group";
 import IconButton from "../../components/IconButton";
-import History from 'history';
+import History from "history";
 import { RouteComponentProps } from "react-router";
 
-
-
-const GroupList: React.FC<RouteComponentProps> = ({history}) => {
+const GroupList: React.FC<RouteComponentProps> = ({ history }) => {
   const [groupList, setGroupList] = useState(new Array<Group>());
   const [isLoading, setIsLoading] = useState(false);
   const [present] = useIonAlert();
@@ -86,15 +86,10 @@ const GroupList: React.FC<RouteComponentProps> = ({history}) => {
         />
         <IonLoading isOpen={isLoading} message={"Loading..."} />
         <IonList lines="none" className="group-container">
-          <IconButton onClick={navigateToAddGroup} justify="center">
-            <FontAwesomeIcon
-              className="addGroupIcon"
-              size="2x"
-              icon={faPlusCircle}
-            ></FontAwesomeIcon>
-          </IconButton>
-
-          <IonButton onClick={presentJoinAlert}>Join</IonButton>
+          <IonRow>
+            <IonButton onClick={navigateToAddGroup}>Add group</IonButton>
+            <IonButton onClick={presentJoinAlert}>Join group</IonButton>
+          </IonRow>
 
           {groupList.map((group) => (
             <GroupComponent

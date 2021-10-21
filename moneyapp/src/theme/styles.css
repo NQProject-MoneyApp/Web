@@ -75,7 +75,6 @@ ion-button {
 
 ion-item.item-input, ion-item.item-input ion-input, ion-button {
   height: 3.1rem;
-  color: var(--ion-color-secondary);
 }
 
 ion-button {

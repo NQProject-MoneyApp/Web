@@ -62,6 +62,7 @@ ion-button {
   margin: 1rem;
   flex-grow: 1;
   min-width: 240px;
+  font-weight: 600;
 }
 
 .transparent-container {
@@ -77,8 +78,9 @@ ion-item.item-input, ion-item.item-input ion-input, ion-button {
   height: 3.1rem;
 }
 
-ion-button {
-  font-weight: 600;
+ion-item.item-input, ion-item.item-input ion-input{
+  height: 3.1rem;
+  color: var(--ion-color-tertiary);
 }
 
 .clickable {
@@ -100,6 +102,7 @@ ion-button {
 
 .login-form-option p{
   flex: auto;
+  color: var(--ion-color-tertiary)
 }
 
 .login-form-option span{

@@ -74,7 +74,7 @@ const LoginFrom: React.FC<any> = ({history}) => {
             }}
           />
         </IonItem>
-        <IonButton color="primary" onClick={submitLogin}>
+        <IonButton onClick={submitLogin}>
           Log in
         </IonButton>
 

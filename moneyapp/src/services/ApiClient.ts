@@ -19,7 +19,7 @@ type GroupDto = {
   total_cost?: number;
   user_balance?: number;
   create_date?: string;
-  is_favorite?: boolean;
+  is_favourite?: boolean;
   members?: GroupUserDto[];
 };
 
@@ -121,6 +121,7 @@ class ApiClient {
           createDate: new Date(e.create_date!),
           icon: e.icon!,
           members: e.members!.map((e) => this.mapFromGroupUserDto(e)),
+          isFavourite: e.is_favourite!,
         };
       });
     }
@@ -140,6 +141,7 @@ class ApiClient {
         createDate: new Date(result.data.create_date!),
         icon: result.data.icon!,
         members: result.data.members!.map((e) => this.mapFromGroupUserDto(e)),
+        isFavourite: result.data.is_favourite!,
       };
     }
 

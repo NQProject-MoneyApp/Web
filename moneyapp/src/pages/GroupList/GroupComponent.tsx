@@ -36,7 +36,7 @@ const GroupComponent: React.FC<GroupComponentProps> = ({
         <IonItem color="none" lines="none">
           <img className="icon" src={Icons.instance.icon(icon)} alt="group icon"/>
           <IonLabel>
-            <IonIcon icon={star}></IonIcon>
+            <IonIcon className="favourite-icon" icon={isFavourite ? star : starOutline}></IonIcon>
             <IonCardTitle class="ion-text-wrap">{name}</IonCardTitle>
             <IonCardSubtitle>$ {balance.toFixed(2)}</IonCardSubtitle>
             <IonCardSubtitle className="groupDate">

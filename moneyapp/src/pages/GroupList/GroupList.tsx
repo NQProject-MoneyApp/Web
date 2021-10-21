@@ -7,20 +7,16 @@ import {
   IonButton,
   useIonAlert,
   IonToast,
-  IonGrid,
   IonRow,
 } from "@ionic/react";
 
 import Toolbar from "../../components/Toolbar";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 import "./GroupList.css";
 import ApiClient from "../../services/ApiClient";
 import { useEffect, useState } from "react";
 import GroupComponent from "./GroupComponent";
 import Group from "../../domain/groups/Group";
 import IconButton from "../../components/IconButton";
-import History from "history";
 import { RouteComponentProps } from "react-router";
 
 const GroupList: React.FC<RouteComponentProps> = ({ history }) => {
@@ -99,7 +95,7 @@ const GroupList: React.FC<RouteComponentProps> = ({ history }) => {
               icon={group.icon}
               balance={group.userBalance}
               createDate={group.createDate}
-              isFavourite={false}
+              isFavourite={group.isFavourite}
             />
           ))}
         </IonList>

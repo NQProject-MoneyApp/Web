@@ -21,6 +21,7 @@ type Group = {
     createDate: Date,
     icon: number,
     members: User[],
+    isFavourite: boolean,
 };
 
 export default Group;

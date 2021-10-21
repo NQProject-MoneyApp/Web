@@ -16,7 +16,6 @@ import ApiClient from "../../services/ApiClient";
 import { useEffect, useState } from "react";
 import GroupComponent from "./GroupComponent";
 import Group from "../../domain/groups/Group";
-import IconButton from "../../components/IconButton";
 import { RouteComponentProps } from "react-router";
 
 const GroupList: React.FC<RouteComponentProps> = ({ history }) => {
@@ -39,6 +38,17 @@ const GroupList: React.FC<RouteComponentProps> = ({ history }) => {
   const joinToGroup = async (code: string) => {
     setIsLoading(true);
     const result = await ApiClient.instance.join(code);
+    if (result.success) {
+      fetchGroups();
+    } else {
+      setIsLoading(false);
+      setShowToast(true);
+    }
+  };
+
+  const markGroupAsFavourite = async (groupId: number, isFavourite: boolean) => {
+    setIsLoading(true);
+    const result = await ApiClient.instance.markGroupAsFavourite(groupId, isFavourite);
     if (result.success) {
       fetchGroups();
     } else {
@@ -96,6 +106,7 @@ const GroupList: React.FC<RouteComponentProps> = ({ history }) => {
               balance={group.userBalance}
               createDate={group.createDate}
               isFavourite={group.isFavourite}
+              markGroupAsFavourite={markGroupAsFavourite}
             />
           ))}
         </IonList>

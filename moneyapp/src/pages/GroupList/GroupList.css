@@ -9,8 +9,9 @@ ion-label {
 }
 
 ion-card-title {
-  /* margin-bottom: 0.5rem; */
+  margin-bottom: 0.5rem;
   font-size: 1.2rem;
+  word-break: break-word;
 }
 
 ion-button {
@@ -39,8 +40,25 @@ img.icon {
   float: left;
 }
 
-.favourite-icon {
-  font-size: 22px;
+.group-label-container {
+  justify-content: space-between;
+  flex-wrap: nowrap;
+}
+
+.group-label-container ion-icon {
+  font-size: 24px;
+}
+
+.group-label-container .clickable {
+  margin-bottom: 0;
+  position: absolute;
+  top: 0.14rem;
+  right: 0.14rem;
+}
+
+.group-label-container .icon-button-container {
+  min-width: 1.9rem;
+  min-height: 1.9rem;
 }
 
 .groupDate {

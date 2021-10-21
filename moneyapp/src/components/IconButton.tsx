@@ -3,7 +3,7 @@ import "./IconButton.css";
 
 type IconButtonProps = {
   children: ReactElement<any, any>;
-  onClick: () => void;
+  onClick: (e: any) => void;
   size?: string;
   justify?: string;
 };
@@ -28,6 +28,9 @@ const IconButton: React.FC<IconButtonProps> = ({
     case "big":
       iconSize = "4rem";
       break;
+    case "unset":
+      iconSize = "unset";
+      break;
     default:
       iconSize = "2.6rem";
   }
@@ -44,7 +47,7 @@ const IconButton: React.FC<IconButtonProps> = ({
     <>
       <div className="icon-button-container" style={containerStyle}>
         <div className="icon-button clickable" style={styles} onClick={onClick}>
-          {children}
+          <div className="clickable-icon-container">{children}</div>
         </div>
       </div>
     </>

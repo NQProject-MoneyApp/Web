@@ -90,6 +90,8 @@ http://ionicframework.com/docs/theming/ */
   --ion-color-light-tint: #f5f6f9;
 
   --ion-color-shadow: #00000015;
+  --ion-color-hover: rgba(0, 0, 0, 0.05);
+  --ion-color-hover-navbar: rgba(255, 255, 255, 0.15);
 }
 
 ion-toolbar {
@@ -167,6 +169,8 @@ ion-toolbar {
     --ion-color-light-tint: #383a3e;
 
     --ion-color-shadow: transparent;
+    --ion-color-hover: rgba(255, 255, 255, 0.1);
+    --ion-color-hover-navbar: rgba(255, 255, 255, 0.1);
   }
 
   /*

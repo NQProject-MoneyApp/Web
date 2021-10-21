@@ -1,11 +1,30 @@
 .icon-button {
-  padding: 0.2rem;
+  min-height: 40px;
+  min-width: 40px;
   text-align: center;
   overflow: hidden;
   flex: auto;
   display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .icon-button-container {
     display: flex;
+}
+
+.clickable-icon-container {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  text-align: center;
+  margin:0.2rem;
+  width: calc(100% - 0.4rem);
+  height: calc(100% - 0.4rem);
+}
+
+.icon-button img {
+  max-height: 100%;
+  max-width: 100%;
 }

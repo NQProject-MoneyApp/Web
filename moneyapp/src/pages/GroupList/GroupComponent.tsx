@@ -5,13 +5,12 @@ import {
   IonItem,
   IonLabel,
   IonIcon,
+  IonRow,
 } from "@ionic/react";
 import { star, starOutline } from "ionicons/icons";
 import moment from "moment";
 import Icons from "../AddGroup/Icons";
-import Burger from "../AddGroup/Icons";
-import GroupDetails from "../GroupDetails/GroupDetails";
-
+import IconButton from "../../components/IconButton";
 
 type GroupComponentProps = {
   readonly groupId: number;
@@ -20,6 +19,10 @@ type GroupComponentProps = {
   readonly balance: number;
   readonly createDate: Date;
   readonly isFavourite: boolean;
+  readonly markGroupAsFavourite: (
+    GroupId: number,
+    isFavourite: boolean
+  ) => Promise<void>;
 };
 
 const GroupComponent: React.FC<GroupComponentProps> = ({
@@ -29,22 +32,39 @@ const GroupComponent: React.FC<GroupComponentProps> = ({
   balance,
   createDate,
   isFavourite,
+  markGroupAsFavourite,
 }: GroupComponentProps) => {
-
   return (
-      <IonCard color="light" routerLink={`/groups/${groupId}/expenses`}>
-        <IonItem color="none" lines="none">
-          <img className="icon" src={Icons.instance.icon(icon)} alt="group icon"/>
-          <IonLabel>
-            <IonIcon className="favourite-icon" icon={isFavourite ? star : starOutline}></IonIcon>
+    <IonCard color="light" routerLink={`/groups/${groupId}/expenses`}>
+      <IonItem color="none" lines="none">
+        <img
+          className="icon"
+          src={Icons.instance.icon(icon)}
+          alt="group icon"
+        />
+        <IonLabel>
+          <IonRow className="group-label-container">
             <IonCardTitle class="ion-text-wrap">{name}</IonCardTitle>
-            <IonCardSubtitle>$ {balance.toFixed(2)}</IonCardSubtitle>
-            <IonCardSubtitle className="groupDate">
-              {moment(createDate).format("DD.MM.YYYY")}
-            </IonCardSubtitle>
-          </IonLabel>
-        </IonItem>
-      </IonCard>
+
+            <IconButton
+              size="unset"
+              onClick={(e) => {
+                e.stopPropagation();
+                e.preventDefault();
+                markGroupAsFavourite(groupId, !isFavourite);
+              }}
+              justify="flex-end"
+            >
+              <IonIcon icon={isFavourite ? star : starOutline}></IonIcon>
+            </IconButton>
+          </IonRow>
+          <IonCardSubtitle>$ {balance.toFixed(2)}</IonCardSubtitle>
+          <IonCardSubtitle className="groupDate">
+            {moment(createDate).format("DD.MM.YYYY")}
+          </IonCardSubtitle>
+        </IonLabel>
+      </IonItem>
+    </IonCard>
   );
 };
 

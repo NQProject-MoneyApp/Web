@@ -241,6 +241,20 @@ class ApiClient {
     }
   }
 
+  async markGroupAsFavourite(
+    groupId: number,
+    isFavourite: boolean,
+  ): Promise<SimpleResult> {
+    try {
+      const result = await this.axiosInstance.patch<any>(`api/groups/${groupId}/`, {
+        is_favourite: isFavourite,
+      });
+      return { success: true, result: "Succes" };
+    } catch {
+      return { success: false, result: null };
+    }
+  }
+
   async join(code: String): Promise<SimpleResult> {
     try {
       const result = await this.axiosInstance.put<any, any>(

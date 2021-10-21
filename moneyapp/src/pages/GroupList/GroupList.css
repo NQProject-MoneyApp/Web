@@ -68,3 +68,9 @@ img.icon {
 .group-container {
   margin-top: 2rem;
 }
+
+
+.group-container ion-button {
+  margin-top: 1rem;
+  margin-bottom: 0rem;
+}

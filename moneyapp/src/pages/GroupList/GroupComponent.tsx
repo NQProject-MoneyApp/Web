@@ -35,7 +35,7 @@ const GroupComponent: React.FC<GroupComponentProps> = ({
   markGroupAsFavourite,
 }: GroupComponentProps) => {
   return (
-    <IonCard color="light" routerLink={`/groups/${groupId}/expenses`}>
+    <IonCard color="light" routerLink={`/groups/${groupId}`}>
       <IonItem color="none" lines="none">
         <img
           className="icon"

@@ -78,11 +78,11 @@ const AddGroupContent: React.FC<any> = ({history}) => {
     }
   };
 
-  const iconColor = (icon: number) => {
-    if (icon == selectedIcon) {
-      return "dark";
+  const iconClassName = (icon: number) => {
+    if (icon === selectedIcon) {
+      return "group-icon-choice selected-icon";
     } else {
-      return "light";
+      return "group-icon-choice clickable";
     }
   };
 
@@ -136,15 +136,14 @@ const AddGroupContent: React.FC<any> = ({history}) => {
           />
           <IonList lines="none">
             <FlexSpacer height="16.rem" />
-            <IonRow className="iconList">
+            <IonRow className="icon-list">
               {icons.map((icon) => (
                 <IonCard
                   key={icon}
-                  color={iconColor(icon)}
-                  className="groupIconClass"
+                  className={iconClassName(icon)}
                 >
                   <IonImg
-                    className="groupImage"
+                    className="group-image"
                     key={icon}
                     src={Icons.instance.icon(icon)}
                     onClick={() => setIcon(icon)}

@@ -1,16 +1,26 @@
-ion-row.iconList {
-    justify-content: flex-start;
-    flex-wrap: nowrap;
-    overflow-x: scroll;
-    overflow-y: hidden;
-  
+ion-row.icon-list {
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  overflow-x: scroll;
+  overflow-y: hidden;
 }
 
-ion-card.groupIconClass {
-    min-width: 4rem;
-    padding: 0.5rem;
+ion-card.group-icon-choice {
+  min-width: 4rem;
+  padding: 0.5rem;
 }
 
-ioin-img.groupImage {
-    margin: 2rem;
+ion-card.group-icon-choice.selected-icon {
+  background-color: var(--ion-color-secondary);
+  transition: 0.2s;
+}
+
+@media (prefers-color-scheme: dark) {
+  ion-card.group-icon-choice.selected-icon {
+    background-color: var(--ion-color-hover);
+  }
+}
+
+ioin-img.group-image {
+  margin: 2rem;
 }

@@ -7,10 +7,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 4px;
 }
 
 .icon-button-container {
-    display: flex;
+  display: flex;
 }
 
 .clickable-icon-container {
@@ -19,7 +20,7 @@
   align-content: center;
   align-items: center;
   text-align: center;
-  margin:0.2rem;
+  margin: 0.2rem;
   width: calc(100% - 0.4rem);
   height: calc(100% - 0.4rem);
 }

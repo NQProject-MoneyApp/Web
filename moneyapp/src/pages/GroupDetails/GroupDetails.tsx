@@ -111,7 +111,7 @@ const GroupDetails: React.FC<RouteComponentProps> = ({ history }) => {
               </IonCol>
               <IonCol>
                 <IonRow>Total cost: ${groupDetails!.totalCost}</IonRow>
-                <IonRow>Balance: ${groupDetails!.userBalance}</IonRow>
+                <IonRow>Balance: ${groupDetails!.userBalance.toFixed(2)}</IonRow>
               </IonCol>
             </IonRow>
             <IonRow>
@@ -141,7 +141,7 @@ const GroupDetails: React.FC<RouteComponentProps> = ({ history }) => {
 
                     <IonLabel> {e.name}</IonLabel>
                     <FlexSpacer flex={1} />
-                    <IonLabel> {e.balance}</IonLabel>
+                    <IonLabel> {e.balance.toFixed(2)}</IonLabel>
                     <FlexSpacer width="1rem" />
                   </IonRow>
                   <FlexSpacer height="0.5rem" />

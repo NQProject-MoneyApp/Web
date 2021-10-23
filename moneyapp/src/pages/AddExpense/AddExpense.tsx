@@ -21,6 +21,7 @@ import {
   SelectedParticipant,
 } from "../../components/ParticipantsComponent";
 import "./AddExpense.css";
+import "../validator.css"
 import Toolbar from "../../components/Toolbar";
 import ApiClient from "../../services/ApiClient";
 

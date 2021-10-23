@@ -46,7 +46,7 @@ const AddExpense: React.FC<RouteComponentProps> = ({ history }) => {
         selectedParticipants.filter((e) => e.selected).map((e) => e.id)
       )
       .then(() => {
-        history.push(`/groups/${groupId}/expenses`);
+        history.goBack();
       });
   };
 

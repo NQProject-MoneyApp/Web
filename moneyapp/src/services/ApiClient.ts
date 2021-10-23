@@ -259,6 +259,22 @@ class ApiClient {
     }
   }
 
+  async editGroup(
+    id: number,
+    name: String,
+    icon: number,
+  ): Promise<SimpleResult> {
+    try {
+      const result = await this.axiosInstance.patch<any>(`api/groups/${id}/`, {
+        name: name,
+        icon: icon,
+      });
+      return { success: true, result: "Succes" };
+    } catch {
+      return { success: false, result: null };
+    }
+  }
+
   async markGroupAsFavourite(
     groupId: number,
     isFavourite: boolean,

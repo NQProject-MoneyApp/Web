@@ -149,7 +149,6 @@ const AddGroupContent: React.FC<any> = ({ history }) => {
         <FlexSpacer height="16.rem" />
 
         <ParticipantsComponent
-          className={isWrongName ? "wrong-input" : ""}
           participants={selectedFriends}
           onChanged={setSelectedFriends}
         />

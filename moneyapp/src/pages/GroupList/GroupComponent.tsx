@@ -7,10 +7,13 @@ import {
   IonIcon,
   IonRow,
 } from "@ionic/react";
-import { star, starOutline } from "ionicons/icons";
+// import { star, starOutline } from "ionicons/icons";
 import moment from "moment";
 import Icons from "../AddGroup/Icons";
 import IconButton from "../../components/IconButton";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar as starSolid } from "@fortawesome/free-solid-svg-icons";
+import { faStar as starOutline } from "@fortawesome/free-regular-svg-icons";
 
 type GroupComponentProps = {
   readonly groupId: number;
@@ -55,7 +58,7 @@ const GroupComponent: React.FC<GroupComponentProps> = ({
               }}
               justify="flex-end"
             >
-              <IonIcon icon={isFavourite ? star : starOutline}></IonIcon>
+              <FontAwesomeIcon className="primary" icon={isFavourite ? starSolid : starOutline }></FontAwesomeIcon>
             </IconButton>
           </IonRow>
           <IonCardSubtitle>$ {balance.toFixed(2)}</IonCardSubtitle>

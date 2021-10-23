@@ -13,6 +13,7 @@ import {
 import { attachProps } from "@ionic/react/dist/types/components/utils";
 import FlexSpacer from "./common/Spacer";
 import IconButton from "./IconButton";
+import "../pages/validator.css";
 
 export type SelectedParticipant = {
   readonly id: number;
@@ -21,11 +22,13 @@ export type SelectedParticipant = {
 };
 
 export type ParticipantsProps = {
+  invalid: boolean;
   participants: SelectedParticipant[];
   onChanged: (participants: SelectedParticipant[]) => void;
 };
 
 export const ParticipantsComponent: React.FC<ParticipantsProps> = ({
+  invalid,
   participants,
   onChanged,
 }: ParticipantsProps) => {
@@ -44,7 +47,7 @@ export const ParticipantsComponent: React.FC<ParticipantsProps> = ({
   };
 
   return (
-    <IonCard>
+    <IonCard className={invalid ? "wrong-input" : ""}>
       <IonCardContent>
         <IonList lines="none">
           {participants.map((p) => {

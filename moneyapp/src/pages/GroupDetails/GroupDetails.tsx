@@ -36,11 +36,11 @@ const GroupDetails: React.FC<RouteComponentProps> = ({ history }) => {
   const [showCopiedToast, setCopiedShowToast] = useState(false);
 
   const navigateToAllExpenses = () => {
-    history.push(`groups/${groupId}/expenses`);
+    history.push(`/groups/${groupId}/expenses`);
   };
 
   const navigateToAddExpense = () => {
-    history.push(`groups/${groupId}/add-expense`);
+    history.push(`/groups/${groupId}/add-expense`);
   };
 
   const fethGroupsDetails = async () => {

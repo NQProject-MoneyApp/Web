@@ -130,7 +130,7 @@ class ApiClient {
 
   async getGroup(id: number): Promise<Group | null> {
     const result = await this.axiosInstance.get<any, NetworkResponse<GroupDto>>(
-      `api/groups/${id}`
+      `api/groups/${id}/`
     );
     if (result.data) {
       return {

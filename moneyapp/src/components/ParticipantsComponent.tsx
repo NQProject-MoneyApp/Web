@@ -22,7 +22,7 @@ export type SelectedParticipant = {
 };
 
 export type ParticipantsProps = {
-  invalid: boolean;
+  invalid?: boolean;
   participants: SelectedParticipant[];
   onChanged: (participants: SelectedParticipant[]) => void;
 };

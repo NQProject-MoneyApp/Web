@@ -54,7 +54,7 @@ const EditExpense: React.FC<RouteComponentProps> = ({ history }) => {
 
     setIsLoading(false);
     validateFriends(selectedParticipants);
-    validateAmount(amount);
+    validateAmount(parseFloat(amount));
     validateName(expenseName);
 
     if (result.success) {

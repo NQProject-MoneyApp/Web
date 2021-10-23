@@ -103,7 +103,7 @@ const GroupDetails: React.FC<RouteComponentProps> = ({ history }) => {
           <IonList className="container">
             <IonGrid className="group-info">
               <h2>{groupDetails!.name}</h2>
-              <IonRow className="group-info-container">
+              <div className="group-info-container">
                 <div>
                   <IonImg
                     className="icon group-image"
@@ -134,7 +134,7 @@ const GroupDetails: React.FC<RouteComponentProps> = ({ history }) => {
                     </div>
                   </IonRow>
                 </div>
-              </IonRow>
+              </div>
             </IonGrid>
 
             <IonRow>

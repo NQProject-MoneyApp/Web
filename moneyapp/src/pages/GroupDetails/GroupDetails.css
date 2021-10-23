@@ -16,7 +16,7 @@
 }
 
 .group-info h2 {
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
   margin-top: 2rem;
   font-family: "Poppins SemiBold";
 }
@@ -26,19 +26,38 @@
   margin: 1rem;
   padding: 0;
 }
-.member-container ion-label {
-  margin-right: 1rem;
-}
-
+.member-container ion-label,
 .group-info-row ion-label {
+  margin-right: 1rem;
   margin-left: 1rem;
+  font-family: "Poppins SemiBold";
 }
 
 .group-info-container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
-  margin-bottom: 2rem;
+}
+
+.group-info-row {
+  margin-top: 1rem;
+  width: 18rem;
+  max-width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.group-info-column {
+  margin: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.group-info-row > ion-col {
+  justify-content: flex-start;
+  text-align: left;
+  padding: 0;
 }
 
 @media only screen and (min-width: 544px) {
@@ -51,16 +70,20 @@
     margin-right: 2rem;
   }
 
+  .group-info-container {
+    margin-top: 3rem;
+    margin-bottom: 2rem;
+    flex-direction: row;
+    justify-content: center;
+  }
+
   .group-info-row {
     margin-top: 1rem;
-    max-width: 16em;
+    max-width: 16rem;
     display: flex;
     justify-content: space-between;
   }
-
-  .group-info-row > ion-col {
-    justify-content: flex-start;
-    text-align: left;
-    padding: 0;
+  .group-info-column {
+    margin: 0;
   }
 }

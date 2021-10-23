@@ -58,16 +58,6 @@ const ExpenseDetails: React.FC<RouteComponentProps> = ({ history }) => {
             <IonLoading isOpen={isLoading} message={"Loading..."} />
             <IonCard color="light" className="expense-details-card">
               <IonCardHeader>
-                {/* <IonItem color="none" lines="none">
-                  <h5>Amount</h5>
-                  <FlexSpacer flex={1} />
-                  <h5>{expenseDetails!.amount}</h5>
-                </IonItem>
-                <IonItem color="none" lines="none">
-                  <h5>Paid by</h5>
-                  <FlexSpacer flex={1} />
-                  <h5>{expenseDetails!.author.name}</h5>
-                </IonItem> */}
                 <IonRow>
                   <IonCardTitle>Amount</IonCardTitle>
                   <FlexSpacer flex={1} />
@@ -86,8 +76,8 @@ const ExpenseDetails: React.FC<RouteComponentProps> = ({ history }) => {
               </IonCardHeader>
               <IonCardContent>
                 {expenseDetails?.participants!.map((e) => (
-                  <IonRow>
-                  <h5 key={e.id}>{e.name}</h5>
+                  <IonRow key={e.id}>
+                  <h5>{e.name}</h5>
                   </IonRow>
                 ))}
               </IonCardContent>

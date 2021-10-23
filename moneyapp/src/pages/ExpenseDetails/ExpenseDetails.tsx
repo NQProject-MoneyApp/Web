@@ -3,8 +3,8 @@ import {
   IonHeader,
   IonContent,
   IonCard,
-  IonItem,
   IonList,
+  IonRow,
   IonCardTitle,
   IonLoading,
   IonCardContent,
@@ -19,6 +19,7 @@ import { useParams } from "react-router";
 import { useEffect, useState } from "react";
 import ApiClient from "../../services/ApiClient";
 import Expense from "../../domain/expenses/Expense";
+import "./ExpenseDetails.css";
 import moment from "moment";
 
 const ExpenseDetails: React.FC<RouteComponentProps> = ({ history }) => {
@@ -55,9 +56,9 @@ const ExpenseDetails: React.FC<RouteComponentProps> = ({ history }) => {
         {!isLoading && (
           <>
             <IonLoading isOpen={isLoading} message={"Loading..."} />
-            <IonCard>
+            <IonCard color="light" className="expense-details-card">
               <IonCardHeader>
-                <IonItem color="none" lines="none">
+                {/* <IonItem color="none" lines="none">
                   <h5>Amount</h5>
                   <FlexSpacer flex={1} />
                   <h5>{expenseDetails!.amount}</h5>
@@ -66,27 +67,39 @@ const ExpenseDetails: React.FC<RouteComponentProps> = ({ history }) => {
                   <h5>Paid by</h5>
                   <FlexSpacer flex={1} />
                   <h5>{expenseDetails!.author.name}</h5>
-                </IonItem>
+                </IonItem> */}
+                <IonRow>
+                  <IonCardTitle>Amount</IonCardTitle>
+                  <FlexSpacer flex={1} />
+                  <IonCardTitle>{expenseDetails!.amount}</IonCardTitle>
+                </IonRow>
+                <IonRow>
+                  <IonCardTitle>Paid by</IonCardTitle>
+                  <FlexSpacer flex={1} />
+                  <IonCardTitle>{expenseDetails!.author.name}</IonCardTitle>
+                </IonRow>
               </IonCardHeader>
             </IonCard>
-            <IonCard>
+            <IonCard color="light">
               <IonCardHeader ion-text-center>
                 <IonCardSubtitle>Participants</IonCardSubtitle>
               </IonCardHeader>
               <IonCardContent>
                 {expenseDetails?.participants!.map((e) => (
+                  <IonRow>
                   <h5 key={e.id}>{e.name}</h5>
+                  </IonRow>
                 ))}
               </IonCardContent>
             </IonCard>
-            <FlexSpacer height="1rem" />
-            <h4>Created on</h4>
-            <h4>{moment(expenseDetails!.createDate).format("DD.MM.YYYY")}</h4>
             <IonButton
               routerLink={`/groups/${groupId}/expenses/${expenseId}/edit`}
             >
               Edit
             </IonButton>
+            <FlexSpacer height="1rem" />
+            <h4>Created on</h4>
+            <h4>{moment(expenseDetails!.createDate).format("DD.MM.YYYY")}</h4>
           </>
         )}
       </IonContent>

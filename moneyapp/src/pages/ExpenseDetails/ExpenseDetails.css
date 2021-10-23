@@ -1,0 +1,35 @@
+ion-card-title {
+    color: var(--ion-color-secondary) !important;
+}
+
+@media (prefers-color-scheme: dark) {
+    ion-card-title {
+        color: var(--ion-text-color) !important;
+    }
+}
+
+h5 {
+    color: var(--ion-color-secondary);
+    text-align: left;   
+}
+
+@media (prefers-color-scheme: dark) {
+    h5 {
+        color: var(--ion-text-color);
+    }
+}
+
+h4 {
+    font-family: 'Poppins Bold';
+    color: var(--ion-color-secondary);
+}
+
+@media (prefers-color-scheme: dark) {
+    h4 {
+        color: var(--ion-text-color);
+    }
+}
+
+.expense-details-card {
+    padding: 0.5rem;
+}

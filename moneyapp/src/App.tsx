@@ -44,7 +44,7 @@ import EditExpense from "./pages/EditExpense/EditExpense";
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
-      <IonRouterOutlet>
+      <IonRouterOutlet animated={false}>
         <Route exact path="/login" component={Login}/>
         <Route exact path="/groups" component={GroupList}/>
         <Route exact path="/groups/:groupId/expenses" component={ExpenseList} />

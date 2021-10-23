@@ -71,7 +71,7 @@ const GroupList: React.FC<RouteComponentProps> = ({ history }) => {
 
   const presentJoinAlert = () => {
     present({
-      header: "Join",
+      header: "Join a group",
       inputs: [
         {
           name: "code",
@@ -79,7 +79,7 @@ const GroupList: React.FC<RouteComponentProps> = ({ history }) => {
           placeholder: "Code",
         },
       ],
-      buttons: [{ text: "Join", handler: (e) => joinToGroup(e.code) }],
+      buttons: [{ text: "Ok", handler: (e) => joinToGroup(e.code) }],
     });
   };
 

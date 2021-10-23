@@ -27,18 +27,19 @@ const EditGroupContent: React.FC<any> = ({ history }) => {
     groupId: string;
   }
   enum EditGroupContentState {
-    loading,
+    pageLoading,
     edit,
   }
 
   const { groupId } = useParams<RouteParams>();
-
-  const [state, setState] = useState(EditGroupContentState.loading);
+  const [isLoading, setIsLoading] = useState(false);
+  const [state, setState] = useState(EditGroupContentState.pageLoading);
   const [showToast, setShowToast] = useState(false);
   const [showErrorToast, setShowErrorToast] = useState(false);
   const [icons, setIcons] = useState(new Array<any>());
   const [name, setName] = useState("");
   const [selectedIcon, setSelectedIcon] = useState(1);
+  const [isWrongName, setIsWrongName] = useState(false);
 
   const fetchIcons = async () => {
     let result = await UserRepository.instance.fetchIcons();
@@ -52,18 +53,20 @@ const EditGroupContent: React.FC<any> = ({ history }) => {
   };
 
   const submitSave = async () => {
-    setState(EditGroupContentState.loading);
+    setIsLoading(true);
     const result = await ApiClient.instance.editGroup(
       parseInt(groupId),
       name,
-      selectedIcon,
+      selectedIcon
     );
+
+    validateName(name);
+    setIsLoading(false);
 
     if (result.success) {
       history.goBack();
     } else {
       setShowErrorToast(true);
-      setState(EditGroupContentState.edit);
     }
   };
 
@@ -75,6 +78,10 @@ const EditGroupContent: React.FC<any> = ({ history }) => {
     }
   };
 
+  const validateName = (name: string) => {
+    setIsWrongName(!name || name.trim() === "" || name.trim().length === 0);
+  };
+
   const setIcon = (icon: number) => {
     setSelectedIcon(icon);
   };
@@ -82,8 +89,6 @@ const EditGroupContent: React.FC<any> = ({ history }) => {
   const init = async () => {
     let iconsResult = await fetchIcons();
     const group = await ApiClient.instance.getGroup(parseInt(groupId));
-
-
 
     if (!iconsResult || group == null) {
       setShowToast(true);
@@ -99,7 +104,7 @@ const EditGroupContent: React.FC<any> = ({ history }) => {
   }, []);
 
   switch (state) {
-    case EditGroupContentState.loading: {
+    case EditGroupContentState.pageLoading: {
       return (
         <IonContent>
           <IonToast
@@ -121,7 +126,7 @@ const EditGroupContent: React.FC<any> = ({ history }) => {
           <IonToast
             isOpen={showErrorToast}
             onDidDismiss={() => setShowErrorToast(false)}
-            message="Edit group error"
+            message="Something wrong"
             position="top"
             color="danger"
             mode="ios"
@@ -143,18 +148,20 @@ const EditGroupContent: React.FC<any> = ({ history }) => {
             </IonRow>
             <FlexSpacer height="16.rem" />
 
-            <IonItem>
-              <IonLabel>Name</IonLabel>
+            <IonCard className={isWrongName ? "wrong-input" : ""}>
               <IonInput
                 type="text"
                 placeholder="Name"
                 value={name}
-                onIonChange={(e) => setName(e.detail.value!)}
+                onIonChange={(e) => {
+                  setName(e.detail.value!);
+                  validateName(e.detail.value!);
+                }}
               />
-            </IonItem>
+            </IonCard>
             <FlexSpacer height="16.rem" />
 
-            <IonButton color="primary" onClick={submitSave}>
+            <IonButton color="primary" onClick={submitSave} disabled={isLoading}>
               Save
             </IonButton>
           </IonList>

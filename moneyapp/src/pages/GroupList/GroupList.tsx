@@ -103,7 +103,7 @@ const GroupList: React.FC<RouteComponentProps> = ({ history }) => {
           mode="ios"
           duration={1000}
         />
-        <IonList lines="none" className="group-container">
+        <IonList lines="none" className="container">
           <IonRow>
             <IonButton onClick={navigateToAddGroup}>Add group</IonButton>
             <IonButton onClick={presentJoinAlert}>Join group</IonButton>

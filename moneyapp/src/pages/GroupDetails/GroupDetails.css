@@ -30,8 +30,8 @@
   margin-right: 1rem;
 }
 
-.group-info-row > ion-col > ion-label {
-  margin: 0;
+.group-info-row ion-label {
+  margin-left: 1rem;
 }
 
 .group-info-container {

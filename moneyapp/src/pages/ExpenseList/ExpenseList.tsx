@@ -52,7 +52,7 @@ const ExpenseList: React.FC<RouteComponentProps> = ({history}) => {
       </IonHeader>
       <IonContent fullscreen>
         <IonLoading isOpen={isLoading} message={"Loading..."} />
-        <IonList lines="none" className="group-container">
+        <IonList lines="none" className="container">
           <IonButton onClick={navigateToAddExpense}>
             Add expense
           </IonButton>

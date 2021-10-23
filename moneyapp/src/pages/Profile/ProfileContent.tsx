@@ -18,49 +18,40 @@ import UserRepository from "../../services/UserRepository";
 import "./Profile.css";
 
 const ProfileContent: React.FC = () => {
-  enum ProfileContentState {
-    loading,
-    error,
-    edit,
-  }
-
-  const [state, setState] = useState(ProfileContentState.loading);
+  const [showToast, setShowToast] = useState(false);
+  const [showErrorToast, setShowErrorToast] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [pk, setPk] = useState(0);
 
   const fetchUserProfile = async () => {
-    let now = Date.now();
-    setState(ProfileContentState.loading);
+    setIsLoading(true);
 
     let data = await UserRepository.instance.userProfile();
-    let diff = Date.now().valueOf() - now.valueOf();
 
     if (data.success) {
-      setTimeout(() => {
-        setUsername(data.result.username);
-        setEmail(data.result.email);
-        setPk(data.result.pk);
-
-        setState(ProfileContentState.edit);
-      }, 1000 - diff);
-    } else {
-      setTimeout(() => {
-        setState(ProfileContentState.error);
-      }, 1000 - diff);
+      setUsername(data.result.username);
+      setEmail(data.result.email);
+      setPk(data.result.pk);
     }
+    setIsLoading(false);
   };
 
   const save = async () => {
-    setState(ProfileContentState.loading);
+    setIsLoading(true);
     let result = await UserRepository.instance.updateUserProfile(
       username,
       pk,
       email
     );
 
+    setIsLoading(false);
+
     if (result.success) {
-      fetchUserProfile();
+      setShowToast(true);
+    } else {
+      setShowErrorToast(true);
     }
   };
 
@@ -76,75 +67,63 @@ const ProfileContent: React.FC = () => {
     fetchUserProfile();
   }, []);
 
-  switch (state) {
-    case ProfileContentState.loading: {
-      return (
-        <IonContent>
-          <IonLoading isOpen={true} message={"Loading..."} />
-        </IonContent>
-      );
-    }
-    case ProfileContentState.edit: {
-      return (
-        <IonContent>
-          <IonCard color="light" className="border">
-            <IonLabel className="initials">{usernamePrefix()}</IonLabel>
-          </IonCard>
-          <FlexSpacer height="1rem" />
+  return (
+    <IonContent>
+      <IonToast
+        isOpen={showErrorToast}
+        onDidDismiss={() => {
+          setShowErrorToast(false);
+        }}
+        message="Something wrong"
+        position="top"
+        color="danger"
+        mode="ios"
+        duration={1000}
+      />
+      <IonToast
+        isOpen={showToast}
+        onDidDismiss={() => setShowToast(false)}
+        message="Updated"
+        position="top"
+        color="primary"
+        mode="ios"
+        duration={1000}
+      />
+      <IonLoading isOpen={isLoading} message={"Loading..."} />
 
-          <IonList lines="none">
-            <IonItem>
-              <IonLabel>Login</IonLabel>
-              <IonInput
-                type="text"
-                placeholder="username"
-                value={username}
-                onIonChange={(e) => setUsername(e.detail.value!)}
-              />
-            </IonItem>
-            <IonItem>
-              <IonLabel>Email</IonLabel>
-              <IonInput
-                type="text"
-                placeholder="email"
-                value={email}
-                disabled
-              />
-            </IonItem>
-            <FlexSpacer height="1rem" />
+      <IonCard color="light" className="border">
+        <IonLabel className="initials">{usernamePrefix()}</IonLabel>
+      </IonCard>
+      <FlexSpacer height="1rem" />
 
-            <IonRow className="buttons">
-              <IonButton color="primary" onClick={save}>
-                Save
-              </IonButton>
+      <IonList lines="none">
+        <IonItem>
+          <IonLabel>Login</IonLabel>
+          <IonInput
+            type="text"
+            placeholder="username"
+            value={username}
+            onIonChange={(e) => setUsername(e.detail.value!)}
+          />
+        </IonItem>
+        <IonItem>
+          <IonLabel>Email</IonLabel>
+          <IonInput type="text" placeholder="email" value={email} disabled />
+        </IonItem>
+        <FlexSpacer height="1rem" />
 
-              <IonButton color="danger" onClick={logout}>
-                Logout
-              </IonButton>
-            </IonRow>
+        <IonRow className="buttons">
+          <IonButton color="primary" onClick={save}>
+            Save
+          </IonButton>
 
-
-          </IonList>
-        </IonContent>
-      );
-    }
-    default: {
-      return (
-        <IonContent>
-          <IonList lines="none">
-            <FlexSpacer height="1rem" />
-            <IonItem className="error">
-              <IonLabel>Connection error</IonLabel>
-            </IonItem>
-            <FlexSpacer height="1rem" />
-            <IonButton color="danger" onClick={fetchUserProfile}>
-              Try again
-            </IonButton>
-          </IonList>
-        </IonContent>
-      );
-    }
-  }
+          <IonButton color="danger" onClick={logout}>
+            Logout
+          </IonButton>
+        </IonRow>
+      </IonList>
+    </IonContent>
+  );
 };
 
 export default ProfileContent;

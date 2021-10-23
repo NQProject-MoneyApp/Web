@@ -30,7 +30,7 @@ const ExpenseList: React.FC<RouteComponentProps> = ({history}) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const navigateToAddExpense = () => {
-    history.push(`/groups/${groupId}/add-expense`);
+    history.push(`/groups/${groupId}/expenses/add`);
   };
 
   const fetchExpenses = async () => {

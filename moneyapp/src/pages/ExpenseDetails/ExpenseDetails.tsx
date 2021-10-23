@@ -10,6 +10,7 @@ import {
   IonCardContent,
   IonCardSubtitle,
   IonCardHeader,
+  IonButton,
 } from "@ionic/react";
 import { RouteComponentProps } from "react-router";
 import FlexSpacer from "../../components/common/Spacer";
@@ -20,7 +21,7 @@ import ApiClient from "../../services/ApiClient";
 import Expense from "../../domain/expenses/Expense";
 import moment from "moment";
 
-const ExpenseDetails: React.FC<RouteComponentProps> = ({history}) => {
+const ExpenseDetails: React.FC<RouteComponentProps> = ({ history }) => {
   interface RouteParams {
     groupId: string;
     expenseId: string;
@@ -48,7 +49,7 @@ const ExpenseDetails: React.FC<RouteComponentProps> = ({history}) => {
   return (
     <IonPage>
       <IonHeader>
-        <Toolbar history={history}/>
+        <Toolbar history={history} />
       </IonHeader>
       <IonContent fullscreen>
         {!isLoading && (
@@ -81,6 +82,11 @@ const ExpenseDetails: React.FC<RouteComponentProps> = ({history}) => {
             <FlexSpacer height="1rem" />
             <h4>Created on</h4>
             <h4>{moment(expenseDetails!.createDate).format("DD.MM.YYYY")}</h4>
+            <IonButton
+              routerLink={`/groups/${groupId}/expenses/${expenseId}/edit`}
+            >
+              Edit
+            </IonButton>
           </>
         )}
       </IonContent>

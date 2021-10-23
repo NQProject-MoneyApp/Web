@@ -30,7 +30,7 @@ const ExpenseComponent: React.FC<ExpenseComponentProps> = ({
   amount,
 }: ExpenseComponentProps) => {
   return (
-    <IonCard color="light" routerLink={`/groups/${groupId}/expenses/${expenseId}`}>
+    <IonCard color="light" routerLink={`/groups/${groupId}/expenses/${expenseId}/details`}>
       <IonItem color="none" lines="none">
         <IonLabel>
           <IonCardTitle class="ion-text-wrap" className="expense">

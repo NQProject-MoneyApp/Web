@@ -71,7 +71,7 @@ const GroupList: React.FC<RouteComponentProps> = ({ history }) => {
 
   const presentJoinAlert = () => {
     present({
-      header: "Join",
+      header: "Join a group",
       inputs: [
         {
           name: "code",
@@ -79,7 +79,7 @@ const GroupList: React.FC<RouteComponentProps> = ({ history }) => {
           placeholder: "Code",
         },
       ],
-      buttons: [{ text: "Join", handler: (e) => joinToGroup(e.code) }],
+      buttons: [{ text: "Ok", handler: (e) => joinToGroup(e.code) }],
     });
   };
 
@@ -97,7 +97,7 @@ const GroupList: React.FC<RouteComponentProps> = ({ history }) => {
         <IonToast
           isOpen={showToast}
           onDidDismiss={() => setShowToast(false)}
-          message="Error"
+          message="Something wrong"
           position="top"
           color="danger"
           mode="ios"

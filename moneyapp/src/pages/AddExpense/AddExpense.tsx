@@ -21,6 +21,7 @@ import {
   SelectedParticipant,
 } from "../../components/ParticipantsComponent";
 import "./AddExpense.css";
+import "../validator.css";
 import Toolbar from "../../components/Toolbar";
 import ApiClient from "../../services/ApiClient";
 
@@ -35,7 +36,7 @@ const AddExpense: React.FC<RouteComponentProps> = ({ history }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isWrongName, setIsWrongName] = useState(false);
   const [isWrongAmount, setIsWrongAmount] = useState(false);
-
+  const [isWrongFriends, setIsWrongFriends] = useState(false);
   const [expenseName, setExpenseName] = useState("");
   const [amount, setAmount] = useState("");
   const [selectedParticipants, setParticipants] = useState(
@@ -49,6 +50,17 @@ const AddExpense: React.FC<RouteComponentProps> = ({ history }) => {
   const validateName = (name: string) => {
     setIsWrongName(!name || name.trim() === "" || name.trim().length === 0);
   };
+
+  const validateFriends = (friends: Array<SelectedParticipant>) => {
+    var count = 0;
+    friends.forEach(element => {
+      if (element.selected) {
+        count += 1;
+      }
+    });
+    setIsWrongFriends(count <= 0);
+  };
+
   const submitSave = async () => {
     setIsLoading(true);
     const result = await ApiClient.instance.addExpense(
@@ -61,9 +73,10 @@ const AddExpense: React.FC<RouteComponentProps> = ({ history }) => {
     setIsLoading(false);
     validateAmount(parseFloat(amount));
     validateName(expenseName);
+    validateFriends(selectedParticipants);
 
     if (result.success) {
-      history.push(`/groups/${groupId}/expenses`);
+      history.goBack();
     } else {
       setShowToast(true);
     }
@@ -154,8 +167,12 @@ const AddExpense: React.FC<RouteComponentProps> = ({ history }) => {
           />
         </IonCard>
         <ParticipantsComponent
+          invalid={isWrongFriends}
           participants={selectedParticipants}
-          onChanged={setParticipants}
+          onChanged={(e) => {
+            setParticipants(e);
+            validateFriends(e);
+          }}
         />
 
         <IonButton

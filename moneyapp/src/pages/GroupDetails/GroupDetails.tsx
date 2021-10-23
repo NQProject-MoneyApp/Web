@@ -151,6 +151,9 @@ const GroupDetails: React.FC<RouteComponentProps> = ({ history }) => {
               <IonButton onClick={navigateToAllExpenses}>
                 All expenses
               </IonButton>
+              <IonButton routerLink={`/groups/${groupId}/edit`}>
+                Edit
+              </IonButton>
               <FlexSpacer height="1rem" />
             </IonList>
           </IonCard>

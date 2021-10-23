@@ -1,4 +1,66 @@
 .group-image {
-    max-width: 6em;
-    margin: auto;
+  width: 6em;
+  margin: auto;
+}
+
+@media only screen and (min-width: 450px) {
+  .member-spacer {
+    border-bottom: 1px solid var(--ion-color-hover);
+    height: 1rem;
+  }
+}
+
+.group-info {
+  padding: 0;
+  white-space: nowrap;
+}
+
+.group-info h2 {
+  margin-bottom: 2rem;
+  margin-top: 2rem;
+  font-family: "Poppins SemiBold";
+}
+
+.group-info > ion-row > ion-col {
+  min-width: 240px;
+  margin: 1rem;
+  padding: 0;
+}
+.member-container ion-label {
+  margin-right: 1rem;
+}
+
+.group-info-row > ion-col > ion-label {
+  margin: 0;
+}
+
+.group-info-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+@media only screen and (min-width: 544px) {
+  .container > ion-card.group-members {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .group-image {
+    margin-right: 2rem;
+  }
+
+  .group-info-row {
+    margin-top: 1rem;
+    max-width: 16em;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .group-info-row > ion-col {
+    justify-content: flex-start;
+    text-align: left;
+    padding: 0;
+  }
 }

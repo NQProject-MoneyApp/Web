@@ -44,7 +44,7 @@ const RegisterForm: React.FC<any> = ({history}) => {
     return <Redirect to="/groups" />;
   } else {
     return (
-      <IonList className="container auth-form">
+      <IonList className="auth-container auth-form">
         <IonLoading isOpen={isLoading} message={"Loading..."} />
 
         <IonToast

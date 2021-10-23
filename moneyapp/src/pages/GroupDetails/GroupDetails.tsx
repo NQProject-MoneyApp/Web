@@ -17,7 +17,6 @@ import {
 } from "@ionic/react";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import FlexSpacer from "../../components/common/Spacer";
 import { RouteComponentProps } from "react-router";
 import Toolbar from "../../components/Toolbar";
 import Group from "../../domain/groups/Group";
@@ -26,6 +25,7 @@ import Icons from "../AddGroup/Icons";
 import { Clipboard } from "@capacitor/clipboard";
 
 import "./GroupDetails.css";
+import FlexSpacer from "../../components/common/Spacer";
 
 const GroupDetails: React.FC<RouteComponentProps> = ({ history }) => {
   const { groupId } = useParams<{ groupId: string }>();
@@ -100,63 +100,67 @@ const GroupDetails: React.FC<RouteComponentProps> = ({ history }) => {
             mode="ios"
             duration={1000}
           />
-          <h2>Group Details</h2>
-          <IonGrid>
+          <IonList className="container">
+            <IonGrid className="group-info">
+              <h2>{groupDetails!.name}</h2>
+              <IonRow className="group-info-container">
+                <div>
+                  <IonImg
+                    className="icon group-image"
+                    src={Icons.instance.icon(groupDetails!.icon)}
+                  />
+                </div>
+                <div className="group-info-column">
+                  <IonRow className="group-info-row">
+                    <div>
+                      <IonLabel>Total cost:</IonLabel>
+                    </div>
+                    <div>
+                      <IonLabel>${groupDetails!.totalCost}</IonLabel>
+                    </div>
+                  </IonRow>
+                  <IonRow className="group-info-row">
+                    <div>
+                      <IonLabel>Balance:</IonLabel>
+                    </div>
+                    <div>
+                      <IonLabel
+                        color={
+                          groupDetails!.userBalance >= 0 ? "success" : "danger"
+                        }
+                      >
+                        ${groupDetails!.userBalance.toFixed(2)}
+                      </IonLabel>
+                    </div>
+                  </IonRow>
+                </div>
+              </IonRow>
+            </IonGrid>
+
             <IonRow>
-              <IonCol>
-                <IonImg
-                  className="icon group-image"
-                  src={Icons.instance.icon(groupDetails!.icon)}
-                />
-              </IonCol>
-              <IonCol>
-                <IonRow>Total cost: ${groupDetails!.totalCost}</IonRow>
-                <IonRow>Balance: ${groupDetails!.userBalance.toFixed(2)}</IonRow>
-              </IonCol>
+              <IonButton color="primary">Settle up</IonButton>
+              <IonButton color="primary" onClick={navigateToAddExpense}>
+                New expense
+              </IonButton>
             </IonRow>
-            <IonRow>
-              <IonCol>
-                <IonButton color="primary">Settle up</IonButton>
-              </IonCol>
-              <IonCol>
-                <IonButton color="primary" onClick={navigateToAddExpense}>
-                  New expense
-                </IonButton>
-              </IonCol>
-              <IonCol>
-                <IonButton color="primary" onClick={presentCodeAlert}>
+            <IonCard className="group-members">
+              <IonList lines="none">
+                {groupDetails?.members!.map((e) => (
+                  <IonCol key={e.id}>
+                    <IonRow className="member-container">
+                      <IonLabel> {e.name}</IonLabel>
+                      <FlexSpacer className="member-spacer" flex={1} />
+                      <IonLabel> {e.balance.toFixed(2)}</IonLabel>
+                    </IonRow>
+                  </IonCol>
+                ))}
+                <IonButton color="secondary" onClick={presentCodeAlert}>
                   Code
                 </IonButton>
-              </IonCol>
-            </IonRow>
-          </IonGrid>
-          <IonCard>
-            <IonList lines="none">
-              <FlexSpacer height="1rem" />
-
-              {groupDetails?.members!.map((e) => (
-                <IonCol key={e.id}>
-                  <IonRow>
-                    <FlexSpacer width="1rem" />
-
-                    <IonLabel> {e.name}</IonLabel>
-                    <FlexSpacer flex={1} />
-                    <IonLabel> {e.balance.toFixed(2)}</IonLabel>
-                    <FlexSpacer width="1rem" />
-                  </IonRow>
-                  <FlexSpacer height="0.5rem" />
-                </IonCol>
-              ))}
-
-              <IonButton onClick={navigateToAllExpenses}>
-                All expenses
-              </IonButton>
-              <IonButton routerLink={`/groups/${groupId}/edit`}>
-                Edit
-              </IonButton>
-              <FlexSpacer height="1rem" />
-            </IonList>
-          </IonCard>
+              </IonList>
+            </IonCard>
+            <IonButton onClick={navigateToAllExpenses}>All expenses</IonButton>
+          </IonList>
         </IonContent>
       </IonPage>
     );

@@ -1,4 +1,4 @@
-.group-container > ion-card {
+.container > ion-card {
   margin-top: 1rem;
   margin-bottom: 1rem;
   padding: 1rem;
@@ -65,9 +65,10 @@ img.icon {
   float: right;
 }
 
-.group-container ion-button {
+.container ion-button {
   margin-top: 1rem;
   margin-bottom: 0rem;
+  flex: 1;
 }
 
 .favorite-icon {

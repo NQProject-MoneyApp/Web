@@ -8,6 +8,9 @@ import {
   useIonAlert,
   IonToast,
   IonRow,
+  IonImg,
+  useIonModal,
+  IonModal,
 } from "@ionic/react";
 
 import Toolbar from "../../components/Toolbar";
@@ -17,6 +20,9 @@ import { useEffect, useState } from "react";
 import GroupComponent from "./GroupComponent";
 import Group from "../../domain/groups/Group";
 import { RouteComponentProps } from "react-router";
+import IconButton from "../../components/IconButton";
+import Icons from "../AddGroup/Icons";
+import LoadingWidget from "../../components/common/LoadingWidget";
 
 const GroupList: React.FC<RouteComponentProps> = ({ history }) => {
   const [groupList, setGroupList] = useState(new Array<Group>());
@@ -46,9 +52,15 @@ const GroupList: React.FC<RouteComponentProps> = ({ history }) => {
     }
   };
 
-  const markGroupAsFavourite = async (groupId: number, isFavourite: boolean) => {
+  const markGroupAsFavourite = async (
+    groupId: number,
+    isFavourite: boolean
+  ) => {
     setIsLoading(true);
-    const result = await ApiClient.instance.markGroupAsFavourite(groupId, isFavourite);
+    const result = await ApiClient.instance.markGroupAsFavourite(
+      groupId,
+      isFavourite
+    );
     if (result.success) {
       fetchGroups();
     } else {
@@ -81,6 +93,7 @@ const GroupList: React.FC<RouteComponentProps> = ({ history }) => {
         <Toolbar history={history} />
       </IonHeader>
       <IonContent fullscreen>
+        <LoadingWidget isLoading={isLoading} />
         <IonToast
           isOpen={showToast}
           onDidDismiss={() => setShowToast(false)}
@@ -90,7 +103,6 @@ const GroupList: React.FC<RouteComponentProps> = ({ history }) => {
           mode="ios"
           duration={1000}
         />
-        <IonLoading isOpen={isLoading} message={"Loading..."} />
         <IonList lines="none" className="group-container">
           <IonRow>
             <IonButton onClick={navigateToAddGroup}>Add group</IonButton>

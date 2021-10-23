@@ -214,14 +214,11 @@ class ApiClient {
     participants: number[]
   ): Promise<SimpleResult> {
     try {
-      await this.axiosInstance.post<any>(
-        `api/${groupId}/expenses/`,
-        {
-          name: name,
-          amount: amount,
-          participants: participants,
-        }
-      );
+      await this.axiosInstance.post<any>(`api/${groupId}/expenses/`, {
+        name: name,
+        amount: amount,
+        participants: participants,
+      });
       return { success: true, result: "Success" };
     } catch {
       return { success: false, result: "Something wrong" };
@@ -234,16 +231,20 @@ class ApiClient {
     name: String,
     amount: number,
     participants: number[]
-  ) {
-    const result = await this.axiosInstance.put<any>(
-      `api/${groupId}/expenses/${expenseId}/`,
-      {
-        name: name,
-        amount: amount,
-        participants: participants,
-      }
-    );
-    console.log(result);
+  ): Promise<SimpleResult> {
+    try {
+      const result = await this.axiosInstance.put<any>(
+        `api/${groupId}/expenses/${expenseId}/`,
+        {
+          name: name,
+          amount: amount,
+          participants: participants,
+        }
+      );
+      return { success: true, result: "Success" };
+    } catch {
+      return { success: false, result: "Something wrong" };
+    }
   }
 
   async addGroup(
@@ -266,7 +267,7 @@ class ApiClient {
   async editGroup(
     id: number,
     name: String,
-    icon: number,
+    icon: number
   ): Promise<SimpleResult> {
     try {
       const result = await this.axiosInstance.patch<any>(`api/groups/${id}/`, {

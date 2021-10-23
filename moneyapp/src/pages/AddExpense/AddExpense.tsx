@@ -37,7 +37,6 @@ const AddExpense: React.FC<RouteComponentProps> = ({ history }) => {
   const [isWrongName, setIsWrongName] = useState(false);
   const [isWrongAmount, setIsWrongAmount] = useState(false);
   const [isWrongFriends, setIsWrongFriends] = useState(false);
-
   const [expenseName, setExpenseName] = useState("");
   const [amount, setAmount] = useState("");
   const [selectedParticipants, setParticipants] = useState(

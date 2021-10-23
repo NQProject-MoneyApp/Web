@@ -53,13 +53,9 @@ const ExpenseList: React.FC<RouteComponentProps> = ({history}) => {
       <IonContent fullscreen>
         <IonLoading isOpen={isLoading} message={"Loading..."} />
         <IonList lines="none" className="group-container">
-          <IconButton onClick={navigateToAddExpense} justify="center">
-            <FontAwesomeIcon
-              className="addGroupIcon"
-              size="2x"
-              icon={faPlusCircle}
-            ></FontAwesomeIcon>
-          </IconButton>
+          <IonButton onClick={navigateToAddExpense}>
+            Add expense
+          </IonButton>
           {expenseList.map((e) => (
             <ExpenseComponent
               key={e.id}

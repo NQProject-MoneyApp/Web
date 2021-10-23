@@ -7,13 +7,13 @@ import {
   IonIcon,
   IonRow,
 } from "@ionic/react";
-// import { star, starOutline } from "ionicons/icons";
 import moment from "moment";
 import Icons from "../AddGroup/Icons";
 import IconButton from "../../components/IconButton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar as starSolid } from "@fortawesome/free-solid-svg-icons";
 import { faStar as starOutline } from "@fortawesome/free-regular-svg-icons";
+import "./GroupList.css";
 
 type GroupComponentProps = {
   readonly groupId: number;
@@ -58,11 +58,11 @@ const GroupComponent: React.FC<GroupComponentProps> = ({
               }}
               justify="flex-end"
             >
-              <FontAwesomeIcon className="primary" icon={isFavourite ? starSolid : starOutline }></FontAwesomeIcon>
+              <FontAwesomeIcon className="favorite-icon" icon={isFavourite ? starSolid : starOutline }></FontAwesomeIcon>
             </IconButton>
           </IonRow>
-          <IonCardSubtitle>$ {balance.toFixed(2)}</IonCardSubtitle>
-          <IonCardSubtitle className="groupDate">
+          <IonCardSubtitle className="group-subtitles">$ {balance.toFixed(2)}</IonCardSubtitle>
+          <IonCardSubtitle className="group-date group-subtitles">
             {moment(createDate).format("DD.MM.YYYY")}
           </IonCardSubtitle>
         </IonLabel>

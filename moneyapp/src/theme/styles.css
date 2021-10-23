@@ -32,6 +32,10 @@ ion-card {
   border-radius: var(--app-rounded-corners);
 }
 
+ion-card-title {
+  font-family: 'Poppins Bold';
+}
+
 .ion-page {
   align-items: center;
 }
@@ -63,6 +67,7 @@ ion-button {
   flex-grow: 1;
   min-width: 240px;
   font-weight: 600;
+  font-family: 'Poppins Bold';
 }
 
 .transparent-container {
@@ -89,6 +94,16 @@ ion-item.item-input, ion-item.item-input ion-input{
   cursor: pointer;
 }
 
+ion-card.ion-color ion-item ion-label ion-card-title.ion-inherit-color {
+  color: var(--ion-color-secondary);
+}
+
+@media (prefers-color-scheme: dark) {
+  ion-card.ion-color ion-item ion-label ion-card-title.ion-inherit-color {
+    color: inherit;
+  }
+}
+
 /* Login/Register screen */
 
 .login-form-option {
@@ -105,4 +120,10 @@ ion-item.item-input, ion-item.item-input ion-input{
   color: var(--ion-color-primary);
   font-weight: 600;
   margin-left: 0.5em;
+}
+
+.card-subtitles {
+  color: var(--ion-color-medium-shade) !important;
+  font-weight: 400;
+  text-transform: none;
 }

@@ -9,6 +9,7 @@ import {
   IonList,
   IonRow,
   IonText,
+  IonCol,
 } from "@ionic/react";
 import FlexSpacer from "../../components/common/Spacer";
 import { User } from "../../domain/users/User";
@@ -31,18 +32,18 @@ const ExpenseComponent: React.FC<ExpenseComponentProps> = ({
 }: ExpenseComponentProps) => {
   return (
     <IonCard color="light" routerLink={`/groups/${groupId}/expenses/${expenseId}/details`}>
-      <IonItem color="none" lines="none">
-        <IonLabel>
+      <IonItem className="expense-card" lines="none">
+        <IonCol>
           <IonCardTitle class="ion-text-wrap" className="expense">
             {title}
           </IonCardTitle>
-          <FlexSpacer height="1rem" />
+          {/* <FlexSpacer height="0.5rem" /> */}
           <IonRow>
-            <IonCardSubtitle>{author.name}</IonCardSubtitle>
+            <IonCardSubtitle className="card-subtitles">{author.name}</IonCardSubtitle>
             <FlexSpacer flex={1} />
-            <IonCardSubtitle className="group-date">$ {amount.toFixed(2)}</IonCardSubtitle>
+            <IonCardSubtitle className="group-date card-subtitles">$ {amount.toFixed(2)}</IonCardSubtitle>
           </IonRow>
-        </IonLabel>
+        </IonCol>
       </IonItem>
     </IonCard>
   );

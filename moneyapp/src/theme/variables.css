@@ -11,6 +11,11 @@ http://ionicframework.com/docs/theming/ */
   src: url("../assets/fonts/poppins_semi_bold.ttf");
 }
 
+@font-face {
+  font-family: "Poppins Bold";
+  src: url("../assets/fonts/poppins_bold.ttf");
+}
+
 /** Ionic CSS Variables **/
 :root {
   /** App stype **/
@@ -154,7 +159,7 @@ http://ionicframework.com/docs/theming/ */
     --ion-color-medium-rgb: 34, 36, 40;
     --ion-color-medium-contrast: #ffffff;
     --ion-color-medium-contrast-rgb: 255, 255, 255;
-    --ion-color-medium-shade: #1e2023;
+    --ion-color-medium-shade: #ffffff;
     --ion-color-medium-tint: #383a3e;
 
     --ion-color-light: #212121;

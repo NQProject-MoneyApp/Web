@@ -12,6 +12,7 @@ import {
   IonRow,
   IonSpinner,
   IonText,
+  IonToast,
 } from "@ionic/react";
 import { useEffect, useState } from "react";
 import { RouteComponentProps, useParams } from "react-router";
@@ -19,6 +20,8 @@ import {
   ParticipantsComponent,
   SelectedParticipant,
 } from "../../components/ParticipantsComponent";
+import "./AddExpense.css";
+import "../validator.css"
 import Toolbar from "../../components/Toolbar";
 import ApiClient from "../../services/ApiClient";
 
@@ -28,26 +31,43 @@ const AddExpense: React.FC<RouteComponentProps> = ({ history }) => {
   }
 
   const { groupId } = useParams<RouteParams>();
+  const [showToast, setShowToast] = useState(false);
+  const [pageLoading, setPageLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isWrongName, setIsWrongName] = useState(false);
+  const [isWrongAmount, setIsWrongAmount] = useState(false);
 
-  const [loading, setLoading] = useState(true);
   const [expenseName, setExpenseName] = useState("");
   const [amount, setAmount] = useState("");
   const [selectedParticipants, setParticipants] = useState(
     new Array<SelectedParticipant>()
   );
 
+  const validateAmount = (amount: number) => {
+    setIsWrongAmount(!amount || amount < 0);
+  };
+
+  const validateName = (name: string) => {
+    setIsWrongName(!name || name.trim() === "" || name.trim().length === 0);
+  };
   const submitSave = async () => {
-    setLoading(true);
-    ApiClient.instance
-      .addExpense(
-        parseInt(groupId),
-        expenseName,
-        parseFloat(amount),
-        selectedParticipants.filter((e) => e.selected).map((e) => e.id)
-      )
-      .then(() => {
-        history.goBack();
-      });
+    setIsLoading(true);
+    const result = await ApiClient.instance.addExpense(
+      parseInt(groupId),
+      expenseName,
+      parseFloat(amount),
+      selectedParticipants.filter((e) => e.selected).map((e) => e.id)
+    );
+
+    setIsLoading(false);
+    validateAmount(parseFloat(amount));
+    validateName(expenseName);
+
+    if (result.success) {
+      history.goBack();
+    } else {
+      setShowToast(true);
+    }
   };
 
   const fetchParticipants = async () => {
@@ -58,7 +78,7 @@ const AddExpense: React.FC<RouteComponentProps> = ({ history }) => {
       .find((g) => g.id == parseInt(groupId))!
       .members.map((e) => ({ id: e.id, name: e.name, selected: true }));
     setParticipants(participants);
-    setLoading(false);
+    setPageLoading(false);
   };
 
   useEffect(() => {
@@ -67,26 +87,26 @@ const AddExpense: React.FC<RouteComponentProps> = ({ history }) => {
 
   const loadingContent = (
     <CreateAnimation
-    key="1"
-    play={true}
-    delay={500}
-    duration={500}
-    fromTo={{
-      property: "opacity",
-      fromValue: "0",
-      toValue: "1",
-    }}
-  >
-    <div
-      style={{
-        height: "50vh",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
+      key="1"
+      play={true}
+      delay={500}
+      duration={500}
+      fromTo={{
+        property: "opacity",
+        fromValue: "0",
+        toValue: "1",
       }}
     >
-      <IonSpinner name="circular" color="primary" />
-    </div>
+      <div
+        style={{
+          height: "50vh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <IonSpinner name="circular" color="primary" />
+      </div>
     </CreateAnimation>
   );
   const content = (
@@ -100,26 +120,50 @@ const AddExpense: React.FC<RouteComponentProps> = ({ history }) => {
         toValue: "1",
       }}
     >
+      <IonToast
+        isOpen={showToast}
+        onDidDismiss={() => setShowToast(false)}
+        message="Something wrong"
+        position="top"
+        color="danger"
+        mode="ios"
+        duration={1000}
+      />
       <IonList>
-        <IonInput
-          type="text"
-          placeholder="Name"
-          value={expenseName}
-          onIonChange={(e) => setExpenseName(e.detail.value!)}
-        />
-        <IonInput
-          type="text"
-          placeholder="Amount"
-          value={amount}
-          onIonChange={(e) => setAmount(e.detail.value!)}
-        />
+        <IonCard className={isWrongName ? "wrong-input" : ""}>
+          <IonInput
+            type="text"
+            placeholder="Name"
+            required={true}
+            value={expenseName}
+            onIonChange={(e) => {
+              setExpenseName(e.detail.value!);
+              validateName(e.detail.value!);
+            }}
+          />
+        </IonCard>
 
+        <IonCard className={isWrongAmount ? "wrong-input" : ""}>
+          <IonInput
+            type="number"
+            placeholder="Amount"
+            value={amount}
+            onIonChange={(e) => {
+              setAmount(e.detail.value!);
+              validateAmount(parseFloat(e.detail.value!));
+            }}
+          />
+        </IonCard>
         <ParticipantsComponent
           participants={selectedParticipants}
           onChanged={setParticipants}
         />
 
-        <IonButton color="primary" onClick={submitSave} disabled={loading}>
+        <IonButton
+          color="primary"
+          onClick={submitSave}
+          disabled={pageLoading || isLoading}
+        >
           Save
         </IonButton>
       </IonList>
@@ -127,14 +171,18 @@ const AddExpense: React.FC<RouteComponentProps> = ({ history }) => {
   );
 
   return (
-    <IonPage style={{
-      display: "flex",
-      justifyContent: "center",
-    }}>
+    <IonPage
+      style={{
+        display: "flex",
+        justifyContent: "center",
+      }}
+    >
       <IonHeader>
         <Toolbar history={history} />
       </IonHeader>
-      <IonContent fullscreen>{loading ? loadingContent : content}</IonContent>
+      <IonContent fullscreen>
+        {pageLoading ? loadingContent : content}
+      </IonContent>
     </IonPage>
   );
 };

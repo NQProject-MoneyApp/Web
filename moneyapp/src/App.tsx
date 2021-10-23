@@ -45,7 +45,7 @@ import EditGroup from "./pages/EditGroup/EditGroup";
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
-      <IonRouterOutlet>
+      <IonRouterOutlet animated={false}>
         <Route exact path="/login" component={Login}/>
         <Route exact path="/groups" component={GroupList}/>
         <Route exact path="/groups/:groupId/expenses" component={ExpenseList} />

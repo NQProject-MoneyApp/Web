@@ -45,7 +45,7 @@ const GroupComponent: React.FC<GroupComponentProps> = ({
           src={Icons.instance.icon(icon)}
           alt="group icon"
         />
-        <IonLabel>
+        <IonLabel className="group-label">
           <IonRow className="group-label-container">
             <IonCardTitle class="ion-text-wrap">{name}</IonCardTitle>
 
@@ -61,8 +61,8 @@ const GroupComponent: React.FC<GroupComponentProps> = ({
               <FontAwesomeIcon className="favorite-icon" icon={isFavourite ? starSolid : starOutline }></FontAwesomeIcon>
             </IconButton>
           </IonRow>
-          <IonCardSubtitle className="group-subtitles">$ {balance.toFixed(2)}</IonCardSubtitle>
-          <IonCardSubtitle className="group-date group-subtitles">
+          <IonCardSubtitle className="card-subtitles">$ {balance.toFixed(2)}</IonCardSubtitle>
+          <IonCardSubtitle className="group-date card-subtitles">
             {moment(createDate).format("DD.MM.YYYY")}
           </IonCardSubtitle>
         </IonLabel>

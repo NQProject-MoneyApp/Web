@@ -1,22 +1,13 @@
-.expense-card {
-  padding: 2em;
-}
-
-ion-card.ion-color ion-item ion-label ion-card-title.ion-inherit-color.expense {
-  color: var(--ion-color-secondary);
-}
-
-@media (prefers-color-scheme: light) {
-  ion-card.ion-color ion-item ion-label ion-card-title.ion-inherit-color {
-    color: var(--ion-color-secondary);
-  }
+ion-card-title.expense {
+  color: var(--ion-color-secondary) !important;
 }
 
 @media (prefers-color-scheme: dark) {
-  ion-card.ion-color
-    ion-item
-    ion-label
-    ion-card-title.ion-inherit-color.expense {
-    color: var(--ion-color-primary);
+  ion-card-title.expense {
+    color: var(--ion-color-primary) !important;
   }
+}
+
+.expense-card {
+  color: none;
 }

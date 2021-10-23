@@ -212,16 +212,20 @@ class ApiClient {
     name: String,
     amount: number,
     participants: number[]
-  ) {
-    const result = await this.axiosInstance.post<any>(
-      `api/${groupId}/expenses/`,
-      {
-        name: name,
-        amount: amount,
-        participants: participants,
-      }
-    );
-    console.log(result);
+  ): Promise<SimpleResult> {
+    try {
+      await this.axiosInstance.post<any>(
+        `api/${groupId}/expenses/`,
+        {
+          name: name,
+          amount: amount,
+          participants: participants,
+        }
+      );
+      return { success: true, result: "Success" };
+    } catch {
+      return { success: false, result: "Something wrong" };
+    }
   }
 
   async editExpense(
@@ -261,12 +265,15 @@ class ApiClient {
 
   async markGroupAsFavourite(
     groupId: number,
-    isFavourite: boolean,
+    isFavourite: boolean
   ): Promise<SimpleResult> {
     try {
-      const result = await this.axiosInstance.patch<any>(`api/groups/${groupId}/`, {
-        is_favourite: isFavourite,
-      });
+      const result = await this.axiosInstance.patch<any>(
+        `api/groups/${groupId}/`,
+        {
+          is_favourite: isFavourite,
+        }
+      );
       return { success: true, result: "Succes" };
     } catch {
       return { success: false, result: null };

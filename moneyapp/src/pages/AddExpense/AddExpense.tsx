@@ -64,7 +64,7 @@ const AddExpense: React.FC<RouteComponentProps> = ({ history }) => {
     validateName(expenseName);
 
     if (result.success) {
-      history.push(`/groups/${groupId}/expenses`);
+      history.goBack();
     } else {
       setShowToast(true);
     }

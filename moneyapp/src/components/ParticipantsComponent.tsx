@@ -60,7 +60,7 @@ export const ParticipantsComponent: React.FC<ParticipantsProps> = ({
                         justify="center"
                       >
                         <FontAwesomeIcon
-                          className="removeIcon"
+                          className="remove-icon"
                           size="2x"
                           icon={faTimesCircle}
                         ></FontAwesomeIcon>
@@ -77,7 +77,7 @@ export const ParticipantsComponent: React.FC<ParticipantsProps> = ({
                         justify="center"
                       >
                         <FontAwesomeIcon
-                          className="addIcon"
+                          className="add-icon"
                           size="2x"
                           icon={faPlusCircle}
                         ></FontAwesomeIcon>

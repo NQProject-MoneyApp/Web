@@ -40,7 +40,7 @@ const ExpenseComponent: React.FC<ExpenseComponentProps> = ({
           <IonRow>
             <IonCardSubtitle>{author.name}</IonCardSubtitle>
             <FlexSpacer flex={1} />
-            <IonCardSubtitle className="groupDate">$ {amount.toFixed(2)}</IonCardSubtitle>
+            <IonCardSubtitle className="group-date">$ {amount.toFixed(2)}</IonCardSubtitle>
           </IonRow>
         </IonLabel>
       </IonItem>

@@ -1,7 +1,7 @@
 .group-container > ion-card {
   margin-top: 1rem;
   margin-bottom: 1rem;
-  padding: 0.5rem;
+  padding: 1rem;
 }
 
 ion-label {
@@ -26,11 +26,11 @@ ion-icon {
   color: var(--ion-color-primary);
 }
 
-.addIcon {
+.add-icon {
   color: var(--ion-color-primary);
 }
 
-.removeIcon {
+.remove-icon {
   color: var(--ion-color-danger);
 }
 
@@ -61,16 +61,24 @@ img.icon {
   min-height: 1.9rem;
 }
 
-.groupDate {
+.group-date {
   float: right;
 }
 
 .group-container {
-  margin-top: 2rem;
+  /* margin-top: 0.5rem; */
 }
-
 
 .group-container ion-button {
   margin-top: 1rem;
   margin-bottom: 0rem;
+}
+
+.favorite-icon {
+  color: var(--ion-color-primary);
+}
+
+.group-subtitles {
+  color: var(--ion-color-medium-shade) !important;
+  font-weight: 400;
 }

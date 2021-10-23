@@ -224,6 +224,24 @@ class ApiClient {
     console.log(result);
   }
 
+  async editExpense(
+    groupId: number,
+    expenseId: number,
+    name: String,
+    amount: number,
+    participants: number[]
+  ) {
+    const result = await this.axiosInstance.put<any>(
+      `api/${groupId}/expenses/${expenseId}/`,
+      {
+        name: name,
+        amount: amount,
+        participants: participants,
+      }
+    );
+    console.log(result);
+  }
+
   async addGroup(
     name: String,
     icon: number,
@@ -309,7 +327,7 @@ class ApiClient {
         if (error.response?.status === 401) {
           UserRepository.instance.logout();
         }
-        throw "Unknow error";
+        throw error;
       }
     );
   }

@@ -39,6 +39,7 @@ import Profile from "./pages/Profile/Profile";
 import AddGroup from "./pages/AddGroup/AddGroup";
 import AddExpense from "./pages/AddExpense/AddExpense";
 import Register from "./pages/Register/Register";
+import EditExpense from "./pages/EditExpense/EditExpense";
 
 const App: React.FC = () => (
   <IonApp>
@@ -47,12 +48,13 @@ const App: React.FC = () => (
         <Route exact path="/login" component={Login}/>
         <Route exact path="/groups" component={GroupList}/>
         <Route exact path="/groups/:groupId/expenses" component={ExpenseList} />
-        <Route exact path="/groups/:groupId/add-expense" component={AddExpense} />
+        <Route exact path="/groups/:groupId/expenses/add" component={AddExpense} />
+        <Route exact path="/groups/:groupId/expenses/:expenseId/edit" component={EditExpense} />
         <Route exact path="/profile" component={Profile}/>
         <Route exact path="/add-group" component={AddGroup}/>
         <Route exact path="/register" component={Register} />
         <Route exact path="/groups/:groupId" component={GroupDetails} />
-        <Route exact path="/groups/:groupId/expenses/:expenseId" component={ExpenseDetails} />
+        <Route exact path="/groups/:groupId/expenses/:expenseId/details" component={ExpenseDetails} />
         <Route exact path="/group-details" component={GroupDetails}/>
         <Route exact path="/">
           <Redirect to="/login" />

@@ -40,7 +40,7 @@ const GroupDetails: React.FC<RouteComponentProps> = ({ history }) => {
   };
 
   const navigateToAddExpense = () => {
-    history.push(`/groups/${groupId}/add-expense`);
+    history.push(`/groups/${groupId}/expenses/add`);
   };
 
   const fethGroupsDetails = async () => {

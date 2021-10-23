@@ -30,7 +30,7 @@ const ExpenseComponent: React.FC<ExpenseComponentProps> = ({
   amount,
 }: ExpenseComponentProps) => {
   return (
-    <IonCard color="light" routerLink={`/groups/${groupId}/expenses/${expenseId}`}>
+    <IonCard color="light" routerLink={`/groups/${groupId}/expenses/${expenseId}/details`}>
       <IonItem color="none" lines="none">
         <IonLabel>
           <IonCardTitle class="ion-text-wrap" className="expense">
@@ -40,7 +40,7 @@ const ExpenseComponent: React.FC<ExpenseComponentProps> = ({
           <IonRow>
             <IonCardSubtitle>{author.name}</IonCardSubtitle>
             <FlexSpacer flex={1} />
-            <IonCardSubtitle className="groupDate">$ {amount.toFixed(2)}</IonCardSubtitle>
+            <IonCardSubtitle className="group-date">$ {amount.toFixed(2)}</IonCardSubtitle>
           </IonRow>
         </IonLabel>
       </IonItem>

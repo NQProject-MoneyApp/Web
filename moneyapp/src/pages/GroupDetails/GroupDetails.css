@@ -1,3 +1,7 @@
+.group-members { 
+  background-color: var(--ion-color-light);
+}
+
 .group-image {
   width: 6em;
   margin: auto;
@@ -16,9 +20,12 @@
 }
 
 .group-info h2 {
-  margin-bottom: 3rem;
+  margin-bottom: 1rem;
   margin-top: 2rem;
   font-family: "Poppins SemiBold";
+  color: var(--ion-color-tertiary);
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--ion-color-hover);
 }
 
 .group-info > ion-row > ion-col {
@@ -41,7 +48,7 @@
 
 .group-info-row {
   margin-top: 1rem;
-  width: 18rem;
+  width: 14rem;
   max-width: 100%;
   display: flex;
   justify-content: space-between;
@@ -61,6 +68,11 @@
 }
 
 @media only screen and (min-width: 544px) {
+  .group-info h2 {
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+  }
+
   .container > ion-card.group-members {
     margin-top: 2rem;
     margin-bottom: 2rem;
@@ -71,7 +83,7 @@
   }
 
   .group-info-container {
-    margin-top: 3rem;
+    margin-top: 2rem;
     margin-bottom: 2rem;
     flex-direction: row;
     justify-content: center;

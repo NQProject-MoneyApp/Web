@@ -26,7 +26,7 @@ const IconButton: React.FC<IconButtonProps> = ({
       iconSize = "2.6rem";
       break;
     case "big":
-      iconSize = "4rem";
+      iconSize = "3rem";
       break;
     case "unset":
       iconSize = "unset";

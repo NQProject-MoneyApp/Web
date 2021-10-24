@@ -7,7 +7,6 @@ import {
   IonCol,
   IonCard,
   IonList,
-  IonItem,
   IonImg,
   IonButton,
   IonLoading,
@@ -26,6 +25,9 @@ import { Clipboard } from "@capacitor/clipboard";
 
 import "./GroupDetails.css";
 import FlexSpacer from "../../components/common/Spacer";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import IconButton from "../../components/IconButton";
+import { faPen, faShareAlt } from "@fortawesome/free-solid-svg-icons";
 
 const GroupDetails: React.FC<RouteComponentProps> = ({ history }) => {
   const { groupId } = useParams<{ groupId: string }>();
@@ -41,6 +43,10 @@ const GroupDetails: React.FC<RouteComponentProps> = ({ history }) => {
 
   const navigateToAddExpense = () => {
     history.push(`/groups/${groupId}/expenses/add`);
+  };
+
+  const navigateToEditGroup = () => {
+    history.push(`/groups/${groupId}/edit`);
   };
 
   const fethGroupsDetails = async () => {
@@ -102,6 +108,17 @@ const GroupDetails: React.FC<RouteComponentProps> = ({ history }) => {
           />
           <IonList className="container">
             <IonGrid className="group-info">
+              <div className="manage-group-icons">
+                <IconButton size="big" onClick={presentCodeAlert}>
+                  <FontAwesomeIcon
+                    size="2x"
+                    icon={faShareAlt}
+                  ></FontAwesomeIcon>
+                </IconButton>
+                <IconButton size="big" onClick={navigateToEditGroup}>
+                  <FontAwesomeIcon size="2x" icon={faPen}></FontAwesomeIcon>
+                </IconButton>
+              </div>
               <h2>{groupDetails!.name}</h2>
               <div className="group-info-container">
                 <div>
@@ -154,9 +171,6 @@ const GroupDetails: React.FC<RouteComponentProps> = ({ history }) => {
                     </IonRow>
                   </IonCol>
                 ))}
-                <IonButton color="secondary" onClick={presentCodeAlert}>
-                  Code
-                </IonButton>
               </IonList>
             </IonCard>
             <IonButton onClick={navigateToAllExpenses}>All expenses</IonButton>

@@ -21,7 +21,7 @@
 
 .group-info h2 {
   margin-bottom: 1rem;
-  margin-top: 2rem;
+  margin-top: 0;
   font-family: "Poppins SemiBold";
   color: var(--ion-color-tertiary);
   padding-bottom: 1rem;
@@ -66,9 +66,29 @@
   text-align: left;
   padding: 0;
 }
+.manage-group-icons {
+  position: initial;
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: row;
+  top: 1.2rem;
+  right: 2rem;
+  font-size: 0.7rem;
+}
+
+
+.manage-group-icons svg {
+  color: var(--ion-color-tertiary);
+}
+
 
 @media only screen and (min-width: 544px) {
+  .manage-group-icons {
+    position: absolute;
+  }
+
   .group-info h2 {
+    margin-top: 2rem;
     margin-bottom: 2rem;
     padding-bottom: 2rem;
   }

@@ -148,7 +148,7 @@ const EditGroupContent: React.FC<any> = ({ history }) => {
             </IonRow>
             <FlexSpacer height="16.rem" />
 
-            <IonCard className={isWrongName ? "wrong-input" : ""}>
+            <IonItem className={isWrongName ? "ion-invalid" : ""}>
               <IonInput
                 type="text"
                 placeholder="Name"
@@ -158,10 +158,14 @@ const EditGroupContent: React.FC<any> = ({ history }) => {
                   validateName(e.detail.value!);
                 }}
               />
-            </IonCard>
+            </IonItem>
             <FlexSpacer height="16.rem" />
 
-            <IonButton color="primary" onClick={submitSave} disabled={isLoading}>
+            <IonButton
+              color="primary"
+              onClick={submitSave}
+              disabled={isLoading}
+            >
               Save
             </IonButton>
           </IonList>

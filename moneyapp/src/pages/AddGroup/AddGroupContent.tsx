@@ -1,18 +1,15 @@
 import {
   IonItem,
-  IonLabel,
   IonInput,
   IonButton,
   IonToast,
   IonContent,
-  IonLoading,
   IonCard,
   IonRow,
   IonList,
   IonImg,
 } from "@ionic/react";
 import { useEffect, useState } from "react";
-import { Redirect, RouteComponentProps } from "react-router";
 import FlexSpacer from "../../components/common/Spacer";
 import {
   ParticipantsComponent,
@@ -22,7 +19,6 @@ import ApiClient from "../../services/ApiClient";
 import UserRepository from "../../services/UserRepository";
 import "./AddGroup.css";
 import Icons from "./Icons";
-import "../validator.css";
 import LoadingWidget from "../../components/common/LoadingWidget";
 
 const AddGroupContent: React.FC<any> = ({ history }) => {
@@ -37,7 +33,7 @@ const AddGroupContent: React.FC<any> = ({ history }) => {
   const [isWrongName, setIsWrongName] = useState(false);
 
   const validateName = (name: string) => {
-    setIsWrongName((!name || name.trim() === "" || name.trim().length === 0));
+    setIsWrongName(!name || name.trim() === "" || name.trim().length === 0);
   };
 
   const fetchFriends = async () => {
@@ -88,9 +84,8 @@ const AddGroupContent: React.FC<any> = ({ history }) => {
   };
 
   const init = async () => {
-
     let now = Date.now();
-   
+
     setIsPageLoading(true);
 
     await fetchFriends();
@@ -108,7 +103,7 @@ const AddGroupContent: React.FC<any> = ({ history }) => {
 
   return (
     <IonContent>
-      <LoadingWidget isLoading={isPageLoading}/>
+      <LoadingWidget isLoading={isPageLoading} />
 
       <IonToast
         isOpen={showErrorToast}
@@ -135,7 +130,7 @@ const AddGroupContent: React.FC<any> = ({ history }) => {
         </IonRow>
         <FlexSpacer height="16.rem" />
 
-        <IonCard className={isWrongName ? "wrong-input" : ""}>
+        <IonItem className={isWrongName ? "ion-invalid" : ""}>
           <IonInput
             type="text"
             placeholder="Name"
@@ -145,7 +140,7 @@ const AddGroupContent: React.FC<any> = ({ history }) => {
               validateName(e.detail.value!);
             }}
           />
-        </IonCard>
+        </IonItem>
         <FlexSpacer height="16.rem" />
 
         <ParticipantsComponent

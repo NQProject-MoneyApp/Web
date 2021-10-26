@@ -13,7 +13,6 @@ import {
 import { attachProps } from "@ionic/react/dist/types/components/utils";
 import FlexSpacer from "./common/Spacer";
 import IconButton from "./IconButton";
-import "../pages/validator.css";
 
 export type SelectedParticipant = {
   readonly id: number;

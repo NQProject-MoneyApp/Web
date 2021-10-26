@@ -1,17 +1,13 @@
 import {
   CreateAnimation,
   IonButton,
-  IonCard,
-  IonCardTitle,
   IonContent,
   IonHeader,
   IonInput,
+  IonItem,
   IonList,
-  IonLoading,
   IonPage,
-  IonRow,
   IonSpinner,
-  IonText,
   IonToast,
 } from "@ionic/react";
 import { useEffect, useState } from "react";
@@ -21,7 +17,6 @@ import {
   SelectedParticipant,
 } from "../../components/ParticipantsComponent";
 import "./AddExpense.css";
-import "../validator.css";
 import Toolbar from "../../components/Toolbar";
 import ApiClient from "../../services/ApiClient";
 
@@ -53,7 +48,7 @@ const AddExpense: React.FC<RouteComponentProps> = ({ history }) => {
 
   const validateFriends = (friends: Array<SelectedParticipant>) => {
     var count = 0;
-    friends.forEach(element => {
+    friends.forEach((element) => {
       if (element.selected) {
         count += 1;
       }
@@ -142,7 +137,7 @@ const AddExpense: React.FC<RouteComponentProps> = ({ history }) => {
         duration={1000}
       />
       <IonList>
-        <IonCard className={isWrongName ? "wrong-input" : ""}>
+        <IonItem className={isWrongName ? "ion-invalid" : ""}>
           <IonInput
             type="text"
             placeholder="Name"
@@ -153,9 +148,9 @@ const AddExpense: React.FC<RouteComponentProps> = ({ history }) => {
               validateName(e.detail.value!);
             }}
           />
-        </IonCard>
+        </IonItem>
 
-        <IonCard className={isWrongAmount ? "wrong-input" : ""}>
+        <IonItem className={isWrongAmount ? "ion-invalid" : ""}>
           <IonInput
             type="number"
             placeholder="Amount"
@@ -165,7 +160,7 @@ const AddExpense: React.FC<RouteComponentProps> = ({ history }) => {
               validateAmount(parseFloat(e.detail.value!));
             }}
           />
-        </IonCard>
+        </IonItem>
         <ParticipantsComponent
           invalid={isWrongFriends}
           participants={selectedParticipants}

@@ -6,6 +6,7 @@ import {
   IonContent,
   IonHeader,
   IonInput,
+  IonItem,
   IonList,
   IonLoading,
   IonPage,
@@ -154,7 +155,7 @@ const EditExpense: React.FC<RouteComponentProps> = ({ history }) => {
           mode="ios"
           duration={1000}
         />
-        <IonCard className={isWrongName ? "wrong-input" : ""}>
+        <IonItem className={isWrongName ? "ion-invalid" : ""}>
           <IonInput
             type="text"
             placeholder="Name"
@@ -164,9 +165,9 @@ const EditExpense: React.FC<RouteComponentProps> = ({ history }) => {
               validateName(e.detail.value!);
             }}
           />
-        </IonCard>
+        </IonItem>
 
-        <IonCard className={isWrongAmount ? "wrong-input" : ""}>
+        <IonItem className={isWrongAmount ? "ion-invalid" : ""}>
           <IonInput
             type="number"
             placeholder="Amount"
@@ -176,7 +177,7 @@ const EditExpense: React.FC<RouteComponentProps> = ({ history }) => {
               validateAmount(parseFloat(e.detail.value!));
             }}
           />
-        </IonCard>
+        </IonItem>
 
         <ParticipantsComponent
           invalid={isWrongFriends}

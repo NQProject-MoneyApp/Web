@@ -97,6 +97,17 @@ http://ionicframework.com/docs/theming/ */
   --ion-color-shadow: #00000015;
   --ion-color-hover: rgba(0, 0, 0, 0.05);
   --ion-color-hover-navbar: rgba(255, 255, 255, 0.15);
+
+}
+ion-item {
+  --highlight-height: 2px;
+  --show-full-highlight: 1;
+  --full-highlight-height: calc(var(--highlight-height) * var(--show-full-highlight));
+  }
+
+ion-item.item-has-focus:not(.ion-invalid) {
+  --highlight-background: transparent;
+
 }
 
 @media (prefers-color-scheme: dark) {

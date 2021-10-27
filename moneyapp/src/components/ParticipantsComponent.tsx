@@ -1,18 +1,16 @@
-import { faPlusCircle, faTimesCircle } from "@fortawesome/free-solid-svg-icons";
+import { faPlus, faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   IonCard,
-  IonCheckbox,
-  IonItem,
   IonList,
   IonCardContent,
   IonLabel,
   IonRow,
-  IonCol,
 } from "@ionic/react";
-import { attachProps } from "@ionic/react/dist/types/components/utils";
 import FlexSpacer from "./common/Spacer";
 import IconButton from "./IconButton";
+import "./ParticipantsComponent.css";
+
 
 export type SelectedParticipant = {
   readonly id: number;
@@ -46,14 +44,12 @@ export const ParticipantsComponent: React.FC<ParticipantsProps> = ({
   };
 
   return (
-    <IonCard className={invalid ? "wrong-input" : ""}>
+    <IonCard className={invalid ? "wrong-input participants-card" : "participants-card"}>
       <IonCardContent>
         <IonList lines="none">
           {participants.map((p) => {
             return (
-              <IonCol key={p.id}>
-                <IonRow>
-                  {p.selected && (
+                <IonRow key={p.id}> 
                     <>
                       <IonLabel>{p.name}</IonLabel>
                       <FlexSpacer flex={1} />
@@ -62,32 +58,13 @@ export const ParticipantsComponent: React.FC<ParticipantsProps> = ({
                         justify="center"
                       >
                         <FontAwesomeIcon
-                          className="remove-icon"
+                          className={p.selected ? "remove-icon" : "add-icon"}
                           size="2x"
-                          icon={faTimesCircle}
+                          icon={faPlus}
                         ></FontAwesomeIcon>
                       </IconButton>
                     </>
-                  )}
-
-                  {!p.selected && (
-                    <>
-                      <IonLabel>{p.name}</IonLabel>
-                      <FlexSpacer flex={1} />
-                      <IconButton
-                        onClick={() => onToggle(p.id)}
-                        justify="center"
-                      >
-                        <FontAwesomeIcon
-                          className="add-icon"
-                          size="2x"
-                          icon={faPlusCircle}
-                        ></FontAwesomeIcon>
-                      </IconButton>
-                    </>
-                  )}
                 </IonRow>
-              </IonCol>
             );
           })}
         </IonList>

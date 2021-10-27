@@ -1,0 +1,17 @@
+.remove-icon, .add-icon {
+    transition: 0.2s;
+}
+
+.remove-icon {
+    transform: rotate(135deg);
+}
+
+.participants-card {
+    background-color: var(--ion-color-light);
+    padding: 1rem;
+}
+
+.participants-card ion-row {
+    font-size: 0.9rem;
+    font-family: "Poppins SemiBold";
+}

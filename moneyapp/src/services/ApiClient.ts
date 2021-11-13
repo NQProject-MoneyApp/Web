@@ -7,6 +7,9 @@ import { User } from "../domain/users/User";
 import { group } from "console";
 import { resultingClientExists } from "workbox-core/_private";
 
+
+const REQUEST_TIMEOUT: number = 30000
+
 type SimpleResult = {
   success: boolean;
   result: any;
@@ -337,7 +340,7 @@ class ApiClient {
   private createInstance(): Axios {
     return axios.create({
       baseURL: process.env.REACT_APP_API_URL || "",
-      timeout: 1000 * 30,
+      timeout: REQUEST_TIMEOUT,
       headers: { Authorization: SessionStorage.instance.getToken() ?? "" },
     });
   }

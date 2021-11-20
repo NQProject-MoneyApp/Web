@@ -98,6 +98,9 @@ http://ionicframework.com/docs/theming/ */
   --ion-color-hover: rgba(0, 0, 0, 0.05);
   --ion-color-hover-navbar: rgba(255, 255, 255, 0.15);
 
+  --ion-backdrop-color: black;
+  --ion-backdrop-opacity: 0.7;
+
 }
 ion-item {
   --highlight-height: 2px;

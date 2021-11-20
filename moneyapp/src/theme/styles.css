@@ -118,3 +118,12 @@ ion-card.ion-color ion-item ion-label ion-card-title.ion-inherit-color {
   font-weight: 400;
   text-transform: none;
 }
+
+.alert-wrapper.sc-ion-alert-ios{
+  padding: 1rem;
+
+}
+
+.alert-button.sc-ion-alert-ios {
+  border: none;
+}

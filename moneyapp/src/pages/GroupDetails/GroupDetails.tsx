@@ -56,7 +56,7 @@ const GroupDetails: React.FC<RouteComponentProps> = ({ history }) => {
     setIsGroupLoaded(true);
   };
 
-  const copieToClipboard = async (code: string) => {
+  const copyToClipboard = async (code: string) => {
     await Clipboard.write({
       string: code,
     });
@@ -70,11 +70,12 @@ const GroupDetails: React.FC<RouteComponentProps> = ({ history }) => {
     setIsLoading(false);
 
     present({
-      header: "Code",
+      cssClass:"share-code-alert",
+      header: "Share the code with friends!",
       message: code,
       buttons: [
-        { text: "Copy", handler: (e) => copieToClipboard(code) },
-        { text: "Ok", handler: (e) => {} },
+        { text: "Copy", handler: (e) => copyToClipboard(code) },
+        { text: "Back", handler: (e) => {} },
       ],
     });
   };

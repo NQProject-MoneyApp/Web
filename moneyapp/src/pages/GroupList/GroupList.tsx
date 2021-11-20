@@ -71,6 +71,7 @@ const GroupList: React.FC<RouteComponentProps> = ({ history }) => {
 
   const presentJoinAlert = () => {
     present({
+      cssClass: "input-code-alert",
       header: "Join a group",
       inputs: [
         {

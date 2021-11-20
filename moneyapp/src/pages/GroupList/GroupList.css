@@ -85,5 +85,4 @@ img.icon {
   border-radius: var(--app-rounded-corners);
   padding: 0.5rem 1rem;
   font-size: 17px;
-  width: calc(100% - 2rem);
 }

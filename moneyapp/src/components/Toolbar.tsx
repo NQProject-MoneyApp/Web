@@ -5,20 +5,24 @@ import FlexSpacer from "./common/Spacer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
 
+import { History } from "history";
+
 import "./Toolbar.css";
 import IconButton from "./IconButton";
 
 type ToolbarProps = {
-  history: any
-}
+  history: History;
+};
 
-const Toolbar: React.FC<ToolbarProps> = ({history}) => {
+const Toolbar: React.FC<ToolbarProps> = ({ history }) => {
   const navigateToProfile = () => {
-    history.push("/profile")
+    history.push("/profile");
   };
 
   const navigateToHome = () => {
-    history.push("/")
+    if(history.location.pathname !== '/groups'){
+      history.push("/groups");
+    }
   };
 
   return (

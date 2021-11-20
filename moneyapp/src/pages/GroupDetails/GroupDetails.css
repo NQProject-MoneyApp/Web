@@ -25,7 +25,10 @@
   font-family: "Poppins SemiBold";
   color: var(--ion-color-tertiary);
   padding-bottom: 1rem;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
   border-bottom: 1px solid var(--ion-color-hover);
+  white-space: normal;
 }
 
 .group-info > ion-row > ion-col {

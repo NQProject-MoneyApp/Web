@@ -111,8 +111,8 @@ const GroupList: React.FC<RouteComponentProps> = ({ history }) => {
         />
         <IonList lines="none" className="container">
           <IonRow>
-            <IonButton onClick={navigateToAddGroup}>Add group</IonButton>
-            <IonButton onClick={presentJoinAlert}>Join group</IonButton>
+            <IonButton onClick={navigateToAddGroup}>Add a group</IonButton>
+            <IonButton onClick={presentJoinAlert}>Join a group</IonButton>
           </IonRow>
 
           {groupList.map((group) => (

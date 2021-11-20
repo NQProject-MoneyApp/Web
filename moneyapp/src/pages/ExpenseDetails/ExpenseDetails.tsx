@@ -11,6 +11,7 @@ import {
   IonCardSubtitle,
   IonCardHeader,
   IonButton,
+  useIonViewWillEnter,
 } from "@ionic/react";
 import { RouteComponentProps } from "react-router";
 import FlexSpacer from "../../components/common/Spacer";
@@ -33,7 +34,6 @@ const ExpenseDetails: React.FC<RouteComponentProps> = ({ history }) => {
   const { groupId, expenseId } = useParams<RouteParams>();
 
   const fetchExpenseDetails = async () => {
-    setIsLoading(true);
     const expense = await ApiClient.instance.getExpense(
       parseInt(groupId),
       parseInt(expenseId)
@@ -46,6 +46,10 @@ const ExpenseDetails: React.FC<RouteComponentProps> = ({ history }) => {
   useEffect(() => {
     fetchExpenseDetails();
   }, []);
+
+  useIonViewWillEnter(() => {
+    fetchExpenseDetails();
+  });
 
   return (
     <IonPage>

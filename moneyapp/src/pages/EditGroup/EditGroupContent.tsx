@@ -1,6 +1,5 @@
 import {
   IonItem,
-  IonLabel,
   IonInput,
   IonButton,
   IonToast,
@@ -12,12 +11,8 @@ import {
   IonImg,
 } from "@ionic/react";
 import { useEffect, useState } from "react";
-import { Redirect, RouteComponentProps, useParams } from "react-router";
+import { useParams } from "react-router";
 import FlexSpacer from "../../components/common/Spacer";
-import {
-  ParticipantsComponent,
-  SelectedParticipant,
-} from "../../components/ParticipantsComponent";
 import ApiClient from "../../services/ApiClient";
 import UserRepository from "../../services/UserRepository";
 import Icons from "../AddGroup/Icons";
@@ -44,7 +39,7 @@ const EditGroupContent: React.FC<any> = ({ history }) => {
   const fetchIcons = async () => {
     let result = await UserRepository.instance.fetchIcons();
 
-    if (result.success) {
+    if (result.success) { 
       setIcons(result.result.icons);
       return true;
     } else {

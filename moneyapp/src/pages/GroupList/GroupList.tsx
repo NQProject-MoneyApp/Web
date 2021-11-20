@@ -11,6 +11,7 @@ import {
   IonImg,
   useIonModal,
   IonModal,
+  useIonViewWillEnter,
 } from "@ionic/react";
 
 import Toolbar from "../../components/Toolbar";
@@ -26,12 +27,11 @@ import LoadingWidget from "../../components/common/LoadingWidget";
 
 const GroupList: React.FC<RouteComponentProps> = ({ history }) => {
   const [groupList, setGroupList] = useState(new Array<Group>());
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [present] = useIonAlert();
   const [showToast, setShowToast] = useState(false);
 
   const fetchGroups = async () => {
-    setIsLoading(true);
     const groups = await ApiClient.instance.getGroups();
     setGroupList(groups);
     setIsLoading(false);
@@ -86,6 +86,11 @@ const GroupList: React.FC<RouteComponentProps> = ({ history }) => {
   useEffect(() => {
     fetchGroups();
   }, []);
+
+    
+  useIonViewWillEnter(() => {
+    fetchGroups();
+  });
 
   return (
     <IonPage>

@@ -13,6 +13,7 @@ import {
   IonLabel,
   useIonAlert,
   IonToast,
+  useIonViewWillEnter,
 } from "@ionic/react";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
@@ -48,9 +49,8 @@ const GroupDetails: React.FC<RouteComponentProps> = ({ history }) => {
   const navigateToEditGroup = () => {
     history.push(`/groups/${groupId}/edit`);
   };
-
+  
   const fethGroupsDetails = async () => {
-    setIsGroupLoaded(false);
     const group = await ApiClient.instance.getGroup(parseInt(groupId));
     setGroup(group);
     setIsGroupLoaded(true);
@@ -82,6 +82,10 @@ const GroupDetails: React.FC<RouteComponentProps> = ({ history }) => {
   useEffect(() => {
     fethGroupsDetails();
   }, []);
+  
+  useIonViewWillEnter(() => {
+    fethGroupsDetails();
+  });
 
   if (!isGroupLoaded) {
     return (

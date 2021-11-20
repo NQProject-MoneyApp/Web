@@ -8,6 +8,7 @@ import {
   IonList,
   IonLoading,
   IonPage,
+  useIonViewWillEnter,
 } from "@ionic/react";
 import { useEffect, useState } from "react";
 import { RouteComponentProps, useParams } from "react-router";
@@ -27,14 +28,13 @@ const ExpenseList: React.FC<RouteComponentProps> = ({history}) => {
   const { groupId } = useParams<RouteParams>();
 
   const [expenseList, setExpenseList] = useState(new Array<Expense>());
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const navigateToAddExpense = () => {
     history.push(`/groups/${groupId}/expenses/add`);
   };
 
   const fetchExpenses = async () => {
-    setIsLoading(true);
     const expenses = await ApiClient.instance.getExpenses(parseInt(groupId));
     setExpenseList(expenses);
     console.log(expenses);
@@ -44,6 +44,10 @@ const ExpenseList: React.FC<RouteComponentProps> = ({history}) => {
   useEffect(() => {
     fetchExpenses();
   }, []);
+
+  useIonViewWillEnter(() => {
+    fetchExpenses();
+  });
 
   return (
     <IonPage>

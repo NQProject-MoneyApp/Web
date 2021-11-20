@@ -120,7 +120,6 @@ const AddGroupContent: React.FC<any> = ({ history }) => {
           {icons.map((icon) => (
             <IonCard key={icon} className={iconClassName(icon)}>
               <IonImg
-                className="group-image"
                 key={icon}
                 src={Icons.instance.icon(icon)}
                 onClick={() => setIcon(icon)}

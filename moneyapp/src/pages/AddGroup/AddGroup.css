@@ -6,8 +6,9 @@ ion-row.icon-list {
 }
 
 ion-card.group-icon-choice {
-  min-width: 4rem;
-  padding: 0.5rem;
+  min-width: 5rem;
+  width: 5rem;
+  padding: 0.8rem;
 }
 
 ion-card.group-icon-choice.selected-icon {

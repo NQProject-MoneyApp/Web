@@ -259,7 +259,7 @@ class ApiClient {
       const result = await this.axiosInstance.post<any>(`api/groups/`, {
         name: name,
         icon: icon,
-        participants: participants,
+        members: participants,
       });
       return { success: true, result: "Succes" };
     } catch {

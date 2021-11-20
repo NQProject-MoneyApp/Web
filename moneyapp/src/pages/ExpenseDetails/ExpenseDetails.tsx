@@ -62,6 +62,11 @@ const ExpenseDetails: React.FC<RouteComponentProps> = ({ history }) => {
             <IonLoading isOpen={isLoading} message={"Loading..."} />
             <IonCard color="light" className="expense-details-card">
               <IonCardHeader>
+              <IonRow>
+                  <IonCardTitle>Name</IonCardTitle>
+                  <FlexSpacer flex={1} />
+                  <IonCardTitle>{expenseDetails!.name}</IonCardTitle>
+                </IonRow>
                 <IonRow>
                   <IonCardTitle>Amount</IonCardTitle>
                   <FlexSpacer flex={1} />

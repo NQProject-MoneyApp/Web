@@ -257,7 +257,7 @@ class ApiClient {
         values.paid_by = paidBy
       }
       if (paidTo) {
-        values.payment_to = paidBy
+        values.payment_to = paidTo
       }
       await this.axiosInstance.post<any>(`api/${groupId}/expenses/`, values);
       return { success: true, result: "Success" };

@@ -56,6 +56,11 @@ type NetworkResponse<T> = {
   data?: T;
 };
 
+enum ExpenseType {
+  expense = "expense",
+  payment = "payment",
+}
+
 class ApiClient {
   static instance: ApiClient = new ApiClient();
 
@@ -236,14 +241,25 @@ class ApiClient {
     groupId: number,
     name: String,
     amount: number,
-    participants: number[]
+    participants: number[],
+    paidBy: number|null = null,
+    type: ExpenseType = ExpenseType.expense,
+    paidTo: number|null = null,
   ): Promise<SimpleResult> {
     try {
-      await this.axiosInstance.post<any>(`api/${groupId}/expenses/`, {
+      let values: any = {
         name: name,
         amount: amount,
         participants: participants,
-      });
+        type: type,
+      }
+      if (paidBy) {
+        values.paid_by = paidBy
+      }
+      if (paidTo) {
+        values.payment_to = paidBy
+      }
+      await this.axiosInstance.post<any>(`api/${groupId}/expenses/`, values);
       return { success: true, result: "Success" };
     } catch {
       return { success: false, result: "Something went wrong" };
@@ -426,3 +442,4 @@ class ApiClient {
 
 export default ApiClient;
 export type { SimpleResult };
+export { ExpenseType };

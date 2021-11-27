@@ -11,7 +11,7 @@ type PaymentComponentProps = {
   readonly fromName: string;
   readonly toName: string;
   readonly amount: number;
-  readonly savePayment: () => Promise<void>;
+  readonly savePayment: () => void;
 };
 
 const PaymentComponent: React.FC<PaymentComponentProps> = ({

@@ -3,14 +3,10 @@ import {
   IonHeader,
   IonPage,
   IonList,
-  IonLoading,
   IonButton,
   useIonAlert,
   IonToast,
   IonRow,
-  IonImg,
-  useIonModal,
-  IonModal,
   useIonViewWillEnter,
 } from "@ionic/react";
 
@@ -21,8 +17,6 @@ import { useEffect, useState } from "react";
 import GroupComponent from "./GroupComponent";
 import Group from "../../domain/groups/Group";
 import { RouteComponentProps } from "react-router";
-import IconButton from "../../components/IconButton";
-import Icons from "../AddGroup/Icons";
 import LoadingWidget from "../../components/common/LoadingWidget";
 
 const GroupList: React.FC<RouteComponentProps> = ({ history }) => {

@@ -4,8 +4,7 @@ import UserRepository from "./UserRepository";
 import Group from "./../domain/groups/Group";
 import { Expense } from "../domain/expenses/Expense";
 import { User } from "../domain/users/User";
-import { group } from "console";
-import { resultingClientExists } from "workbox-core/_private";
+import SuggestedPayment from "../domain/groups/SuggestedPayment";
 
 
 const REQUEST_TIMEOUT: number = 30000
@@ -24,6 +23,12 @@ type GroupDto = {
   create_date?: string;
   is_favourite?: boolean;
   members?: GroupUserDto[];
+};
+
+type SuggestedPaymentDto = {
+  paid_by?: UserDto;
+  paid_to?: UserDto;
+  amount?: number;
 };
 
 type ExpenseDto = {
@@ -161,6 +166,23 @@ class ApiClient {
     }
 
     return "code";
+  }
+
+  async getSuggestedPayments(groupId: number): Promise<SuggestedPayment[]> {
+    const result = await this.axiosInstance.get<any, NetworkResponse<SuggestedPaymentDto[]>>(
+      `api/groups/${groupId}/suggested-payments/`
+    );
+    if (result.data) {
+      return result.data.map((e) => {
+        return {
+          paidBy: this.mapFromUserDto(e.paid_by!, 0),
+          paidTo: this.mapFromUserDto(e.paid_to!, 0),
+          amount: e.amount!,
+        };
+      });
+    }
+
+    return [];
   }
 
   async getExpenses(groupId: number): Promise<Expense[]> {
@@ -395,7 +417,7 @@ class ApiClient {
   private mapFromUserDto(user: UserDto, balance: number): User {
     return {
       id: user.pk!,
-      email: user.email!,
+      email: user.email || "",
       name: user.username!,
       balance: balance,
     };

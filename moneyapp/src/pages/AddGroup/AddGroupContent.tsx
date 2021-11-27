@@ -108,7 +108,7 @@ const AddGroupContent: React.FC<any> = ({ history }) => {
       <IonToast
         isOpen={showErrorToast}
         onDidDismiss={() => setShowErrorToast(false)}
-        message="Something wrong"
+        message="Something went wrong"
         position="top"
         color="danger"
         mode="ios"

@@ -74,7 +74,7 @@ const ProfileContent: React.FC = () => {
         onDidDismiss={() => {
           setShowErrorToast(false);
         }}
-        message="Something wrong"
+        message="Something went wrong"
         position="top"
         color="danger"
         mode="ios"
@@ -118,7 +118,7 @@ const ProfileContent: React.FC = () => {
           </IonButton>
 
           <IonButton color="danger" onClick={logout}>
-            Logout
+            Log out
           </IonButton>
         </IonRow>
       </IonList>

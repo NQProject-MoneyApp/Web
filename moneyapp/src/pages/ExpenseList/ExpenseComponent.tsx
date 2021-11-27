@@ -31,17 +31,23 @@ const ExpenseComponent: React.FC<ExpenseComponentProps> = ({
   amount,
 }: ExpenseComponentProps) => {
   return (
-    <IonCard color="light" routerLink={`/groups/${groupId}/expenses/${expenseId}/details`}>
+    <IonCard
+      color="light"
+      routerLink={`/groups/${groupId}/expenses/${expenseId}/details`}
+    >
       <IonItem className="expense-card" lines="none">
         <IonCol>
           <IonCardTitle class="ion-text-wrap" className="expense">
             {title}
           </IonCardTitle>
-          {/* <FlexSpacer height="0.5rem" /> */}
           <IonRow>
-            <IonCardSubtitle className="card-subtitles">{author.name}</IonCardSubtitle>
+            <IonCardSubtitle className="card-subtitles">
+              {author.name}
+            </IonCardSubtitle>
             <FlexSpacer flex={1} />
-            <IonCardSubtitle className="group-date card-subtitles">$ {amount.toFixed(2)}</IonCardSubtitle>
+            <IonCardSubtitle className="group-date card-subtitles">
+              $ {amount.toFixed(2)}
+            </IonCardSubtitle>
           </IonRow>
         </IonCol>
       </IonItem>

@@ -58,10 +58,15 @@ const GroupComponent: React.FC<GroupComponentProps> = ({
               }}
               justify="flex-end"
             >
-              <FontAwesomeIcon className="favorite-icon" icon={isFavourite ? starSolid : starOutline }></FontAwesomeIcon>
+              <FontAwesomeIcon
+                className="favorite-icon"
+                icon={isFavourite ? starSolid : starOutline}
+              ></FontAwesomeIcon>
             </IconButton>
           </IonRow>
-          <IonCardSubtitle className="card-subtitles">$ {balance.toFixed(2)}</IonCardSubtitle>
+          <IonCardSubtitle className="card-subtitles">
+            $ {balance.toFixed(2)}
+          </IonCardSubtitle>
           <IonCardSubtitle className="group-date card-subtitles">
             {moment(createDate).format("DD.MM.YYYY")}
           </IonCardSubtitle>

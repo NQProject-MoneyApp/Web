@@ -130,10 +130,9 @@ const AddExpense: React.FC<RouteComponentProps> = ({ history }) => {
       <IonToast
         isOpen={showToast}
         onDidDismiss={() => setShowToast(false)}
-        message="Something wrong"
+        message="Something went wrong"
         position="top"
         color="danger"
-        mode="ios"
         duration={1000}
       />
       <IonList>

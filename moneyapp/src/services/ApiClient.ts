@@ -246,7 +246,7 @@ class ApiClient {
       });
       return { success: true, result: "Success" };
     } catch {
-      return { success: false, result: "Something wrong" };
+      return { success: false, result: "Something went wrong" };
     }
   }
 
@@ -268,7 +268,7 @@ class ApiClient {
       );
       return { success: true, result: "Success" };
     } catch {
-      return { success: false, result: "Something wrong" };
+      return { success: false, result: "Something went wrong" };
     }
   }
 
@@ -283,7 +283,7 @@ class ApiClient {
         icon: icon,
         members: participants,
       });
-      return { success: true, result: "Succes" };
+      return { success: true, result: "Success" };
     } catch {
       return { success: false, result: null };
     }
@@ -299,7 +299,7 @@ class ApiClient {
         name: name,
         icon: icon,
       });
-      return { success: true, result: "Succes" };
+      return { success: true, result: "Success" };
     } catch {
       return { success: false, result: null };
     }
@@ -316,7 +316,7 @@ class ApiClient {
           is_favourite: isFavourite,
         }
       );
-      return { success: true, result: "Succes" };
+      return { success: true, result: "Success" };
     } catch {
       return { success: false, result: null };
     }
@@ -327,7 +327,7 @@ class ApiClient {
       const result = await this.axiosInstance.put<any, any>(
         `api/join/${code}/`
       );
-      return { success: true, result: "Succes" };
+      return { success: true, result: "Success" };
     } catch {
       return { success: false, result: null };
     }

@@ -8,6 +8,7 @@ export type Expense = {
    
     readonly createDate?: string;
     readonly author: User;
+    readonly paidBy: string;
     readonly participants: User[];
   };
 

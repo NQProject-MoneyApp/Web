@@ -5,8 +5,11 @@ import {
   IonHeader,
   IonInput,
   IonItem,
+  IonLabel,
   IonList,
   IonPage,
+  IonSelect,
+  IonSelectOption,
   IonSpinner,
   IonToast,
 } from "@ionic/react";
@@ -34,6 +37,7 @@ const AddExpense: React.FC<RouteComponentProps> = ({ history }) => {
   const [isWrongFriends, setIsWrongFriends] = useState(false);
   const [expenseName, setExpenseName] = useState("");
   const [amount, setAmount] = useState("");
+  const [paidBy, setPaidBy] = useState(null);
   const [selectedParticipants, setParticipants] = useState(
     new Array<SelectedParticipant>()
   );
@@ -62,7 +66,8 @@ const AddExpense: React.FC<RouteComponentProps> = ({ history }) => {
       parseInt(groupId),
       expenseName,
       parseFloat(amount),
-      selectedParticipants.filter((e) => e.selected).map((e) => e.id)
+      selectedParticipants.filter((e) => e.selected).map((e) => e.id),
+      paidBy
     );
 
     setIsLoading(false);
@@ -160,6 +165,22 @@ const AddExpense: React.FC<RouteComponentProps> = ({ history }) => {
             }}
           />
         </IonItem>
+
+        <IonItem lines="none" className={isWrongAmount ? "ion-invalid" : ""}>
+          <IonLabel>Paid by</IonLabel>
+          <IonSelect
+            placeholder="choose"
+            value={paidBy}
+            onIonChange={(e) => {
+              setPaidBy(e.detail.value!);
+            }}
+          >
+            {selectedParticipants.map((p) => {
+              return <IonSelectOption value={p.id}>{p.name}</IonSelectOption>;
+            })}
+          </IonSelect>
+        </IonItem>
+
         <ParticipantsComponent
           invalid={isWrongFriends}
           participants={selectedParticipants}

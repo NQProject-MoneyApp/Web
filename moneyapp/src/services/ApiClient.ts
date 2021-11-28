@@ -36,6 +36,7 @@ type ExpenseDto = {
   group_id?: number;
   name?: string;
   author?: UserDto;
+  paid_by?: string;
   amount?: number;
   create_date?: string;
   participants?: UserDto[];
@@ -203,6 +204,7 @@ class ApiClient {
           name: e.name!,
           id: e.pk!,
           author: this.mapFromUserDto(e.author!, 0),
+          paidBy: e.paid_by!,
           createDate: e.create_date!,
           participants: e.participants!.map((e) => this.mapFromUserDto(e, 0)),
         };
@@ -227,6 +229,7 @@ class ApiClient {
         id: result.data.pk!,
         name: result.data.name!,
         author: this.mapFromUserDto(result.data.author!, 0),
+        paidBy: result.data.paid_by!,
         createDate: result.data.create_date!,
         participants: result.data.participants!.map((e) =>
           this.mapFromUserDto(e, 0)

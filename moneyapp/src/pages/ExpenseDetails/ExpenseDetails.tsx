@@ -16,7 +16,7 @@ import FlexSpacer from "../../components/common/Spacer";
 import Toolbar from "../../components/Toolbar";
 import { useParams } from "react-router";
 import { useEffect, useState } from "react";
-import ApiClient from "../../services/ApiClient";
+import ApiClient, { ExpenseType } from "../../services/ApiClient";
 import Expense from "../../domain/expenses/Expense";
 import "./ExpenseDetails.css";
 import moment from "moment";
@@ -59,12 +59,15 @@ const ExpenseDetails: React.FC<RouteComponentProps> = ({ history }) => {
           <>
             <IonLoading isOpen={isLoading} message={"Loading..."} />
             <IonCard color="light" className="expense-details-card">
+            <IonCardHeader ion-text-center>
+                <IonCardTitle className="expense-type">{expenseDetails!.type}</IonCardTitle>
+              </IonCardHeader>
               <IonCardHeader>
-                <IonRow>
+                {expenseDetails!.type === ExpenseType.expense && <IonRow>
                   <IonCardTitle className="expense-label">Name</IonCardTitle>
                   <FlexSpacer flex={1} />
                   <IonCardTitle className="expense-label">{expenseDetails!.name}</IonCardTitle>
-                </IonRow>
+                </IonRow>}
                 <IonRow>
                   <IonCardTitle className="expense-label">Amount</IonCardTitle>
                   <FlexSpacer flex={1} />
@@ -75,6 +78,11 @@ const ExpenseDetails: React.FC<RouteComponentProps> = ({ history }) => {
                   <FlexSpacer flex={1} />
                   <IonCardTitle className="expense-label">{expenseDetails!.paidBy}</IonCardTitle>
                 </IonRow>
+                {expenseDetails!.type === ExpenseType.payment && <IonRow>
+                  <IonCardTitle className="expense-label">Paid To</IonCardTitle>
+                  <FlexSpacer flex={1} />
+                  <IonCardTitle className="expense-label">{expenseDetails!.paidTo}</IonCardTitle>
+                </IonRow>}
               </IonCardHeader>
             </IonCard>
             <IonCard color="light">

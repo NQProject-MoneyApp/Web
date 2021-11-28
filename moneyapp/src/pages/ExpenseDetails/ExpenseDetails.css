@@ -2,6 +2,10 @@ ion-card-title.expense-label {
   font-family: "Poppins Regular";
 }
 
+ion-card-title.expense-type {
+    text-transform: capitalize;
+  }
+
 
 @media (prefers-color-scheme: dark) {
   ion-card-title {

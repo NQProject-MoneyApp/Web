@@ -2,24 +2,18 @@ import {
   IonCard,
   IonCardSubtitle,
   IonCardTitle,
-  IonContent,
-  IonIcon,
   IonItem,
-  IonLabel,
-  IonList,
   IonRow,
-  IonText,
   IonCol,
 } from "@ionic/react";
 import FlexSpacer from "../../components/common/Spacer";
-import { User } from "../../domain/users/User";
 import "./ExpenseList.css";
 
 type ExpenseComponentProps = {
   readonly groupId: number;
   readonly expenseId: number;
   readonly title: string;
-  readonly author: User;
+  readonly paidBy: string;
   readonly amount: number;
 };
 
@@ -27,7 +21,7 @@ const ExpenseComponent: React.FC<ExpenseComponentProps> = ({
   groupId,
   expenseId,
   title,
-  author,
+  paidBy,
   amount,
 }: ExpenseComponentProps) => {
   return (
@@ -42,7 +36,7 @@ const ExpenseComponent: React.FC<ExpenseComponentProps> = ({
           </IonCardTitle>
           <IonRow>
             <IonCardSubtitle className="card-subtitles">
-              {author.name}
+              {paidBy}
             </IonCardSubtitle>
             <FlexSpacer flex={1} />
             <IonCardSubtitle className="group-date card-subtitles">

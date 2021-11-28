@@ -44,7 +44,9 @@ const SuggestedPayments: React.FC<RouteComponentProps> = ({ history }) => {
     fetchSuggestedPayments();
   });
 
-  const navigateToNewPayment = () => {};
+  const navigateToNewPayment = () => {
+    history.push(`/groups/${groupId}/add-payment`);
+  };
 
   const savePayment = async (paidBy: User, paidTo: User, amount: number) => {
     setIsLoading(true);

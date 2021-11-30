@@ -59,55 +59,74 @@ const ExpenseDetails: React.FC<RouteComponentProps> = ({ history }) => {
           <>
             <IonLoading isOpen={isLoading} message={"Loading..."} />
             <IonCard color="light" className="expense-details-card">
-            <IonCardHeader ion-text-center>
-                <IonCardTitle className="expense-type">{expenseDetails!.type}</IonCardTitle>
+              <IonCardHeader ion-text-center>
+                <IonCardTitle className="expense-type">
+                  {expenseDetails!.type}
+                </IonCardTitle>
               </IonCardHeader>
               <IonCardHeader>
-                {expenseDetails!.type === ExpenseType.expense && <IonRow>
-                  <IonCardTitle className="expense-label">Name</IonCardTitle>
-                  <FlexSpacer flex={1} />
-                  <IonCardTitle className="expense-label">{expenseDetails!.name}</IonCardTitle>
-                </IonRow>}
+                {expenseDetails!.type === ExpenseType.expense && (
+                  <IonRow>
+                    <IonCardTitle className="expense-label">Name</IonCardTitle>
+                    <FlexSpacer flex={1} />
+                    <IonCardTitle className="expense-label">
+                      {expenseDetails!.name}
+                    </IonCardTitle>
+                  </IonRow>
+                )}
                 <IonRow>
                   <IonCardTitle className="expense-label">Amount</IonCardTitle>
                   <FlexSpacer flex={1} />
-                  <IonCardTitle className="expense-label">${expenseDetails!.amount}</IonCardTitle>
+                  <IonCardTitle className="expense-label">
+                    ${expenseDetails!.amount}
+                  </IonCardTitle>
                 </IonRow>
                 <IonRow>
                   <IonCardTitle className="expense-label">Paid by</IonCardTitle>
                   <FlexSpacer flex={1} />
-                  <IonCardTitle className="expense-label">{expenseDetails!.paidBy}</IonCardTitle>
+                  <IonCardTitle className="expense-label">
+                    {expenseDetails!.paidBy}
+                  </IonCardTitle>
                 </IonRow>
-                {expenseDetails!.type === ExpenseType.payment && <IonRow>
-                  <IonCardTitle className="expense-label">Paid To</IonCardTitle>
-                  <FlexSpacer flex={1} />
-                  <IonCardTitle className="expense-label">{expenseDetails!.paidTo}</IonCardTitle>
-                </IonRow>}
-              </IonCardHeader>
-            </IonCard>
-            <IonCard color="light">
-              <IonCardHeader ion-text-center>
-                <IonCardTitle className="expense-label">Participants</IonCardTitle>
-              </IonCardHeader>
-              <IonCardContent className="participants-list">
-                {expenseDetails?.participants!.map((e) => (
-                  <IonRow key={e.id}>
-                    {e.name}
+                {expenseDetails!.type === ExpenseType.payment && (
+                  <IonRow>
+                    <IonCardTitle className="expense-label">
+                      Paid To
+                    </IonCardTitle>
+                    <FlexSpacer flex={1} />
+                    <IonCardTitle className="expense-label">
+                      {expenseDetails!.paidTo}
+                    </IonCardTitle>
                   </IonRow>
-                ))}
-              </IonCardContent>
+                )}
+              </IonCardHeader>
             </IonCard>
-            <IonButton
-              routerLink={`/groups/${groupId}/expenses/${expenseId}/edit`}
-            >
-              Edit
-            </IonButton>
+            {expenseDetails!.type === ExpenseType.expense && (
+              <>
+                <IonCard color="light">
+                  <IonCardHeader ion-text-center>
+                    <IonCardTitle className="expense-label">
+                      Participants
+                    </IonCardTitle>
+                  </IonCardHeader>
+                  <IonCardContent className="participants-list">
+                    {expenseDetails?.participants!.map((e) => (
+                      <IonRow key={e.id}>{e.name}</IonRow>
+                    ))}
+                  </IonCardContent>
+                </IonCard>
+
+                <IonButton
+                  routerLink={`/groups/${groupId}/expenses/${expenseId}/edit`}
+                >
+                  Edit
+                </IonButton>
+              </>
+            )}
             <FlexSpacer height="1rem" />
 
             <h4 className="label">Created by</h4>
-            <h4 className="value">
-              {expenseDetails!.author.name}
-            </h4>
+            <h4 className="value">{expenseDetails!.author.name}</h4>
             <FlexSpacer height="1rem" />
 
             <h4 className="label">Created on</h4>

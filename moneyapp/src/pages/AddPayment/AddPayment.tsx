@@ -15,15 +15,11 @@ import {
 } from "@ionic/react";
 import { useEffect, useState } from "react";
 import { RouteComponentProps, useParams } from "react-router";
-import {
-  ParticipantsComponent,
-  SelectedParticipant,
-} from "../../components/ParticipantsComponent";
-import "./AddExpense.css";
+import { SelectedParticipant } from "../../components/ParticipantsComponent";
 import Toolbar from "../../components/Toolbar";
-import ApiClient from "../../services/ApiClient";
+import ApiClient, { ExpenseType } from "../../services/ApiClient";
 
-const AddExpense: React.FC<RouteComponentProps> = ({ history }) => {
+const AddPayment: React.FC<RouteComponentProps> = ({ history }) => {
   interface RouteParams {
     groupId: string;
   }
@@ -32,13 +28,11 @@ const AddExpense: React.FC<RouteComponentProps> = ({ history }) => {
   const [showToast, setShowToast] = useState(false);
   const [pageLoading, setPageLoading] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
-  const [isWrongName, setIsWrongName] = useState(false);
-  const [isWrongAmount, setIsWrongAmount] = useState(false);
-  const [isWrongFriends, setIsWrongFriends] = useState(false);
-  const [expenseName, setExpenseName] = useState("");
   const [amount, setAmount] = useState("");
-  const [paidBy, setPaidBy] = useState(null);
-  const [selectedParticipants, setParticipants] = useState(
+  const [isWrongAmount, setIsWrongAmount] = useState(false);
+  const [paidBy, setPaidBy] = useState<number|null>(null);
+  const [paidTo, setPaidTo] = useState<number|null>(null);
+  const [participants, setParticipants] = useState(
     new Array<SelectedParticipant>()
   );
 
@@ -46,35 +40,19 @@ const AddExpense: React.FC<RouteComponentProps> = ({ history }) => {
     setIsWrongAmount(!amount || amount < 0);
   };
 
-  const validateName = (name: string) => {
-    setIsWrongName(!name || name.trim() === "" || name.trim().length === 0);
-  };
-
-  const validateFriends = (friends: Array<SelectedParticipant>) => {
-    var count = 0;
-    friends.forEach((element) => {
-      if (element.selected) {
-        count += 1;
-      }
-    });
-    setIsWrongFriends(count <= 0);
-  };
-
   const submitSave = async () => {
     setIsLoading(true);
-    validateAmount(parseFloat(amount));
-    validateName(expenseName);
-    validateFriends(selectedParticipants);
     const result = await ApiClient.instance.addExpense(
       parseInt(groupId),
-      expenseName,
+      `${participants.find(p => p.id === paidBy)!.name} -> ${participants.find(p => p.id === paidTo)!.name}`,
       parseFloat(amount),
-      selectedParticipants.filter((e) => e.selected).map((e) => e.id),
-      paidBy
+      [],
+      paidBy,
+      ExpenseType.payment,
+      paidTo
     );
 
     setIsLoading(false);
-    
 
     if (result.success) {
       history.goBack();
@@ -87,10 +65,10 @@ const AddExpense: React.FC<RouteComponentProps> = ({ history }) => {
     console.log("fetchParticipants");
 
     const groups = await ApiClient.instance.getGroups();
-    const participants: SelectedParticipant[] = groups
-      .find((g) => g.id == parseInt(groupId))!
+    const fetchedParticipants: SelectedParticipant[] = groups
+      .find((g) => g.id === parseInt(groupId))!
       .members.map((e) => ({ id: e.id, name: e.name, selected: true }));
-    setParticipants(participants);
+    setParticipants(fetchedParticipants);
     setPageLoading(false);
   };
 
@@ -142,19 +120,36 @@ const AddExpense: React.FC<RouteComponentProps> = ({ history }) => {
         duration={1000}
       />
       <IonList>
-        <IonItem className={isWrongName ? "ion-invalid" : ""}>
-          <IonInput
-            type="text"
-            placeholder="Name"
-            required={true}
-            value={expenseName}
+        <IonItem lines="none">
+          <IonLabel>Paid by</IonLabel>
+          <IonSelect
+            placeholder="choose"
+            value={paidBy}
             onIonChange={(e) => {
-              setExpenseName(e.detail.value!);
-              validateName(e.detail.value!);
+              setPaidBy(e.detail.value!);
             }}
-          />
+          >
+            {participants.map((p) => {
+              return <IonSelectOption value={p.id}>{p.name}</IonSelectOption>;
+            })}
+          </IonSelect>
         </IonItem>
 
+        <IonItem lines="none">
+          <IonLabel>Paid To</IonLabel>
+          <IonSelect
+            placeholder="choose"
+            value={paidTo}
+            onIonChange={(e) => {
+              console.log((e.detail.value!))
+              setPaidTo(e.detail.value!);
+            }}
+          >
+            {participants.map((p) => {
+              return <IonSelectOption value={p.id}>{p.name}</IonSelectOption>;
+            })}
+          </IonSelect>
+        </IonItem>
         <IonItem className={isWrongAmount ? "ion-invalid" : ""}>
           <IonInput
             type="number"
@@ -166,30 +161,6 @@ const AddExpense: React.FC<RouteComponentProps> = ({ history }) => {
             }}
           />
         </IonItem>
-
-        <IonItem lines="none" className={isWrongAmount ? "ion-invalid" : ""}>
-          <IonLabel>Paid by</IonLabel>
-          <IonSelect
-            placeholder="choose"
-            value={paidBy}
-            onIonChange={(e) => {
-              setPaidBy(e.detail.value!);
-            }}
-          >
-            {selectedParticipants.map((p) => {
-              return <IonSelectOption value={p.id}>{p.name}</IonSelectOption>;
-            })}
-          </IonSelect>
-        </IonItem>
-
-        <ParticipantsComponent
-          invalid={isWrongFriends}
-          participants={selectedParticipants}
-          onChanged={(e) => {
-            setParticipants(e);
-            validateFriends(e);
-          }}
-        />
 
         <IonButton
           color="primary"
@@ -219,4 +190,4 @@ const AddExpense: React.FC<RouteComponentProps> = ({ history }) => {
   );
 };
 
-export default AddExpense;
+export default AddPayment;

@@ -67,7 +67,7 @@ const ExpenseList: React.FC<RouteComponentProps> = ({history}) => {
               expenseId={e.id}
               title={e.name}
               amount={e.amount}
-              author={e.author}
+              paidBy={e.paidBy}
             />
           ))}
         </IonList>

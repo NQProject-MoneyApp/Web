@@ -1,0 +1,12 @@
+ion-card-subtitle.ion-inherit-color.payment-subtitle {
+  font-size: 0.9rem;
+  text-transform: none;
+  font-family: "Poppins Regular";
+  color: var(--ion-color-dark-shade);
+  text-align: center;
+}
+
+.value {
+  font-family: 'Poppins Bold';
+  color: var(--ion-text-color);
+}

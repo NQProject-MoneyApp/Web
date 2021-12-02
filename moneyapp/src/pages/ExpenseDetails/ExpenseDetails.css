@@ -1,35 +1,41 @@
-ion-card-title {
-    color: var(--ion-color-secondary) !important;
+ion-card-title.expense-label {
+  font-family: "Poppins Regular";
 }
 
+ion-card-title.expense-type {
+    text-transform: capitalize;
+  }
+
+
 @media (prefers-color-scheme: dark) {
-    ion-card-title {
-        color: var(--ion-text-color) !important;
-    }
+  ion-card-title {
+    color: var(--ion-text-color) !important;
+  }
 }
 
 h5 {
-    color: var(--ion-color-secondary);
-    text-align: left;   
+  color: var(--ion-color-secondary);
+  text-align: left;
 }
 
 @media (prefers-color-scheme: dark) {
-    h5 {
-        color: var(--ion-text-color);
-    }
+  h5 {
+    color: var(--ion-text-color);
+  }
 }
 
-h4 {
-    font-family: 'Poppins Bold';
-    color: var(--ion-color-secondary);
+h4.label {
+  color: var(--ion-color-medium);
 }
 
-@media (prefers-color-scheme: dark) {
-    h4 {
-        color: var(--ion-text-color);
-    }
+h4.value {
+  color: var(--ion-color-dark-tint);
 }
 
 .expense-details-card {
-    padding: 0.5rem;
+  padding: 0.5rem;
+}
+
+.participants-list ion-row{
+    justify-content: center;
 }

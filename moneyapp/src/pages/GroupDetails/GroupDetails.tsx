@@ -50,6 +50,10 @@ const GroupDetails: React.FC<RouteComponentProps> = ({ history }) => {
     history.push(`/groups/${groupId}/edit`);
   };
 
+  const navigateToSuggestedPayments = () => {
+    history.push(`/groups/${groupId}/suggested-payments`);
+  };
+
   const fethGroupsDetails = useCallback(async () => {
     const group = await ApiClient.instance.getGroup(parseInt(groupId));
     setGroup(group);
@@ -161,7 +165,7 @@ const GroupDetails: React.FC<RouteComponentProps> = ({ history }) => {
           </IonGrid>
 
           <IonRow>
-            <IonButton color="primary">Settle up</IonButton>
+            <IonButton color="primary" onClick={navigateToSuggestedPayments}>Settle up</IonButton>
             <IonButton color="primary" onClick={navigateToAddExpense}>
               New expense
             </IonButton>

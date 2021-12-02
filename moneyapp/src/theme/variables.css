@@ -167,9 +167,9 @@ ion-item.item-has-focus:not(.ion-invalid) {
     --ion-color-dark-contrast: #000000;
     --ion-color-dark-contrast-rgb: 0, 0, 0;
     --ion-color-dark-shade: #d7d8da;
-    --ion-color-dark-tint: #f5f6f9;
+    --ion-color-dark-tint: #e7e7e7;
 
-    --ion-color-medium: #212121;
+    --ion-color-medium: #818181;
     --ion-color-medium-rgb: 34, 36, 40;
     --ion-color-medium-contrast: #ffffff;
     --ion-color-medium-contrast-rgb: 255, 255, 255;

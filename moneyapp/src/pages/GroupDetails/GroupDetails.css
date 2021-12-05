@@ -41,6 +41,13 @@
   margin-right: 1rem;
   margin-left: 1rem;
   font-family: "Poppins SemiBold";
+  font-size: 1rem;
+  margin-bottom: -0.3rem; 
+  margin-top: -0.3rem; 
+}
+
+.group-info-row ion-label {
+  font-size: 1.2rem;
 }
 
 .group-info-container {
@@ -51,14 +58,14 @@
 
 .group-info-row {
   margin-top: 1rem;
-  width: 14rem;
+  width: 16rem;
   max-width: 100%;
   display: flex;
   justify-content: space-between;
 }
 
 .group-info-column {
-  margin: 2rem;
+  margin: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;

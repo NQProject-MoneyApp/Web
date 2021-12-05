@@ -22,8 +22,7 @@ import wine from "../../images/icons/Wine.svg";
 
 class Icons {
   static instance: Icons = new Icons();
-  // todo sort!
-  private icons = [beers, bowling, burgers, burgerSet, cups, kite, wine];
+  private icons = [burgers, burgerSet, bowling, wine, cups, beers, kite];
 
   icon(from: number): string {
     return this.icons[from - 1];
